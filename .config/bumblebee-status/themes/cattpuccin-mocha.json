@@ -1,0 +1,15 @@
+{
+	"icons": [ "awesome-fonts" ],
+	"defaults": {
+		"bg": "#1e1e2e",
+		"fg": "#cdd6f4",
+		"critical": {
+			"bg": "#1e1e2e",
+			"fg": "#f38ba8"
+		},
+		"warning": {
+			"bg": "#1e1e2e",
+			"fg": "#f9e2af"
+		}
+	}
+}		

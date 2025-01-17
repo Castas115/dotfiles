@@ -1,0 +1,303 @@
+# catppuccin
+set $rosewater #f5e0dc
+set $flamingo #f2cdcd
+set $pink #f5c2e7
+set $mauve #cba6f7
+set $red #f38ba8
+set $maroon #eba0ac
+set $peach #fab387
+set $yellow #f9e2af
+set $green #a6e3a1
+set $teal #94e2d5
+set $sky #89dceb
+set $sapphire #74c7ec
+set $blue #89b4fa
+set $lavender #b4befe
+set $text #cdd6f4
+set $subtext1 #bac2de
+set $subtext0 #a6adc8
+set $overlay2 #9399b2
+set $overlay1 #7f849c
+set $overlay0 #6c7086
+set $surface2 #585b70
+set $surface1 #45475a
+set $surface0 #313244
+set $base #1e1e2e
+set $mantle #181825
+set $crust #11111b
+client.focused           $lavender $base $text  $rosewater $lavender
+client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
+client.unfocused         $overlay0 $base $text  $rosewater $overlay0
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
+
+
+set $met Mod4
+set $alt Mod1
+
+font pango: SauceCodePro Nerd Font 8
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex-autostart --autostart --environment i3
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+exec --no-startup-id picom -b -c
+exec --no-startup-id python3 ~/.config/i3/autotiling-master/autotiling/main.py
+
+# Use Mouse+$met to drag floating windows to their wanted position
+floating_modifier $met
+
+exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+# copy q
+for_window [instance="copyq"] floating enable
+for_window [instance="copyq"] resize set 600 500
+for_window [instance="copyq"] border pixel 5
+exec copyqor_window [class="Copyq"] floating enable
+
+# autostart apps:
+exec --no-startup-id copyq
+exec --no-startup-id keepassxc
+exec --no-startup-id autorandr -c
+
+# Workspaces
+set $wsZ "1:Z"
+set $wsX "2:X"
+
+set $wsF "3:F 󰈹"
+set $wsD "4:D "
+set $wsA "5:A"
+set $wsE "6:E"
+set $wsQ "7:Q"
+set $wsG "8:G"
+
+set $wsR "9:R"
+set $wsC "10:C"
+set $wsV "11:V"
+set $wsB "12:B"
+
+# Set app to window with xprop 
+for_window [class="^firefox"]           move to workspace $wsF
+for_window [class="^zen"]				move to workspace $wsE
+for_window [class="^Code"]              move to workspace $wsD
+for_window [class="Postman"]            move to workspace $wsS
+for_window [class="Nautilus"]           move to workspace $wsC
+for_window [class="^Slack"]             move to workspace $wsZ
+for_window [title="^passwords.kdbx"]    move to workspace $wsG
+for_window [title="^Outlook"]           move to workspace $wsR
+for_window [class="^teams-for-linux"]   move to workspace $wsR
+for_window [title="^Outlook"] layout tabbed
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $met+r mode "default"
+}
+
+bar {
+    strip_workspace_numbers yes
+    status_command i3status
+
+	  font pango:Hack Nerd Font 8
+ status_command bumblebee-status -m \
+ 	 memory bluetooth battery pipewire arandr date time \
+ 	-p time.format="%H:%M" date.format="%a, %d %b %Y" playerctl.hide=true \
+ 	-t cattpuccin-mocha
+
+  colors {
+    background         $base
+    statusline         $text
+    focused_statusline $text
+    focused_separator  $base
+
+    # target           border bg        text
+    focused_workspace  $base  $lavender $crust
+    active_workspace   $base  $surface2 $text
+    inactive_workspace $base  $base     $text
+    urgent_workspace   $base  $red      $crust
+  }
+}
+
+# for tildes and n
+# exec_always --no-startup-id setxkbmap -option compose:ralt
+exec_always --no-startup-id setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
+
+################
+###  screen  ###
+################
+
+set $monL eDP-1
+set $mon1 DP-2-1
+set $mon1 DP-1-1
+set $mon2 DP-2-2
+set $mon2 DP-1-3
+
+#exec --no-startup-id xrandr --output eDP-1 --scale 0.6x0.6 --output DP-2-2 --above eDP-1 --output DP-2-1 --right-of DP-2-2
+
+workspace $wsZ output $monL
+workspace $wsX output $monL
+
+workspace $wsF output $mon1
+workspace $wsD output $mon1
+workspace $wsA output $mon1
+workspace $wsE output $mon1
+workspace $wsQ output $mon1
+workspace $wsG output $mon1
+
+workspace $wsR output $mon2
+workspace $wsC output $mon2
+workspace $wsV output $mon2
+workspace $wsB output $mon2
+
+exec --no-startup-id nitrogen --restore
+
+default_border pixel 1
+default_floating_border pixel 1
+
+gaps inner 7
+gaps outer 1
+
+
+############################
+####      shorcuts      ####
+############################
+
+# i3 stuff
+bindsym $met+Ctrl+q kill
+bindsym $met+Ctrl+w mode "resize"
+bindsym $met+Ctrl+e reload
+bindsym $met+Ctrl+r restart
+bindsym $met+Ctrl+t exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $met+Ctrl+y exec --no-startup-id i3lock -c 232323
+
+bindsym $met+Ctrl+a layout tabbed
+bindsym $met+Ctrl+s layout stacking
+bindsym $met+Ctrl+d layout toggle split
+bindsym $met+Ctrl+f fullscreen toggle
+
+bindsym $met+Ctrl+z focus parent
+bindsym $met+Ctrl+period split h
+bindsym $met+Ctrl+comma split v
+
+# toggle tiling / floating
+bindsym $met+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $met+space focus mode_toggle
+
+# gaps
+bindsym $met+i gaps inner current plus 1
+bindsym $met+Shift+i gaps inner current minus 1
+bindsym $met+o gaps outer current plus 1
+bindsym $met+Shift+o gaps outer current minus 1
+
+# CUSTOM LOCK SCREEN
+set $i3lockwall sh ~/.config/i3/lock-script.sh
+bindsym $met+Mod1+Ctrl+Shift+l exec --no-startup-id $i3lockwall
+bindsym $met+Mod1+Ctrl+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
+
+# brightness
+bindsym $met+n exec --no-startup-id brightnessctl set 10%-
+bindsym $met+Shift+n exec --no-startup-id brightnessctl set 1%-
+bindsym $met+m exec --no-startup-id brightnessctl set +10%
+bindsym $met+Shift+m exec --no-startup-id brightnessctl set +1%
+
+# change focus
+bindsym $met+h focus left
+bindsym $met+Left focus left
+bindsym $met+j focus down
+bindsym $met+Down focus down
+bindsym $met+k focus up
+bindsym $met+Up focus up
+bindsym $met+l focus right
+bindsym $met+Right focus right
+
+# move focused window
+bindsym $met+Shift+h move left
+bindsym $met+Shift+Left move left
+bindsym $met+Shift+j move down
+bindsym $met+Shift+Down move down
+bindsym $met+Shift+k move up
+bindsym $met+Shift+Up move up
+bindsym $met+Shift+l move right
+bindsym $met+Shift+Right move right
+
+# switch to workspace
+bindsym $met+F workspace number $wsF
+bindsym $met+D workspace number $wsD
+bindsym $met+E workspace number $wsE
+bindsym $met+Q workspace number $wsQ
+bindsym $met+R workspace number $wsR
+bindsym $met+A workspace number $wsA
+bindsym $met+G workspace number $wsG
+bindsym $met+Z workspace number $wsZ
+bindsym $met+X workspace number $wsX
+bindsym $met+C workspace number $wsC
+bindsym $met+V workspace number $wsV
+bindsym $met+B workspace number $wsB
+
+# move focused container to workspace
+bindsym $met+$alt+F move container to workspace number $wsF
+bindsym $met+$alt+D move container to workspace number $wsD
+bindsym $met+$alt+E move container to workspace number $wsE
+bindsym $met+$alt+Q move container to workspace number $wsQ
+bindsym $met+$alt+R move container to workspace number $wsR
+bindsym $met+$alt+A move container to workspace number $wsA
+bindsym $met+$alt+G move container to workspace number $wsG
+bindsym $met+$alt+Z move container to workspace number $wsZ
+bindsym $met+$alt+X move container to workspace number $wsX
+bindsym $met+$alt+C move container to workspace number $wsC
+bindsym $met+$alt+V move container to workspace number $wsV
+bindsym $met+$alt+B move container to workspace number $wsB
+
+# funcionalidad alt+tab
+bindsym $met+Tab workspace back_and_forth
+
+# focus to specific output
+bindsym $met+2 focus output $monL 
+bindsym $met+3 focus output $mon1
+bindsym $met+4 focus output $mon2 
+
+# move to specific output
+bindsym $met+$alt+2 move workspace to output $monL 
+bindsym $met+$alt+3 move workspace to output $mon1
+bindsym $met+$alt+4 move workspace to output $mon2
+
+# open apps
+bindsym $met+Shift+s exec kitty
+bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+# $met+Shift+a CopyQ
+# $met+Shift+x CopyQ screenshot
+bindsym --release $met+Shift+z exec --no-startup-id flameshot gui
+bindsym --release $met+Shift+c exec --no-startup-id nautilus
+bindsym --release $met+Shift+q exec --no-startup-id autorandr -c
+bindsym --release $met+Shift+w exec --no-startup-id ~/.config/i3/autorandr-rofi.sh
+
