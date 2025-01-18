@@ -1,18 +1,16 @@
-return { 
+return {
 	{
-		'nvim-telescope/telescope.nvim', branch = '0.1.x', 
+		'nvim-telescope/telescope.nvim', branch = '0.1.x',
 		dependencies = { 'nvim-lua/plenary.nvim' },
 		config = function()
-
-			vim.keymap.set("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", { desc = "[S]earch [K]ey maps" })
+			local builtin = require("telescope.builtin")
+			vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "[F]ind [K]ey maps" })
+			vim.keymap.set("n", "<M-s>", builtin.lsp_document_symbols, { desc = "Find Symbols" })
 			vim.keymap.set("n", "<S-h>", function()
 				require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
 					sort_mru = true,
 					sort_lastused = true,
 					initial_mode = "normal",
-					-- Pre-select the current buffer
-					-- ignore_current_buffer = false,
-					-- select_current = true,
 					layout_config = {
 						preview_width = 0.6,
 					},
@@ -21,7 +19,7 @@ return {
 		end,
 		keys = {
 			{
-				"<leader>fF",
+				"<M-f>",
 				function()
 					-- Get the directory of the currently active buffer
 					local cwd = require("telescope.utils").buffer_dir()
