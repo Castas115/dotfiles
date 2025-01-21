@@ -157,9 +157,9 @@ exec_always --no-startup-id setxkbmap -rules evdev -model evdev -layout us -vari
 
 set $monL eDP-1
 set $mon1 DP-2-1
-set $mon1 DP-1-1
+# set $mon1 DP-1-1
 set $mon2 DP-2-2
-set $mon2 DP-1-3
+# set $mon2 DP-1-3
 
 #exec --no-startup-id xrandr --output eDP-1 --scale 0.6x0.6 --output DP-2-2 --above eDP-1 --output DP-2-1 --right-of DP-2-2
 
@@ -181,10 +181,10 @@ workspace $wsB output $mon2
 exec --no-startup-id nitrogen --restore
 
 default_border pixel 1
-default_floating_border pixel 1
+default_floating_border pixel 2
 
-gaps inner 7
-gaps outer 1
+gaps inner 4
+gaps outer 0
 
 
 ############################
