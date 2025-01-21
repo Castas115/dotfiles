@@ -196,8 +196,8 @@ bindsym $met+Ctrl+q kill
 bindsym $met+Ctrl+w mode "resize"
 bindsym $met+Ctrl+e reload
 bindsym $met+Ctrl+r restart
-bindsym $met+Ctrl+t exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $met+Ctrl+y exec --no-startup-id i3lock -c 232323
+bindsym $met+Ctrl+t exec --no-startup-id i3lock -c 232323
+bindsym $met+Ctrl+y exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $met+Ctrl+a layout tabbed
 bindsym $met+Ctrl+s layout stacking
