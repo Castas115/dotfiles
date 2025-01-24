@@ -61,7 +61,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 exec --no-startup-id picom -b -c
-exec --no-startup-id python3 ~/.config/i3/autotiling-master/autotiling/main.py
+exec --no-startup-id python3 ~/.config/i3/scripts/autotiling-master/autotiling/main.py
 
 # Use Mouse+$met to drag floating windows to their wanted position
 floating_modifier $met
@@ -220,7 +220,7 @@ bindsym $met+o gaps outer current plus 1
 bindsym $met+Shift+o gaps outer current minus 1
 
 # CUSTOM LOCK SCREEN
-set $i3lockwall sh ~/.config/i3/lock-script.sh
+set $i3lockwall sh ~/.config/i3/scripts/lock-script.sh
 bindsym $met+Mod1+Ctrl+Shift+l exec --no-startup-id $i3lockwall
 bindsym $met+Mod1+Ctrl+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
 
@@ -241,14 +241,14 @@ bindsym $met+l focus right
 bindsym $met+Right focus right
 
 # move focused window
-bindsym $met+Shift+h move left
-bindsym $met+Shift+Left move left
-bindsym $met+Shift+j move down
-bindsym $met+Shift+Down move down
-bindsym $met+Shift+k move up
-bindsym $met+Shift+Up move up
-bindsym $met+Shift+l move right
-bindsym $met+Shift+Right move right
+bindsym $met+$alt+h move left
+bindsym $met+$alt+Left move left
+bindsym $met+$alt+j move down
+bindsym $met+$alt+Down move down
+bindsym $met+$alt+k move up
+bindsym $met+$alt+Up move up
+bindsym $met+$alt+l move right
+bindsym $met+$alt+Right move right
 
 # switch to workspace
 bindsym $met+F workspace number $wsF
@@ -295,9 +295,17 @@ bindsym $met+$alt+4 move workspace to output $mon2
 bindsym $met+Shift+s exec kitty
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 # $met+Shift+a CopyQ
-# $met+Shift+x CopyQ screenshot
+
 bindsym --release $met+Shift+z exec --no-startup-id flameshot gui
+# $met+Shift+x CopyQ screenshot
 bindsym --release $met+Shift+c exec --no-startup-id nautilus
 bindsym --release $met+Shift+q exec --no-startup-id autorandr -c
-bindsym --release $met+Shift+w exec --no-startup-id ~/.config/i3/autorandr-rofi.sh
+bindsym --release $met+Shift+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
+
+set $meh Mod1+Ctrl+Shift
+bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
+bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
+for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 800 1000
+
+
 
