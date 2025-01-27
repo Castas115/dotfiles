@@ -99,10 +99,7 @@ set $wsB "12:B"
 # Set app to window with xprop 
 for_window [class="^firefox"]           move to workspace $wsF
 for_window [class="^zen"]				move to workspace $wsE
-for_window [class="^Code"]              move to workspace $wsD
-for_window [class="Postman"]            move to workspace $wsS
 for_window [class="Nautilus"]           move to workspace $wsC
-for_window [class="^Slack"]             move to workspace $wsZ
 for_window [title="^passwords.kdbx"]    move to workspace $wsG
 for_window [title="^Outlook"]           move to workspace $wsR
 for_window [class="^teams-for-linux"]   move to workspace $wsR
