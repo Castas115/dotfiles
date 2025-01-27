@@ -106,7 +106,7 @@ for_window [class="^Slack"]             move to workspace $wsZ
 for_window [title="^passwords.kdbx"]    move to workspace $wsG
 for_window [title="^Outlook"]           move to workspace $wsR
 for_window [class="^teams-for-linux"]   move to workspace $wsR
-for_window [title="^Outlook"] layout tabbed
+for_window [class="^ - Outlook"] layout tabbed
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
