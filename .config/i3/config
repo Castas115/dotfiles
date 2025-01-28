@@ -72,7 +72,7 @@ exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/activ
 # copy q
 for_window [instance="copyq"] floating enable
 for_window [instance="copyq"] resize set 600 500
-for_window [instance="copyq"] border pixel 5
+for_window [instance="copyq"] border pixel 0
 exec copyqor_window [class="Copyq"] floating enable
 
 # autostart apps:
@@ -117,7 +117,6 @@ mode "resize" {
         bindsym Right resize grow width 10 px or 10 ppt
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym $met+r mode "default"
 }
 
 bar {
@@ -190,7 +189,7 @@ gaps outer 0
 
 # i3 stuff
 bindsym $met+Ctrl+q kill
-bindsym $met+Ctrl+w mode "resize"
+bindsym $met+Ctrl+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
 bindsym $met+Ctrl+e reload
 bindsym $met+Ctrl+r restart
 bindsym $met+Ctrl+t exec --no-startup-id i3lock -c 232323
@@ -202,8 +201,24 @@ bindsym $met+Ctrl+d layout toggle split
 bindsym $met+Ctrl+f fullscreen toggle
 
 bindsym $met+Ctrl+z focus parent
+bindsym $met+Ctrl+x mode "resize"
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
+
+# open apps
+#		$met+Shift+a CopyQ
+bindsym $met+Shift+s exec kitty
+bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+
+bindsym $met+Shift+z exec --no-startup-id flameshot gui
+# $met+Shift+x CopyQ screenshot
+bindsym $met+Shift+c exec --no-startup-id nautilus
+
+set $meh Mod1+Ctrl+Shift
+bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
+bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
+for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000, border pixel 0
+
 
 # toggle tiling / floating
 bindsym $met+Shift+space floating toggle
@@ -287,20 +302,3 @@ bindsym $met+4 focus output $mon2
 bindsym $met+$alt+2 move workspace to output $monL 
 bindsym $met+$alt+3 move workspace to output $mon1
 bindsym $met+$alt+4 move workspace to output $mon2
-
-# open apps
-bindsym $met+Shift+s exec kitty
-bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
-# $met+Shift+a CopyQ
-
-bindsym --release $met+Shift+z exec --no-startup-id flameshot gui
-# $met+Shift+x CopyQ screenshot
-bindsym --release $met+Shift+c exec --no-startup-id nautilus
-bindsym --release $met+Shift+q exec --no-startup-id autorandr -c
-bindsym --release $met+Shift+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
-
-set $meh Mod1+Ctrl+Shift
-bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
-bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
-for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000
-
