@@ -55,12 +55,16 @@ local function toggle_checkbox()
 
 	if not current_line:match("^%s* %- %[") then
 		vim.cmd("normal!I - [ ] ")
-		-- cursor_pos = cursor_pos + 7
         vim.api.nvim_win_set_cursor(0, { cursor_pos[1], #current_line })
 	elseif current_line:match("^%s* %- %[ %]") then
-		local updated_line = current_line:gsub("% %- %[ %]", "")
+		local updated_line = current_line:gsub("%- %[ %]", "- [-]")
 		vim.api.nvim_set_current_line(updated_line)
-		-- cursor_pos = cursor_pos - 7
+	elseif current_line:match("^%s* %- %[%x%]") then
+		local updated_line = current_line:gsub("%- %[%x%]", "- [ ]")
+		vim.api.nvim_set_current_line(updated_line)
+	elseif current_line:match("^%s* %- %[%-%]") then
+		local updated_line = current_line:gsub("%- %[%-%]", "- [ ]")
+		vim.api.nvim_set_current_line(updated_line)
 	end
 
   -- -- Check if the line starts with a bullet or "- ", and remove it
