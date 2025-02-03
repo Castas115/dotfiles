@@ -1,7 +1,10 @@
 #!/bin/bash
 
+path="$HOME/Documents/secondBrain/"
 SESSION_NAME="secondBrain"
 KITTY_CLASS="kitty"
+
+git -C "$path" pull
 
 # Check if you're already in the session
 if tmux ls | grep -q "$SESSION_NAME:.*attached"; then
