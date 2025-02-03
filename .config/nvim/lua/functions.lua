@@ -82,55 +82,50 @@ vim.keymap.set({"n","v","i"}, "<M-c>", toggle_checkbox, { noremap = true, silent
 
 vim.keymap.set("n", "<M-x>", function()
   -- Customizable variables
-  -- NOTE: Customize the completion label
-  local label_done = "done:"
-  -- NOTE: Customize the timestamp format
-  local timestamp = os.date("%y%m%d-%H%M")
-  -- local timestamp = os.date("%y%m%d")
-  -- NOTE: Customize the heading and its level
-  local tasks_heading = "## Completed tasks"
+  local label_done = "done:"  -- Label for completed tasks
+  local timestamp = os.date("%y%m%d-%H%M")  -- Timestamp format
+  local tasks_heading = "## Completed tasks"  -- Heading for completed tasks
+
   -- Save the view to preserve folds
   vim.cmd("mkview")
   local api = vim.api
+
   -- Retrieve buffer & lines
   local buf = api.nvim_get_current_buf()
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  local cursor_pos = api.nvim_win_get_cursor(0)
   local start_line = cursor_pos[1] - 1
-  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+  local lines = api.nvim_buf_get_lines(buf, 0, -1, false)
   local total_lines = #lines
+
   -- If cursor is beyond last line, do nothing
   if start_line >= total_lines then
     vim.cmd("loadview")
     return
   end
-  ------------------------------------------------------------------------------
-  -- (A) Move upwards to find the bullet line (if user is somewhere in the chunk)
-  ------------------------------------------------------------------------------
+
+  -- (A) Move upwards to find the bullet line
   while start_line > 0 do
     local line_text = lines[start_line + 1]
-    -- Stop if we find a blank line or a bullet line
     if line_text == "" or line_text:match("^%s*%-") then
       break
     end
     start_line = start_line - 1
   end
-  -- Now we might be on a blank line or a bullet line
+
+  -- Adjust start_line if on a blank line
   if lines[start_line + 1] == "" and start_line < (total_lines - 1) then
     start_line = start_line + 1
   end
-  ------------------------------------------------------------------------------
-  -- (B) Validate that it's actually a task bullet, i.e. '- [ ]' or '- [x]'
-  ------------------------------------------------------------------------------
+
+  -- (B) Validate that it's a task bullet
   local bullet_line = lines[start_line + 1]
   if not bullet_line:match("^%s*%- %[[x ]%]") then
-    -- Not a task bullet => show a message and return
     print("Not a task bullet: no action taken.")
     vim.cmd("loadview")
     return
   end
-  ------------------------------------------------------------------------------
+
   -- 1. Identify the chunk boundaries
-  ------------------------------------------------------------------------------
   local chunk_start = start_line
   local chunk_end = start_line
   while chunk_end + 1 < total_lines do
@@ -140,20 +135,18 @@ vim.keymap.set("n", "<M-x>", function()
     end
     chunk_end = chunk_end + 1
   end
+
   -- Collect the chunk lines
   local chunk = {}
   for i = chunk_start, chunk_end do
     table.insert(chunk, lines[i + 1])
   end
-  ------------------------------------------------------------------------------
+
   -- 2. Check if chunk has [done: ...] or [untoggled], then transform them
-  ------------------------------------------------------------------------------
   local has_done_index = nil
   local has_untoggled_index = nil
   for i, line in ipairs(chunk) do
-    -- Replace `[done: ...]` -> `` `done: ...` ``
     chunk[i] = line:gsub("%[done:([^%]]+)%]", "`" .. label_done .. "%1`")
-    -- Replace `[untoggled]` -> `` `untoggled` ``
     chunk[i] = chunk[i]:gsub("%[untoggled%]", "`untoggled`")
     if chunk[i]:match("`" .. label_done .. ".-`") then
       has_done_index = i
@@ -168,20 +161,16 @@ vim.keymap.set("n", "<M-x>", function()
       end
     end
   end
-  ------------------------------------------------------------------------------
+
   -- 3. Helpers to toggle bullet
-  ------------------------------------------------------------------------------
-  -- Convert '- [ ]' to '- [x]'
   local function bulletToX(line)
     return line:gsub("^(%s*%- )%[%s*%]", "%1[x]")
   end
-  -- Convert '- [x]' to '- [ ]'
   local function bulletToBlank(line)
     return line:gsub("^(%s*%- )%[x%]", "%1[ ]")
   end
-  ------------------------------------------------------------------------------
+
   -- 4. Insert or remove label *after* the bracket
-  ------------------------------------------------------------------------------
   local function insertLabelAfterBracket(line, label)
     local prefix = line:match("^(%s*%- %[[x ]%])")
     if not prefix then
@@ -191,22 +180,31 @@ vim.keymap.set("n", "<M-x>", function()
     return prefix .. " " .. label .. rest
   end
   local function removeLabel(line)
-    -- If there's a label (like `` `done: ...` `` or `` `untoggled` ``) right after
-    -- '- [x]' or '- [ ]', remove it
     return line:gsub("^(%s*%- %[[x ]%])%s+`.-`", "%1")
   end
-  ------------------------------------------------------------------------------
-  -- 5. Update the buffer with new chunk lines (in place)
-  ------------------------------------------------------------------------------
+
+  -- 5. Find the closest `###` header
+  local function findClosestHeader(task_line)
+    for i = task_line - 1, 0, -1 do
+      local line_text = lines[i + 1]
+      if line_text:match("^### ") then
+        -- Extract header text and convert to tag format
+        local header_text = line_text:gsub("^###%s*", ""):gsub("%s+", "_"):lower()
+        return "#" .. header_text
+      end
+    end
+    return nil  -- No header found
+  end
+
+  -- 6. Update the buffer with new chunk lines (in place)
   local function updateBufferWithChunk(new_chunk)
     for idx = chunk_start, chunk_end do
       lines[idx + 1] = new_chunk[idx - chunk_start + 1]
     end
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    api.nvim_buf_set_lines(buf, 0, -1, false, lines)
   end
-  ------------------------------------------------------------------------------
-  -- 6. Main toggle logic
-  ------------------------------------------------------------------------------
+
+  -- 7. Main toggle logic
   if has_done_index then
     chunk[has_done_index] = removeLabel(chunk[has_done_index]):gsub("`" .. label_done .. ".-`", "`untoggled`")
     chunk[1] = bulletToBlank(chunk[1])
@@ -223,17 +221,28 @@ vim.keymap.set("n", "<M-x>", function()
     updateBufferWithChunk(chunk)
     vim.notify("Completed", vim.log.levels.INFO)
   else
+    -- Find the closest `###` header and add it as a tag
+    local header_tag = findClosestHeader(start_line)
+    local done_label = "`" .. label_done .. " " .. timestamp .. "`"
+    if header_tag then
+      done_label = done_label .. " " .. header_tag
+    end
+
     -- Save original window view before modifications
     local win = api.nvim_get_current_win()
     local view = api.nvim_win_call(win, function()
       return vim.fn.winsaveview()
     end)
+
+    -- Toggle the task and add the label
     chunk[1] = bulletToX(chunk[1])
-    chunk[1] = insertLabelAfterBracket(chunk[1], "`" .. label_done .. " " .. timestamp .. "`")
+    chunk[1] = insertLabelAfterBracket(chunk[1], done_label)
+
     -- Remove chunk from the original lines
     for i = chunk_end, chunk_start, -1 do
       table.remove(lines, i + 1)
     end
+
     -- Append chunk under 'tasks_heading'
     local heading_index = nil
     for i, line in ipairs(lines) do
@@ -262,18 +271,19 @@ vim.keymap.set("n", "<M-x>", function()
         table.remove(lines, after_last_item)
       end
     end
+
     -- Update buffer content
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    api.nvim_buf_set_lines(buf, 0, -1, false, lines)
     vim.notify("Completed", vim.log.levels.INFO)
+
     -- Restore window view to preserve scroll position
     api.nvim_win_call(win, function()
       vim.fn.winrestview(view)
     end)
   end
+
   -- Write changes and restore view to preserve folds
-  -- "Update" saves only if the buffer has been modified since the last save
   vim.cmd("silent update")
   vim.cmd("loadview")
 end, { desc = "[P]Toggle task and move it to 'done'" })
-
 
