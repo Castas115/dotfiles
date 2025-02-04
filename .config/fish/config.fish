@@ -6,7 +6,6 @@ end
 set fish_greeting ""
 
 fish_vi_key_bindings
-fish_vi_cursor --force-iterm
 set -g fish_cursor_insert line
 set -g fish_cursor_default block
 
