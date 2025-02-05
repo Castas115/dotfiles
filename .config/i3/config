@@ -75,11 +75,6 @@ for_window [instance="copyq"] resize set 600 500
 for_window [instance="copyq"] border pixel 0
 exec copyqor_window [class="Copyq"] floating enable
 
-# autostart apps:
-exec --no-startup-id copyq
-exec --no-startup-id keepassxc
-exec --no-startup-id autorandr -c
-
 # Workspaces
 set $wsZ "1:Z"
 set $wsX "2:X"
@@ -210,12 +205,11 @@ bindsym $met+Ctrl+comma split v
 bindsym $met+Shift+s exec kitty
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 
-bindsym $met+Shift+z exec --no-startup-id flameshot gui
 # $met+Shift+x CopyQ screenshot
 bindsym $met+Shift+c exec --no-startup-id nautilus
 
 set $meh Mod1+Ctrl+Shift
-bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
+# bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
 for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000, border pixel 0
 
