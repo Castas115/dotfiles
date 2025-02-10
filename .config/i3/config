@@ -150,6 +150,7 @@ set $monL eDP-1
 set $mon1 DP-2-1
 # set $mon1 DP-1-1
 set $mon2 DP-2-2
+# set $mon2 DP-1-2
 # set $mon2 DP-1-3
 
 #exec --no-startup-id xrandr --output eDP-1 --scale 0.6x0.6 --output DP-2-2 --above eDP-1 --output DP-2-1 --right-of DP-2-2
@@ -169,13 +170,19 @@ workspace $wsC output $mon2
 workspace $wsV output $mon2
 workspace $wsB output $mon2
 
-exec --no-startup-id nitrogen --restore
 
 default_border pixel 1
 default_floating_border pixel 2
 
 gaps inner 4
 gaps outer 0
+
+### startup
+exec --no-startup-id fish -c 'sleep 1 && tmux start-server'
+exec --no-startup-id copyq
+exec --no-startup-id keepassxc
+exec --no-startup-id autorandr -c
+exec --no-startup-id nitrogen --restore
 
 
 ############################
@@ -208,6 +215,9 @@ bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{t
 # $met+Shift+x CopyQ screenshot
 bindsym $met+Shift+c exec --no-startup-id nautilus
 
+bindsym $met+Shift+l exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
+bindsym $met+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
+
 set $meh Mod1+Ctrl+Shift
 # bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
@@ -224,11 +234,6 @@ bindsym $met+i gaps inner current plus 1
 bindsym $met+Shift+i gaps inner current minus 1
 bindsym $met+o gaps outer current plus 1
 bindsym $met+Shift+o gaps outer current minus 1
-
-# CUSTOM LOCK SCREEN
-set $i3lockwall sh ~/.config/i3/scripts/lock-script.sh
-bindsym $met+Mod1+Ctrl+Shift+l exec --no-startup-id $i3lockwall
-bindsym $met+Mod1+Ctrl+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
 
 # brightness
 bindsym $met+n exec --no-startup-id brightnessctl set 10%-
