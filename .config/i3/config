@@ -87,18 +87,18 @@ set $wsQ "7:Q"
 set $wsG "8:G"
 
 set $wsR "9:R"
-set $wsC "10:C"
-set $wsV "11:V"
-set $wsB "12:B"
+set $wsT "10:T"
+set $wsC "11:C"
+set $wsV "12:V"
+set $wsB "13:B"
 
 # Set app to window with xprop 
 for_window [class="^firefox"]           move to workspace $wsF
 for_window [class="^zen"]				move to workspace $wsE
-for_window [class="Nautilus"]           move to workspace $wsC
+for_window [class="Nautilus"]           move to workspace $wsR
 for_window [title="^passwords.kdbx"]    move to workspace $wsG
-for_window [title="^Outlook"]           move to workspace $wsR
-for_window [class="^teams-for-linux"]   move to workspace $wsR
-for_window [class="^ - Outlook"] layout tabbed
+for_window [title="^Outlook"]           move to workspace $wsV
+for_window [class="^teams-for-linux"]   move to workspace $wsC
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -166,6 +166,7 @@ workspace $wsQ output $mon1
 workspace $wsG output $mon1
 
 workspace $wsR output $mon2
+workspace $wsT output $mon2
 workspace $wsC output $mon2
 workspace $wsV output $mon2
 workspace $wsB output $mon2
@@ -177,57 +178,9 @@ default_floating_border pixel 2
 gaps inner 4
 gaps outer 0
 
-### startup
-exec --no-startup-id fish -c 'sleep 1 && tmux start-server'
-exec --no-startup-id copyq
-exec --no-startup-id keepassxc
-exec --no-startup-id autorandr -c
-exec --no-startup-id nitrogen --restore
-
-
-############################
-####      shorcuts      ####
-############################
-
-# i3 stuff
-bindsym $met+Ctrl+q kill
-bindsym $met+Ctrl+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
-bindsym $met+Ctrl+e reload
-bindsym $met+Ctrl+r restart
-bindsym $met+Ctrl+t exec --no-startup-id i3lock -c 232323
-bindsym $met+Ctrl+y exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-bindsym $met+Ctrl+a layout tabbed
-bindsym $met+Ctrl+s layout stacking
-bindsym $met+Ctrl+d layout toggle split
-bindsym $met+Ctrl+f fullscreen toggle
-
-bindsym $met+Ctrl+z focus parent
-bindsym $met+Ctrl+x mode "resize"
-bindsym $met+Ctrl+period split h
-bindsym $met+Ctrl+comma split v
-
-# open apps
-#		$met+Shift+a CopyQ
-bindsym $met+Shift+s exec kitty
-bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
-
-# $met+Shift+x CopyQ screenshot
-bindsym $met+Shift+c exec --no-startup-id nautilus
-
-bindsym $met+Shift+l exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
-bindsym $met+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
-
-set $meh Mod1+Ctrl+Shift
-# bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
-bindsym $meh+x exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
-for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000, border pixel 0
-
-
-# toggle tiling / floating
-bindsym $met+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $met+space focus mode_toggle
+#############################
+####   window shorcuts   ####
+#############################
 
 # gaps
 bindsym $met+i gaps inner current plus 1
@@ -268,7 +221,7 @@ bindsym $met+E workspace number $wsE
 bindsym $met+Q workspace number $wsQ
 bindsym $met+R workspace number $wsR
 bindsym $met+A workspace number $wsA
-bindsym $met+G workspace number $wsG
+bindsym $met+G workspace number $wsG_
 bindsym $met+Z workspace number $wsZ
 bindsym $met+X workspace number $wsX
 bindsym $met+C workspace number $wsC
@@ -301,3 +254,58 @@ bindsym $met+4 focus output $mon2
 bindsym $met+$alt+2 move workspace to output $monL 
 bindsym $met+$alt+3 move workspace to output $mon1
 bindsym $met+$alt+4 move workspace to output $mon2
+
+### startup
+# exec --no-startup-id fish -c 'tmux start-server'
+exec --no-startup-id copyq
+exec --no-startup-id keepassxc
+exec --no-startup-id autorandr -c
+exec --no-startup-id nitrogen --restore
+
+
+############################
+####      shorcuts      ####
+############################
+
+# i3 stuff
+bindsym $met+Ctrl+q kill
+bindsym $met+Ctrl+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
+bindsym $met+Ctrl+e reload
+bindsym $met+Ctrl+r restart
+bindsym $met+Ctrl+t exec --no-startup-id i3lock -c 232323
+bindsym $met+Ctrl+y exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $met+Ctrl+a layout tabbed
+bindsym $met+Ctrl+s layout stacking
+bindsym $met+Ctrl+d layout toggle split
+bindsym $met+Ctrl+f fullscreen toggle
+
+bindsym $met+Ctrl+z focus parent
+bindsym $met+Ctrl+x mode "resize"
+bindsym $met+Ctrl+period split h
+bindsym $met+Ctrl+comma split v
+
+# open apps
+#		$met+Shift+a CopyQ
+bindsym $met+Shift+s exec kitty
+bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
+	for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000, border pixel 0
+
+# $met+Shift+x CopyQ screenshot
+bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
+
+bindsym $met+Shift+r exec --no-startup-id nautilus
+
+bindsym $met+Shift+l exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
+bindsym $met+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
+
+set $meh Mod1+Ctrl+Shift
+# bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
+
+
+# toggle tiling / floating
+bindsym $met+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $met+space focus mode_toggle
+
