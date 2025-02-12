@@ -255,13 +255,20 @@ bindsym $met+$alt+2 move workspace to output $monL
 bindsym $met+$alt+3 move workspace to output $mon1
 bindsym $met+$alt+4 move workspace to output $mon2
 
-### startup
+# toggle tiling / floating
+bindsym $met+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $met+space focus mode_toggle
+
+###########################
+####      startup      ####
+###########################
+
 # exec --no-startup-id fish -c 'tmux start-server'
 exec --no-startup-id copyq
 exec --no-startup-id keepassxc
 exec --no-startup-id autorandr -c
 exec --no-startup-id nitrogen --restore
-
 
 ############################
 ####      shorcuts      ####
@@ -301,10 +308,4 @@ bindsym $met+Shift+l exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
 bindsym $met+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
 
 # bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
-
-
-# toggle tiling / floating
-bindsym $met+Shift+space floating toggle
-# change focus between tiling / floating windows
-bindsym $met+space focus mode_toggle
 
