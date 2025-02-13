@@ -221,7 +221,7 @@ bindsym $met+E workspace number $wsE
 bindsym $met+Q workspace number $wsQ
 bindsym $met+R workspace number $wsR
 bindsym $met+A workspace number $wsA
-bindsym $met+G workspace number $wsG_
+bindsym $met+G workspace number $wsG
 bindsym $met+Z workspace number $wsZ
 bindsym $met+X workspace number $wsX
 bindsym $met+C workspace number $wsC
@@ -304,8 +304,8 @@ bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
 
 bindsym $met+Shift+r exec --no-startup-id nautilus
 
-bindsym $met+Shift+l exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
-bindsym $met+Shift+p exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
+bindsym $met+Shift+t exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
+bindsym $met+Shift+g exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
 
 # bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 
