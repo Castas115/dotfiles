@@ -142,9 +142,9 @@ bar {
 # exec_always --no-startup-id setxkbmap -option compose:ralt
 exec_always --no-startup-id setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
 
-################
-###  screen  ###
-################
+##################
+###  Monitors  ###
+##################
 
 set $monL eDP-1
 set $mon1 DP-2-1
@@ -289,6 +289,7 @@ bindsym $met+Ctrl+f fullscreen toggle
 
 bindsym $met+Ctrl+z focus parent
 bindsym $met+Ctrl+x mode "resize"
+bindsym $met+Ctrl+v exec --no-startup-id autorandr -c
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
 
@@ -305,7 +306,7 @@ bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
 bindsym $met+Shift+r exec --no-startup-id nautilus
 
 bindsym $met+Shift+t exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
-bindsym $met+Shift+g exec --no-startup-id bash ~/programming/scripts/gilifichador_v2.sh
+bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 
 # bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 
