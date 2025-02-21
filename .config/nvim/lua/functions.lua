@@ -38,12 +38,12 @@ end
 local function write_current_day()
 	local lines = {
 		"___",
-		os.date("### ***%Y-%m-%d %a***"),
+		os.date("> ***%Y-%m-%d %a**, %H:%M*"),
 		"",
 		""
 	}
 	vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
-	vim.api.nvim_win_set_cursor(0, { 3, 0 })
+	vim.api.nvim_win_set_cursor(0, { 4, 0 })
 end
 
 vim.keymap.set("n", "td", write_current_day, { noremap = true, silent = true })
