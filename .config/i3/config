@@ -274,7 +274,7 @@ exec --no-startup-id nitrogen --restore
 ####      shorcuts      ####
 ############################
 
-# i3 stuff
+# C: i3 stuff
 bindsym $met+Ctrl+q kill
 bindsym $met+Ctrl+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
 bindsym $met+Ctrl+e reload
@@ -293,12 +293,12 @@ bindsym $met+Ctrl+v exec --no-startup-id autorandr -c
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
 
-# open apps
-#		$met+Shift+a	CopyQ
-bindsym $met+Shift+s exec kitty
+# V: open apps
+bindsym $met+Shift+a exec kitty
+#		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
-	for_window [class="kitty" title="secondBrain"] floating enable, move position center, resize set 1300 1000, border pixel 0
+	for_window [class="floating"] floating enable, move position center, resize set 1300 1000, border pixel 0
 
 #		$met+Shift+x	CopyQ screenshot
 bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron

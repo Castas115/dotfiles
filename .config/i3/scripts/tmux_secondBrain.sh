@@ -9,7 +9,7 @@ if tmux list-sessions | grep -q "$SESSION_NAME:.*attached"; then
 	tmux detach -s "$SESSION_NAME"
 else
 	# Attach to the session
-	kitty -1 --title "$SESSION_NAME" tmux attach -t "$SESSION_NAME"
+	kitty -1 --class "floating" --title "$SESSION_NAME" tmux attach -t "$SESSION_NAME"
 	git -C "$path" pull
 fi
 
