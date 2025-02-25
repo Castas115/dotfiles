@@ -1,5 +1,6 @@
 vim.keymap.set("n", "<leader>q", ":q!<CR>", {noremap=false, silent = true })
-vim.keymap.set("v", "<leader>y", '"+y', {noremap=false, silent = true })
+vim.keymap.set({'n', 'v'}, "<C-S-c>", '"+y', {noremap=false, silent = true })
+
 vim.keymap.set({'n', 'v'}, '<C-s>', '<Esc>:w<CR>')
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a')
 
