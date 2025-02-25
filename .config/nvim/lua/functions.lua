@@ -38,7 +38,8 @@ end
 local function write_current_day()
 	local lines = {
 		"___",
-		os.date("> ***%Y-%m-%d %a**, %H:%M*"),
+		os.date("# ***%Y-%m-%d %a**, %H:%M*"),
+		"",
 		"",
 		""
 	}
