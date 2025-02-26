@@ -115,6 +115,7 @@ mode "resize" {
 }
 
 bar {
+    tray_output primary
     strip_workspace_numbers yes
     status_command i3status
 
