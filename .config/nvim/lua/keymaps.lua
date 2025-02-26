@@ -19,4 +19,4 @@ vim.keymap.set({'n', 'v', 'i', 'c'}, "<PageUp>", "<C-u>", { desc = "Scroll up ha
 vim.keymap.set({'n', 'v', 'i', 'c'}, "<PageDown>", "<C-d>", { desc = "Scroll down half a page" })
 
 
-vim.keymap.set('n', '<leader><Del>', "<Esc>:execute 'silaent !rm ' . expand('%') | bdelete<CR>")
+vim.keymap.set('n', '<leader><Del>', "<Esc>:execute 'silent !rm ' . expand('%') | bdelete<CR>")
