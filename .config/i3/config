@@ -139,20 +139,16 @@ bar {
   }
 }
 
-# for tildes and n
-# exec_always --no-startup-id setxkbmap -option compose:ralt
-exec_always --no-startup-id setxkbmap -rules evdev -model evdev -layout us -variant altgr-intl
+# for tíldes and ñ
+exec_always setxkbmap -layout us -variant altgr-intl
 
 ##################
 ###  Monitors  ###
 ##################
 
 set $monL eDP-1
-set $mon1 DP-2-1
-# set $mon1 DP-1-1
-set $mon2 DP-2-2
-# set $mon2 DP-1-2
-# set $mon2 DP-1-3
+set $mon1 DP-1-1
+set $mon2 DP-1-2
 
 #exec --no-startup-id xrandr --output eDP-1 --scale 0.6x0.6 --output DP-2-2 --above eDP-1 --output DP-2-1 --right-of DP-2-2
 
@@ -304,6 +300,7 @@ bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.
 #		$met+Shift+x	CopyQ screenshot
 bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
 
+bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
 bindsym $met+Shift+r exec --no-startup-id nautilus
 
 bindsym $met+Shift+t exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
