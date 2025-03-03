@@ -291,7 +291,7 @@ bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
 
 # V: open apps
-bindsym $met+Shift+a exec kitty
+bindsym $met+Shift+a exec kitty -1 tmux attach -t general
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
