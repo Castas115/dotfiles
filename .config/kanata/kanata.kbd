@@ -2,28 +2,42 @@
   process-unmapped-keys yes
 )
 
+
 (defsrc
-  caps tab a s d f j k l ;
+  esc  1    2    3    4    5       6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t       y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g       h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b       n    m    ,    .    /    rsft
+  lctl lmet lalt           spc               ralt
 )
+
 (defvar
   tap-time 170
   hold-time 170
 )
 
 (defalias
-  caps_lock (tap-hold 100 100 tab (multi lmet lctl))
-  tab (tap-hold 100 100 esc lmet)
-
   a (tap-hold $tap-time $hold-time a lalt)
-  ; (tap-hold $tap-time $hold-time ; lsft)
   s (tap-hold $tap-time $hold-time s lmet)
-  l (tap-hold $tap-time $hold-time l lmet)
-  k (tap-hold $tap-time $hold-time k lctl)
   d (tap-hold $tap-time $hold-time d lctl)
   f (tap-hold $tap-time $hold-time f lsft)
+
   j (tap-hold $tap-time $hold-time j lsft)
+  k (tap-hold $tap-time $hold-time k lctl)
+  l (tap-hold $tap-time $hold-time l lmet)
+  ; (tap-hold $tap-time $hold-time ; lalt)
+
+
+  A-C (tap-hold $tap-time $hold-time ret (multi lmet lctl))
+  A-S (tap-hold $tap-time $hold-time del (multi lmet lsft))
+  spc_Meh (tap-hold $tap-time $hold-time spc (multi lalt lctl lsft))
+
 )
 
 (deflayer base
-  @caps_lock @tab @a @s @d @f @j @k @l @;
+  esc  1    2    3    4    5        6    7    8    9    0    -    =    bspc
+  esc  q    w    e    r    t        y    u    i    o    p    [    ]    \
+  tab  @a   @s   @d   @f   g        h    @j   @k   @l   @;    '    ret
+  lsft z    x    c    v    b        n    m    ,    .    /    rsft
+  lctl @A-C @A-S            @spc_Meh               bspc
 )
