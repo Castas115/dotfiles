@@ -1,0 +1,16 @@
+command = /usr/bin/fish --login --interactive
+
+theme = catppuccin-mocha
+font-size = 12
+font-family = Hack Nerd Font
+font-family-bold = Hack Nerd Font Bold
+font-family-italic = Hack Nerd Font Italic
+font-family-bold-italic = Hack Nerd Font Bold Italic
+font-thicken = true
+
+mouse-hide-while-typing = true
+window-decoration = false
+macos-option-as-alt = true
+background-opacity = 0.85
+
+term = xterm-ghostty
