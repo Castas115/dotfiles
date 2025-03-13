@@ -29,7 +29,6 @@ abbr t  'tmux'
 abbr ta  'tmux attach'
 abbr tl  'tmux ls'
 
-# abbr y   'yazi'
 
 function y
 	set tmp (mktemp -t "yazi-cwd.XXXXXX")
@@ -39,3 +38,7 @@ function y
 	end
 	rm -f -- "$tmp"
 end
+
+
+# salto things
+abbr po 'bash ~/programming/scripts/pricebook-options.sh'
