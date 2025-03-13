@@ -7,7 +7,7 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set('n', '<leader>e', ':Neotree<CR>', { noremap = true, silent = true })
+		vim.keymap.set('n', '<leader>o', ':Neotree<CR>', { noremap = true, silent = true })
 	end
 }
 
