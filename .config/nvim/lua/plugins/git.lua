@@ -1,11 +1,27 @@
 return {
 	{
-		"lewis6991/gitsigns.nvim",
-		config =function ()
-			require("gitsigns").setup()
-			vim.keymap.set('n', "<leader>gp", ':Gitsigns preview_hunk<CR>', { desc = "Git preview hunk" })
-			vim.keymap.set('n', "<leader>gi", ':Gitsigns preview_hunk_inline<CR>', { desc = "Git preview hunk inline" })
-			vim.keymap.set('n', "<leader>gb", ':Gitsigns toggle_current_line_blame<CR>', { desc = "Git blame" })
+		'echasnovski/mini.diff',
+		version = '*',
+		config = function()
+			require('mini.diff').setup {
+				vim.keymap.set('n', "<leader>gd", ':lua MiniDiff.toggle_overlay()<CR>', { desc = "Git diff" }),
+				view = {
+					style = 'sign', -- 'number' or 'sign',
+					signs = { add = '┃', change = '┃', delete = '▁' },
+					priority = 199, -- Priority of used visualization extmarks
+				},
+
+				mappings = {
+					apply = 'gh',
+					reset = 'gH',
+					textobject = 'gh',
+
+					goto_first = '[H',
+					goto_prev = '[h',
+					goto_next = ']h',
+					goto_last = ']H',
+				},
+			}
 		end
 	},{
 		"NeogitOrg/neogit",
@@ -16,7 +32,7 @@ return {
 		},
 		cmd = 'Neogit',
 		keys = {
-			{ '<leader>gg', ':Neogit<cr>', desc = 'neo[g]it' },
+			{ '<leader>gg', ':Neogit kind=floating<cr>', desc = 'neo[g]it' },
 		},
 		config = function()
 			require('neogit').setup {
