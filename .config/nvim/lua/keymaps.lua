@@ -28,7 +28,6 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv",
 	{ desc = "moves lines down in visual selection", noremap = true, silent = true })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv",
 	{ desc = "moves lines up in visual selection", noremap = true, silent = true })
--- vim.keymap.set("n", "J", "mzJ`z")
 
 vim.keymap.set('n', '<leader><Del>', "<Esc>:execute 'silent !rm ' . expand('%') | bdelete<CR>")
 
