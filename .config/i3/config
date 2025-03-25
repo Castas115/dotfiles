@@ -69,12 +69,6 @@ floating_modifier $met
 exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
 exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
 
-# copy q
-for_window [instance="copyq"] floating enable
-for_window [instance="copyq"] resize set 600 500
-for_window [instance="copyq"] border pixel 0
-exec copyqor_window [class="Copyq"] floating enable
-
 # Workspaces
 set $wsZ "1:Z"
 set $wsX "2:X"
@@ -91,14 +85,6 @@ set $wsT "10:T"
 set $wsC "11:C"
 set $wsV "12:V"
 set $wsB "13:B"
-
-# Set app to window with xprop 
-for_window [class="^firefox"]           move to workspace $wsF
-for_window [class="^zen"]				move to workspace $wsE
-for_window [class="Nautilus"]           move to workspace $wsR
-for_window [title="^passwords.kdbx"]    move to workspace $wsG
-for_window [title="^Outlook"]           move to workspace $wsV
-for_window [class="^teams-for-linux"]   move to workspace $wsC
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -255,15 +241,32 @@ bindsym $met+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $met+space focus mode_toggle
 
+
+####################################
+####    windows & workspaces    ####
+####################################
+# Set app to window with xprop 
+for_window [class="^firefox"]           move to workspace $wsF
+for_window [class="^zen"]				move to workspace $wsE
+for_window [class="Nautilus"]           move to workspace $wsR
+for_window [title="^passwords.kdbx"]    move to workspace $wsG
+for_window [title="^Outlook"]           move to workspace $wsV
+for_window [class="^teams-for-linux"]   move to workspace $wsC
+
+for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
+for_window [class="floating"]			floating enable, move position center, resize set 1300 1000, border pixel 0
+for_window [class="g_workspace"]		move to workspace $wsG
+
 ###########################
 ####      startup      ####
 ###########################
 
-# exec --no-startup-id fish -c 'tmux start-server'
+exec --no-startup-id kitty -1 --class "g_workspace" fish -c "tmux & sleep 10 && tmux detach"
 exec --no-startup-id copyq
 exec --no-startup-id keepassxc
 exec --no-startup-id autorandr -c
 exec --no-startup-id nitrogen --restore
+exec --no-startup-id i3 reload
 
 ############################
 ####      shorcuts      ####
@@ -294,7 +297,6 @@ bindsym $met+Shift+a exec kitty -1 tmux attach -t general
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
-	for_window [class="floating"] floating enable, move position center, resize set 1300 1000, border pixel 0
 
 #		$met+Shift+x	CopyQ screenshot
 
