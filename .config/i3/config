@@ -254,7 +254,7 @@ for_window [title="^Outlook"]           move to workspace $wsV
 for_window [class="^teams-for-linux"]   move to workspace $wsC
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
-for_window [class="floating"]			floating enable, move position center, resize set 1300 1000, border pixel 0
+for_window [class="floating"]			floating enable, move position center, resize set 1500 1000, border pixel 0
 for_window [class="g_workspace"]		move to workspace $wsG
 
 ###########################
@@ -299,6 +299,7 @@ bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{t
 bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_secondBrain.sh
 
 #		$met+Shift+x	CopyQ screenshot
+bindsym $met+Shift+z exec --no-startup-id flameshot gui
 
 bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
 bindsym $met+Shift+r exec --no-startup-id nautilus
