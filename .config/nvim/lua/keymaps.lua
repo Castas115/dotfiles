@@ -44,8 +44,6 @@ vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
 
-
-
 vim.keymap.set("n", "<leader>.", "<C-w>v", { desc = "Split window vertically" })
 -- split window vertically
 vim.keymap.set("n", "<leader>,", "<C-w>s", { desc = "Split window horizontally" })
