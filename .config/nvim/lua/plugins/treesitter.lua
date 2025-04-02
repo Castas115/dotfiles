@@ -7,7 +7,8 @@ return {
 		  ensure_installed = { 
 			'go', 'lua', 'python', 'rust', 'typescript', 'regex', 'php',
 			'bash', 'markdown', 'markdown_inline', 'kdl', 'sql', 'org', 'terraform',
-			'html', 'css', 'javascript', 'yaml', 'json', 'toml',
+			'html', 'css', 'javascript', 'yaml', 'json', 'toml', 'nu',
+			'git_config', 'git_rebase', 'gitattributes', 'gitcommit'
 		  },
 
 		  highlight = { enable = true },

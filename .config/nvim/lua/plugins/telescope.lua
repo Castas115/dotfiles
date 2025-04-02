@@ -5,8 +5,8 @@ return {
 		config = function()
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "[F]ind [K]ey maps" })
-			vim.keymap.set("n", "<M-s>", builtin.lsp_document_symbols, { desc = "Find Symbols" })
-			vim.keymap.set("n", "<S-h>", function()
+			vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find Symbols" })
+			vim.keymap.set("n", "<leader>fd", function()
 				require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
 					sort_mru = true,
 					sort_lastused = true,
@@ -18,20 +18,6 @@ return {
 			end, { desc = "Open telescope buffers" })
 		end,
 		keys = {
-			{
-				"<M-f>",
-				function()
-					-- Get the directory of the currently active buffer
-					local cwd = require("telescope.utils").buffer_dir()
-					-- Use Telescope's find_files with a specific cwd
-					require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
-						cwd = cwd,
-						prompt_title = "Files in " .. cwd,
-					}))
-				end,
-				desc = "Find Files (Buffer Dir)",
-			},
-
 			{
 				"<leader>ff",
 				function()
@@ -56,8 +42,6 @@ return {
 				end,
 				desc = "[P]Grep (buffer dir)",
 			},
-
-			-- { "<leader>sg", LazyVim.pick("live_grep", { root = false, theme = "ivy" }), desc = "Grep (Root Dir)" },
 			{
 				"<leader>sg",
 				function()
@@ -71,7 +55,6 @@ return {
 				desc = "[P]Grep (Root Dir)",
 			},
 
-			-- { "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "Status" },
 			{
 				"<leader>gs",
 				function()
@@ -151,5 +134,61 @@ return {
 			}
 		end
 	},
+
+	-- Filename: ~/github/dotfiles-latest/neovim/neobean/lua/plugins/telescope-frecency.lua
+	-- ~/github/dotfiles-latest/neovim/neobean/lua/plugins/telescope-frecency.lua
+
+	--[=====[
+https://github.com/nvim-telescope/telescope-frecency.nvim
+
+This plugins keeps a score of my recently access files through telescope, and 
+shows the ones I se the most at the top of the list
+
+It requires telescope, so don't uninstall telescope
+
+For questions read the docs
+https://github.com/nvim-telescope/telescope-frecency.nvim/blob/master/doc/telescope-frecency.txt
+
+You can delete entries from DB by this command. This command does not remove
+the file itself, only from DB.
+- delete the current opened file 
+  - :FrecencyDelete
+- delete the supplied path 
+  - :FrecencyDelete /full/path/to/the/file
+--]=====]
+
+	{
+		"nvim-telescope/telescope-frecency.nvim",
+		config = function()
+			require("telescope").setup({
+				extensions = {
+					frecency = {
+						show_scores = true, -- Default: false
+						-- If `true`, it shows confirmation dialog before any entries are removed from the DB
+						-- If you want not to be bothered with such things and to remove stale results silently
+						-- set db_safe_mode=false and auto_validate=true
+						--
+						-- This fixes an issue I had in which I couldn't close the floating
+						-- window because I couldn't focus it
+						db_safe_mode = false, -- Default: true
+						-- If `true`, it removes stale entries count over than db_validate_threshold
+						auto_validate = true, -- Default: true
+						-- It will remove entries when stale ones exist more than this count
+						db_validate_threshold = 10, -- Default: 10
+						-- Show the path of the active filter before file paths.
+						-- So if I'm in the `dotfiles-latest` directory it will show me that
+						-- before the name of the file
+						show_filter_column = false, -- Default: true
+						-- I declare a workspace which I will use when calling frecency if I
+						-- want to search for files in a specific path
+						-- workspaces = {
+						--   ["neobean_plugins"] = "$HOME/github/dotfiles-latest/neovim/neobean/lua/plugins",
+						-- },
+					},
+				},
+			})
+			require("telescope").load_extension("frecency")
+		end,
+	}
 }
 
