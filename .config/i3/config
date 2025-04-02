@@ -201,6 +201,7 @@ bindsym $met+D workspace number $wsD
 bindsym $met+E workspace number $wsE
 bindsym $met+Q workspace number $wsQ
 bindsym $met+R workspace number $wsR
+bindsym $met+T workspace number $wsT
 bindsym $met+A workspace number $wsA
 bindsym $met+G workspace number $wsG
 bindsym $met+Z workspace number $wsZ
@@ -215,6 +216,7 @@ bindsym $met+$alt+D move container to workspace number $wsD
 bindsym $met+$alt+E move container to workspace number $wsE
 bindsym $met+$alt+Q move container to workspace number $wsQ
 bindsym $met+$alt+R move container to workspace number $wsR
+bindsym $met+$alt+T move container to workspace number $wsT
 bindsym $met+$alt+A move container to workspace number $wsA
 bindsym $met+$alt+G move container to workspace number $wsG
 bindsym $met+$alt+Z move container to workspace number $wsZ
@@ -306,7 +308,7 @@ bindsym $met+Shift+r exec --no-startup-id nautilus
 
 bindsym $met+Shift+t exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
-bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
+# bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
 
 bindsym $met+Shift+h exec kanata -c /home/j.castander/.config/kanata/kanata.kbd # no va
 
