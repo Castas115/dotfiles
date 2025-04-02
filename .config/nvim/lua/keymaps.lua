@@ -34,8 +34,6 @@ vim.keymap.set('n', '<leader><Del>', "<Esc>:execute 'silent !rm ' . expand('%') 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "x", '"_x', opts)
 
-vim.keymap.set("n", "<leader>=", vim.lsp.buf.format)
-
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "x", '"_x', opts)
 
