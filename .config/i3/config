@@ -248,12 +248,9 @@ bindsym $met+space focus mode_toggle
 ####    windows & workspaces    ####
 ####################################
 # Set app to window with xprop 
-for_window [class="^firefox"]           move to workspace $wsF
-for_window [class="^zen"]				move to workspace $wsE
-for_window [class="Nautilus"]           move to workspace $wsR
+for_window [class="Vivaldi-stable"]           move to workspace $wsF
+for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]    move to workspace $wsG
-for_window [title="^Outlook"]           move to workspace $wsV
-for_window [class="^teams-for-linux"]   move to workspace $wsC
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
 for_window [class="floating"]			floating enable, move position center, resize set 1500 1000, border pixel 0
@@ -286,6 +283,7 @@ bindsym $met+Ctrl+a layout tabbed
 bindsym $met+Ctrl+s layout stacking
 bindsym $met+Ctrl+d layout toggle split
 bindsym $met+Ctrl+f fullscreen toggle
+bindsym $met+Ctrl+g exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
 
 bindsym $met+Ctrl+z focus parent
 bindsym $met+Ctrl+x mode "resize"
@@ -298,15 +296,15 @@ bindsym $met+Ctrl+comma split v
 bindsym $met+Shift+a exec kitty -1 tmux attach -t general
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
-bindsym $met+Shift+f exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
+bindsym $met+Shift+f exec --no-startup-id vivaldi
 
 #		$met+Shift+x	CopyQ screenshot
 bindsym $met+Shift+z exec --no-startup-id flameshot gui
 
 bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
-bindsym $met+Shift+r exec --no-startup-id nautilus
+bindsym $met+Shift+e exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
+bindsym $met+Shift+t exec --no-startup-id nautilus
 
-bindsym $met+Shift+t exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 # bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
 
