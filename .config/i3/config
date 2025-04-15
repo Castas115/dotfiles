@@ -248,9 +248,10 @@ bindsym $met+space focus mode_toggle
 ####    windows & workspaces    ####
 ####################################
 # Set app to window with xprop 
-for_window [class="Vivaldi-stable"]           move to workspace $wsF
+for_window [class="Vivaldi-stable"]     move to workspace $wsF
+for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
-for_window [title="^passwords.kdbx"]    move to workspace $wsG
+for_window [title="^passwords.kdbx"]	move to workspace $wsG
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
 for_window [class="floating"]			floating enable, move position center, resize set 1500 1000, border pixel 0
@@ -306,7 +307,7 @@ bindsym $met+Shift+e exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_sessi
 bindsym $met+Shift+t exec --no-startup-id nautilus
 
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
-# bindsym $met+Shift+b exec teams-for-linux; exec outlook-electron
+bindsym $met+Shift+b exec microsoft-edge
 
 bindsym $met+Shift+h exec kanata -c /home/j.castander/.config/kanata/kanata.kbd # no va
 
