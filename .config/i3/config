@@ -311,5 +311,7 @@ bindsym $met+Shift+b exec --no-startup-id microsoft-edge
 
 bindsym $met+Shift+h exec kanata -c /home/j.castander/.config/kanata/kanata.kbd # no va
 
+bindsym $met+Shift+u exec bluetoothctl connect AC:BF:71:BC:80:CB
+
 # bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 
