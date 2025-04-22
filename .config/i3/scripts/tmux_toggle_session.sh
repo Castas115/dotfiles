@@ -11,7 +11,7 @@ if tmux list-sessions | grep -q "$SESSION_NAME:.*attached"; then
 else
 	# Attach to the session
 	kitty -1 --class "floating" -d "$PROJECT_PATH" tmux new-session -A -s "$SESSION_NAME"
-	if [ -z "$GIT_PULL" ]; then
+	if [ -n "$GIT_PULL" ]; then
 		git -C "$PROJECT_PATH" pull
 	fi
 fi
