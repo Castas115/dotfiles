@@ -254,7 +254,7 @@ for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]	move to workspace $wsG
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
-for_window [class="floating"]			floating enable, move position center, resize set 1500 1000, border pixel 0
+for_window [class="floating"]			floating enable, move position center, resize set 1750 1000, border pixel 0
 for_window [class="g_workspace"]		move to workspace $wsG
 
 ###########################
