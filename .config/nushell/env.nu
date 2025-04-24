@@ -5,12 +5,6 @@
 
 def create_right_prompt [] {
     # create a right prompt in magenta with green separators and am/pm underlined
-    let time_segment = ([
-        (ansi reset)
-        (ansi magenta)
-        (date now | format date '%x %X') # try to respect user's locale
-    ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)" |
-        str replace --regex --all "([AP]M)" $"(ansi magenta_underline)${1}")
 
     let last_exit_code = if ($env.LAST_EXIT_CODE != 0) {([
         (ansi rb)
@@ -18,7 +12,14 @@ def create_right_prompt [] {
     ] | str join)
     } else { "" }
 
-    ([$last_exit_code, (char space), $time_segment] | str join)
+    let git_segment = (if (do --ignore-errors { git rev-parse --is-inside-work-tree } | complete).exit_code == 0 {
+		let branch = (do --ignore-errors { git branch --show-current } | complete).stdout
+		let status = (do --ignore-errors { git status --porcelain } | complete).stdout
+		let color = if ($status | is-empty) { (ansi green) } else { (ansi yellow) }
+		$"(ansi blue) 󰊢($color) ($branch)"
+	} else { "" })
+
+    ([$last_exit_code, (char space), $git_segment] | str join)
 }
 
 # Use nushell functions to define your right and left prompt
