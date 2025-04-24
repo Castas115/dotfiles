@@ -12,14 +12,7 @@ def create_right_prompt [] {
     ] | str join)
     } else { "" }
 
-    let git_segment = (if (do --ignore-errors { git rev-parse --is-inside-work-tree } | complete).exit_code == 0 {
-		let branch = (do --ignore-errors { git branch --show-current } | complete).stdout
-		let status = (do --ignore-errors { git status --porcelain } | complete).stdout
-		let color = if ($status | is-empty) { (ansi green) } else { (ansi yellow) }
-		$"(ansi blue) 󰊢($color) ($branch)"
-	} else { "" })
-
-    ([$last_exit_code, (char space), $git_segment] | str join)
+    ([$last_exit_code, (char space), (git-prompt-string)] | str join)
 }
 
 # Use nushell functions to define your right and left prompt
@@ -73,6 +66,7 @@ use std "path add"
 path add /opt/homebrew/bin
 path add /run/current-system/sw/bin
 path add /home/j.castander/.local/bin/
+path add /home/j.castander/go/bin/
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
