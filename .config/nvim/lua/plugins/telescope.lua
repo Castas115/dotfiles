@@ -3,80 +3,73 @@ return {
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = {
-			{
-				"<leader>fd",
-				function()
-					require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
-						sort_mru = true,
-						sort_lastused = true,
-						initial_mode = "normal",
-						layout_config = {
-							preview_width = 0.6,
-						},
-					}))
-				end,
-				desc = "Open telescope buffers",
-			},
-			{
-				"<leader>ff",
-				function()
-					local cwd = vim.fn.getcwd()
-					require("telescope").extensions.frecency.frecency(require("telescope.themes").get_ivy({
-						workspace = "CWD",
-						cwd = cwd,
-						prompt_title = "FRECENCY " .. cwd,
-					}))
-				end,
-				desc = "Find Files (Root Dir)",
-			},
-			-- { "<leader>sG", LazyVim.pick("live_grep"), desc = "Grep (cwd)" },
-			{
-				"<leader>sG",
-				function()
-					local cwd = require("telescope.utils").buffer_dir()
-					require("telescope.builtin").live_grep(require("telescope.themes").get_ivy({
-						cwd = cwd,
-						prompt_title = "GREP " .. cwd,
-					}))
-				end,
-				desc = "[P]Grep (buffer dir)",
-			},
-			{
-				"<leader>sg",
-				function()
-					local cwd = vim.fn.getcwd()
-					require("telescope.builtin").live_grep(require("telescope.themes").get_ivy({
-						-- gets current working directory
-						cwd = cwd,
-						prompt_title = "GREP " .. cwd,
-					}))
-				end,
-				desc = "[P]Grep (Root Dir)",
-			},
+		keys = function()
+			local builtin = require("telescope.builtin")
+			local themes = require("telescope.themes")
+			local extensions = require("telescope").extensions
 
-			{
-				"<leader>fg",
-				function()
-					require("telescope.builtin").git_status(require("telescope.themes").get_ivy({
-						layout_config = {
-							preview_width = 0.75,
-							-- height = 0.2,
-						},
-						initial_mode = "normal", -- Start in normal mode
-					}))
-				end,
-				desc = "Git Status (ivy theme with custom preview size)",
-			},
-
-			{
-				"<leader><leader>",
-				"<cmd>e #<cr>",
-				desc = "Alternate buffer",
-			},
-			{ "<leader>fk", "<cmd>Telescope keymaps<cr>", { desc = "[F]ind [K]ey maps" }},
-			{ "<leader>fs", require("telescope.builtin").lsp_document_symbols, { desc = "Find Symbols" }},
-		},
+			return {
+				{
+					"<leader>fd",
+					function()
+						builtin.buffers(themes.get_ivy({
+							sort_mru = true,
+							sort_lastused = true,
+							initial_mode = "normal",
+							layout_config = { preview_width = 0.6 },
+						}))
+					end,
+					desc = "List Buffers",
+				},
+				{
+					"<leader>ff",
+					function()
+						local cwd = vim.fn.getcwd()
+						extensions.frecency.frecency(themes.get_ivy({
+							workspace = "CWD",
+							cwd = cwd,
+							prompt_title = "FRECENCY " .. cwd,
+						}))
+					end,
+					desc = "Find Files (Root Dir)",
+				},
+				{
+					"<leader>sg",
+					function()
+						local cwd = vim.fn.getcwd()
+						builtin.live_grep(themes.get_ivy({
+							cwd = cwd,
+							prompt_title = "GREP " .. cwd,
+						}))
+					end,
+					desc = "Grep in Root Dir",
+				},
+				{
+					"<leader>sG",
+					function()
+						local cwd = require("telescope.utils").buffer_dir()
+						builtin.live_grep(themes.get_ivy({
+							cwd = cwd,
+							prompt_title = "GREP " .. cwd,
+						}))
+					end,
+					desc = "Grep in Buffer Dir",
+				},
+				{
+					"<leader>fg",
+					function()
+						builtin.git_status(themes.get_ivy({
+							layout_config = { preview_width = 0.6 },
+							initial_mode = "normal",
+						}))
+					end,
+					desc = "Git Status",
+				},
+				{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Find Keymaps", },
+				{ "<leader>fs", builtin.lsp_document_symbols, desc = "Find Symbols", },
+				{ "<leader><leader>", "<cmd>e #<cr>", desc = "Alternate Buffer", },
+			}
+		end,
 		opts = function()
 			local actions = require("telescope.actions")
 			return {
