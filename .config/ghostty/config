@@ -8,6 +8,9 @@ font-family-italic = Hack Nerd Font Italic
 font-family-bold-italic = Hack Nerd Font Bold Italic
 font-thicken = true
 
+cursor-color = #bac2de
+cursor-text = #1e1e2e
+
 mouse-hide-while-typing = true
 window-decoration = false
 macos-option-as-alt = true
