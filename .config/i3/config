@@ -252,6 +252,7 @@ for_window [class="Vivaldi-stable"]     move to workspace $wsF
 for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]	move to workspace $wsG
+for_window [title="Start Page - Vivaldi"]	move to workspace $wsR
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
 for_window [class="floating"]			floating enable, move position center, resize set 1750 1000, border pixel 0
