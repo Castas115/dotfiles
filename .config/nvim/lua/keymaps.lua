@@ -1,6 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 vim.keymap.set("n", "<leader>q", ":q!<CR>", opts)
+vim.keymap.set("n", "<M-q>", ":qa!<CR>", opts)
 vim.keymap.set({ 'n', 'v' }, "<C-S-c>", '"+y', opts)
 vim.keymap.set({ 'n', 'v' }, "<C-c>", '"+y', opts)
 
