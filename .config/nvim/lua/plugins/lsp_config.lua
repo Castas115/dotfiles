@@ -25,28 +25,47 @@ return {
 	config = function()
 		local lsp = require("lsp-zero")
 		vim.diagnostic.config({
-			virtual_text = true,  -- Show diagnostics inline
-			signs = true,         -- Show signs in the gutter
-			underline = true,     -- Underline the error text
+			virtual_text = true, -- Show diagnostics inline
+			signs = true, -- Show signs in the gutter
+			underline = true, -- Underline the error text
 			update_in_insert = false,
 			severity_sort = true,
 			float = {
 				border = "rounded",
-				source = "always",
+				source = true,
 			},
 		})
 
 		lsp.on_attach(function(client, bufnr)
 			local opts = { buffer = bufnr, remap = false }
 
-			vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Hover" }))
-			vim.keymap.set("n", "<leader>lr", function() vim.lsp.buf.references() end, vim.tbl_deep_extend("force", opts, { desc = "LSP References" }))
-			vim.keymap.set("n", "<leader>ld", function() vim.lsp.buf.definition() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Definition" }))
-			vim.keymap.set("n", "<leader>ln", function() vim.lsp.buf.rename() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Rename" }))
-			vim.keymap.set("n", "<leader>la", function() vim.lsp.buf.code_action() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Code Action" }))
-			vim.keymap.set("n", "<leader>ls", function() vim.lsp.buf.workspace_symbol() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Workspace Symbol" }))
-			vim.keymap.set("n", "<leader>lD", function() vim.diagnostic.setloclist() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-			vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, vim.tbl_deep_extend("force", opts, { desc = "LSP Signature Help" }))
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Hover" }))
+			vim.keymap.set("n", "<leader>lr", function()
+				vim.lsp.buf.references()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP References" }))
+			vim.keymap.set("n", "<leader>ld", function()
+				vim.lsp.buf.definition()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Definition" }))
+			vim.keymap.set("n", "<leader>ln", function()
+				vim.lsp.buf.rename()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Rename" }))
+			vim.keymap.set("n", "<leader>la", function()
+				vim.lsp.buf.code_action()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Code Action" }))
+			vim.keymap.set("n", "<leader>ls", function()
+				vim.lsp.buf.workspace_symbol()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Workspace Symbol" }))
+			vim.keymap.set("n", "<leader>lD", function()
+				vim.diagnostic.setloclist()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
+			vim.keymap.set("i", "<C-h>", function()
+				vim.lsp.buf.signature_help()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Signature Help" }))
+			vim.keymap.set("n", "<leader>li", function()
+				vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Organize Imports" }))
 		end)
 
 		require("mason").setup({})
@@ -88,13 +107,13 @@ return {
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
-					{
-						name = "cmdline",
-						option = {
-							ignore_cmds = { "Man", "!" },
-						},
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
 					},
-				}),
+				},
+			}),
 		})
 
 		cmp.setup({
