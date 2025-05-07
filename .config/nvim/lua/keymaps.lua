@@ -1,6 +1,10 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
+
+keymap.set({ "n", "x" }, ":", ";")
+keymap.set({ "n", "x" }, ";", ":")
+
 keymap.set("n", "<leader>q", ":q!<CR>", opts)
 keymap.set("n", "<M-q>", ":qa!<CR>", opts)
 keymap.set({ 'n', 'v' }, "<C-S-c>", '"+y', opts)
@@ -47,4 +51,4 @@ keymap.set({"n", "i"}, "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><L
 keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
 
 keymap.set("n", "<leader>.", "<C-w>v", { desc = "Split window vertically" })
--- split window vertically
+keymap.set("n", "<leader>,", "<C-w>s", { desc = "Split window horizontally" })
