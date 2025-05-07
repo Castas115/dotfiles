@@ -13,6 +13,11 @@ vim.keymap.set('n', '<C-j>', '<C-w>j', opts)
 vim.keymap.set('n', '<C-k>', '<C-w>k', opts)
 vim.keymap.set('n', '<C-l>', '<C-w>l', opts)
 
+vim.api.nvim_set_keymap('n', '<A-h>', ':vertical resize -2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-j>', ':resize -2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-k>', ':resize +2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-l>', ':vertical resize +2<CR>', { noremap = true, silent = true })
+
 vim.keymap.set('n', 'tq', '<Esc>:bdelete<CR>')
 vim.keymap.set('n', 'tk', '<Esc>:bnext<CR>')
 vim.keymap.set('n', 'tj', '<Esc>:bprev<CR>')
