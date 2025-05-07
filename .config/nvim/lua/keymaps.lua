@@ -38,9 +38,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv",
 vim.keymap.set('n', '<leader><Del>', "<Esc>:execute 'silent !rm ' . expand('%') | bdelete<CR>")
 
 vim.keymap.set({ "n", "v" }, "<A-d>", [["_d]])
-vim.keymap.set("n", "x", '"_x', opts)
+vim.keymap.set("n", "<A-x>", '"_x', opts)
 
-vim.keymap.set("n", "<leader>S", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+vim.keymap.set({"n", "i"}, "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace word cursor is on globally" })
 
 vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })

@@ -1,15 +1,3 @@
-local function today_diary()
-	local second_brain_path = "~/Documents/secondBrain"
-
-	vim.cmd("cd " .. second_brain_path)
-
-	local current_date = os.date("%y-%m-%d-%a")
-	local file_path = second_brain_path  .. "/diario/" .. current_date .. ".md"
-	vim.cmd("edit " .. file_path)
-end
-
--- vim.keymap.set("n", "<leader>td", today_diary, { noremap = true, silent = true })
-
 local function diff_with_copy()
 	-- Get the current file path and extension
 	print("a")
@@ -79,9 +67,9 @@ local function toggle_checkbox()
 	-- vim.api.nvim_win_set_cursor(0, cursor_pos)
 end
 
-vim.keymap.set({"n","v","i"}, "<M-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
+vim.keymap.set({"n","v"}, "<leader>tc", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
 
-vim.keymap.set("n", "<M-x>", function()
+vim.keymap.set("n", "<leader>tx", function()
   -- Customizable variables
   local label_done = "done:"  -- Label for completed tasks
   local timestamp = os.date("%y%m%d-%H%M")  -- Timestamp format
