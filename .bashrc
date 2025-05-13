@@ -138,6 +138,3 @@ alias g='lazygit'
 export PATH="$PATH:/home/j.castander/.local/bin"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-/usr/bin/keychain -q --nogui $HOME/.ssh/id_ed25519
-source $HOME/.keychain/$HOST-sh
