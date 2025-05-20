@@ -20,8 +20,7 @@ return {
 	},
 	keys = {
 		{ "<leader>gl", function() Snacks.lazygit.log_file() end,	desc = "Lazygit Log (cwd)" },
-		{ "<leader>lg", function() Snacks.lazygit() end,			desc = "Lazygit" },
-		{ "<leader>fr", function() Snacks.picker.recent() end,      desc = "Recent Files" },
-		{ "<C-n>",      function() Snacks.explorer() end,			 desc = "Explorer" },
+		{ "<leader>gg", function() Snacks.lazygit() end,			desc = "Lazygit" },
+		{ "<C-n>",      function() Snacks.explorer() end,			desc = "Explorer" },
 	}
 }

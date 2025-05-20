@@ -32,7 +32,7 @@ return {
 		},
 		cmd = 'Neogit',
 		keys = {
-			{ '<leader>gg', ':Neogit kind=floating<cr>', desc = 'neo[g]it' },
+			{ '<leader>gn', ':Neogit kind=floating<cr>', desc = 'neo[g]it' },
 		},
 		config = function()
 			require('neogit').setup {
