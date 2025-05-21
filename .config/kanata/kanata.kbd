@@ -12,42 +12,42 @@
 )
 
 (defvar
-  tap-time 170
-  hold-time 170
+  tt 170
+  ht 170
 )
 
 (defalias
-  w (tap-hold $tap-time $hold-time w (layer-while-held nums_icons))
-  o (tap-hold $tap-time $hold-time o (layer-while-held nums_icons))
-  e (tap-hold $tap-time $hold-time e (layer-while-held nums_icons2))
-  r (tap-hold $tap-time $hold-time r (layer-while-held mouse))
+  w (tap-hold $tt $ht w (layer-while-held nums_icons))
+  o (tap-hold $tt $ht o (layer-while-held nums_icons))
+  e (tap-hold $tt $ht e (layer-while-held nums_icons2))
+  r (tap-hold $tt $ht r (layer-while-held mouse))
 
-  a (tap-hold $tap-time $hold-time a lalt)
-  s (tap-hold $tap-time $hold-time s lmet)
-  d (tap-hold $tap-time $hold-time d lctl)
-  f (tap-hold $tap-time $hold-time f lsft)
-  g (tap-hold $tap-time $hold-time g (layer-while-held macros))
-  ctl (tap-dance $tap-time (lctl (dynamic-macro-record-stop-truncate 3)))
+  a (tap-hold $tt $ht a lalt)
+  s (tap-hold $tt $ht s lmet)
+  d (tap-hold $tt $ht d lctl)
+  f (tap-hold $tt $ht f lsft)
+  g (tap-hold $tt $ht g (layer-while-held macros))
+  ctl (tap-dance $tt (lctl (dynamic-macro-record-stop-truncate 3)))
 
-  j (tap-hold $tap-time $hold-time j lsft)
-  k (tap-hold $tap-time $hold-time k lctl)
-  l (tap-hold $tap-time $hold-time l lmet)
-  ; (tap-hold $tap-time $hold-time ; lalt)
+  j (tap-hold $tt $ht j lsft)
+  k (tap-hold $tt $ht k lctl)
+  l (tap-hold $tt $ht l lmet)
+  ; (tap-hold $tt $ht ; lalt)
 
-  z (tap-hold $tap-time $hold-time z (multi lalt lsft))
-  x (tap-hold $tap-time $hold-time x (multi lctrl lsft))
-  c (tap-hold $tap-time $hold-time c (multi lmet lctrl))
-  v (tap-hold $tap-time $hold-time v (multi lmet lsft))
-  b (tap-hold $tap-time $hold-time b (multi lmet lalt))
+  z (tap-hold $tt $ht z (multi lalt lsft))
+  x (tap-hold $tt $ht x (multi lctrl lsft))
+  c (tap-hold $tt $ht c (multi lmet lctrl))
+  v (tap-hold $tt $ht v (multi lmet lsft))
+  b (tap-hold $tt $ht b (multi lmet lalt))
   
-  m (tap-hold $tap-time $hold-time m ralt)
+  m (tap-hold $tt $ht m ralt)
 
-  A-C (tap-hold $tap-time $hold-time ret (multi lmet lctl))
-  A-S (tap-hold $tap-time $hold-time del (multi lmet lsft))
-  spc_Meh (tap-hold $tap-time $hold-time spc (multi lalt lctl lsft))
-  arrs (tap-hold $tap-time $hold-time bspc (layer-while-held arrows))
+  A-C (tap-hold $tt $ht ret (multi lmet lctl))
+  A-S (tap-hold $tt $ht del (multi lmet lsft))
+  spc_Meh (tap-hold $tt $ht spc (multi lalt lctl lsft))
+  arrs (tap-hold $tt $ht bspc (layer-while-held arrows))
 
-  ret_altgr (tap-hold $tap-time $hold-time ret ralt)
+  ret_altgr (tap-hold $tt $ht ret ralt)
 
   laptop (layer-switch base_laptop)
   moon   (layer-switch base)
