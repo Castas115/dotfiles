@@ -1,5 +1,6 @@
 (defcfg
   process-unmapped-keys yes
+  delegate-to-first-layer yes
 )
 
 (defsrc
@@ -19,12 +20,14 @@
   w (tap-hold $tap-time $hold-time w (layer-while-held nums_icons))
   o (tap-hold $tap-time $hold-time o (layer-while-held nums_icons))
   e (tap-hold $tap-time $hold-time e (layer-while-held nums_icons2))
+  r (tap-hold $tap-time $hold-time r (layer-while-held mouse))
 
   a (tap-hold $tap-time $hold-time a lalt)
   s (tap-hold $tap-time $hold-time s lmet)
   d (tap-hold $tap-time $hold-time d lctl)
   f (tap-hold $tap-time $hold-time f lsft)
-  g (tap-hold $tap-time $hold-time g (layer-while-held mouse))
+  g (tap-hold $tap-time $hold-time g (layer-while-held macros))
+  ctl (tap-dance $tap-time (lctl (dynamic-macro-record-stop-truncate 3)))
 
   j (tap-hold $tap-time $hold-time j lsft)
   k (tap-hold $tap-time $hold-time k lctl)
@@ -48,14 +51,27 @@
 
   laptop (layer-switch base_laptop)
   moon   (layer-switch base)
+
+  dr0 (dynamic-macro-record 0)
+  dp0 (dynamic-macro-play 0)
+  dr1 (dynamic-macro-record 1)
+  dp1 (dynamic-macro-play 1)
+  dr2 (dynamic-macro-record 2)
+  dp2 (dynamic-macro-play 2)
+  dr3 (dynamic-macro-record 3)
+  dp3 (dynamic-macro-play 3)
+  dr4 (dynamic-macro-record 4)
+  dp4 (dynamic-macro-play 4)
+  dr5 (dynamic-macro-record 5)
+  dp5 (dynamic-macro-play 5)
 )
 
 (deflayer base
   caps 1    2    3    4    5        6    7    8    9    0    -    =    @arrs
-  esc  q    @w   @e    r    t        y    u    i    @o   p    \   [    ret
-  tab  @a   @s   @d   @f   @g       h    @j   @k   @l   @;    '   ]    @laptop
+  esc  q    @w   @e   @r   t        y    u    i    @o   p    \   [    ret
+  tab  @a   @s   @d   @f   @g       h    @j   @k   @l   @;    '   \    @laptop
   lsft @z   @x   @c   @v   @b       n    @m    ,    .    /    rsft
-  lctl @A-C @A-S            @spc_Meh          @arrs @ret_altgr
+  @ctl @A-C @A-S            @spc_Meh          @arrs @ret_altgr
 )
 
 (deflayer arrows
@@ -65,7 +81,6 @@
   _    @z   @x   @c   @v   @b     _    home end  pgdn pgup  _
   _    _    _                  _            XX   _
 )
-
 
 (deflayer nums_icons
   _    _    _    _    _    _     _    _    _    _    _    _    _    0
@@ -83,18 +98,36 @@
   _    _    _                 _            0    _
 )
 
-(deflayer mouse
-  _    _    _    _      _      _       _    _    _    _    _    _    _    _
-  _    _    _    C-pgup C-pgdn _       _    _    _    _    _    _    _    _
-  _    _    _    🖰4    🖰5    XX      _    _    _    _    _    _    _    _
-  _    _    _    _      _      _       _    🖰1  🖰2  🖰3  _    _
-  _    _    _                      _              _    _
+(deflayermap mouse
+  r XX
+  w  C-pgup
+  e C-pgdn
+  s 🖰4
+  d 🖰5
+  m 🖰1
+  , 🖰2
+  . 🖰3
 )
 
-(deflayer base_laptop
-  tab  _    _    _    _    _      _    _    _    _    _    _    _    _
-  caps _    _    _    _    _      _    _    _    _    _    _    _    _
-  esc  _    _    _    _    _      _    _    _    _    _    _    _    @moon
-  lsft _    _    _    _    _      _    _    _    _    _    _
-  lctl _    _                 _             _    _
+(deflayer macros
+  _    _    _    _    _    _      _    _    _    _    _    _    _    _
+  _    _    @dr3 @dp3 @dp2 @dr2   _    _    _    _    _    _    _    _
+  _    @dr0 @dr1 @dp1 @dp0 XX     _    _    _    _    _    _    _    _
+  _    _    @dr5 @dp5 @dp4 @dr4   _    _    _    _    _    _
+  _    _    _                 _             _    _
+)
+
+(deflayermap base_laptop
+  caps  tab
+  esc   caps
+  tab   esc
+  ins   @moon
+)
+
+(deflayer copy
+  _    _    _    _    _    _      _    _    _    _    _    _    _    _
+  _    _    _    _    _    _      _    _    _    _    _    _    _    _
+  _    _    _    _    _    _      _    _    _    _    _    _    _    _
+  _    _    _    _    _    _      _    _    _    _    _    _
+  _    _    _                 _             _    _
 )
