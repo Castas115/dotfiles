@@ -20,13 +20,13 @@
   w (tap-hold $tt $ht w (layer-while-held nums_icons))
   o (tap-hold $tt $ht o (layer-while-held nums_icons))
   e (tap-hold $tt $ht e (layer-while-held nums_icons2))
-  r (tap-hold $tt $ht r (layer-while-held mouse))
+  t (tap-hold $tt $ht t (layer-while-held macros))
 
   a (tap-hold $tt $ht a lalt)
   s (tap-hold $tt $ht s lmet)
   d (tap-hold $tt $ht d lctl)
   f (tap-hold $tt $ht f lsft)
-  g (tap-hold $tt $ht g (layer-while-held macros))
+  g (tap-hold $tt $ht g (layer-while-held mouse))
   ctl (tap-dance $tt (lctl (dynamic-macro-record-stop-truncate 3)))
 
   j (tap-hold $tt $ht j lsft)
@@ -68,7 +68,7 @@
 
 (deflayer base
   caps 1    2    3    4    5        6    7    8    9    0    -    =    @arrs
-  esc  q    @w   @e   @r   t        y    u    i    @o   p    \   [    ret
+  esc  q    @w   @e   r    @t       y    u    i    @o   p    \   [    ret
   tab  @a   @s   @d   @f   @g       h    @j   @k   @l   @;    '   \    @laptop
   lsft @z   @x   @c   @v   @b       n    @m    ,    .    /    rsft
   @ctl @A-C @A-S            @spc_Meh          @arrs @ret_altgr
@@ -99,11 +99,11 @@
 )
 
 (deflayermap mouse
-  r XX
-  w  C-pgup
-  e C-pgdn
-  s 🖰4
-  d 🖰5
+  g XX
+  d 🖰4
+  f 🖰5
+  e C-pgup
+  r C-pgdn
   m 🖰1
   , 🖰2
   . 🖰3
@@ -111,8 +111,8 @@
 
 (deflayer macros
   _    _    _    _    _    _      _    _    _    _    _    _    _    _
-  _    _    @dr3 @dp3 @dp2 @dr2   _    _    _    _    _    _    _    _
-  _    @dr0 @dr1 @dp1 @dp0 XX     _    _    _    _    _    _    _    _
+  _    @dr2 @dr3 @dp3 @dp2 XX     _    _    _    _    _    _    _    _
+  _    _    @dr1 @dp1 @dp0 @dr0   _    _    _    _    _    _    _    _
   _    _    @dr5 @dp5 @dp4 @dr4   _    _    _    _    _    _
   _    _    _                 _             _    _
 )
