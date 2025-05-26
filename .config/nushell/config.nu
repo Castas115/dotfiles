@@ -759,12 +759,19 @@ source ~/.config/nushell/env.nu
 source ~/.local/share/atuin/init.nu
 source ~/.zoxide.nu
 
+alias s  = sudo
+alias ai = sudo apt install -y
+alias ar = sudo apt remove -y
+def au [] {
+    sudo apt update
+    sudo apt upgrade -y
+}
+
 alias ll = ls -l
 alias lt = eza --tree --level=2 --long --icons --git
 alias v  = nvim
 alias cf = ci # zoxide
 alias v  = nvim
-alias ai = sudo apt-get install -y
 alias g  = lazygit
 alias gd = lazygit -p ~/dotfiles
 alias b  = batcat
