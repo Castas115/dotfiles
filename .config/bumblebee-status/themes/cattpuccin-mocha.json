@@ -1,14 +1,14 @@
 {
 	"icons": [ "awesome-fonts" ],
 	"defaults": {
-		"bg": "#1e1e2e",
+		"bg": "#000000",
 		"fg": "#cdd6f4",
 		"critical": {
-			"bg": "#1e1e2e",
+			"bg": "#000000",
 			"fg": "#f38ba8"
 		},
 		"warning": {
-			"bg": "#1e1e2e",
+			"bg": "#000000",
 			"fg": "#f9e2af"
 		}
 	}
