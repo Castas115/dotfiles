@@ -23,6 +23,7 @@ set $surface2 #585b70
 set $surface1 #45475a
 set $surface0 #313244
 set $base #1e1e2e
+set $base #000000
 set $mantle #181825
 set $crust #11111b
 client.focused           $lavender $base $text  $rosewater $lavender
@@ -107,7 +108,7 @@ bar {
 
 	  font pango:Hack Nerd Font 8
  status_command bumblebee-status -m \
- 	 memory bluetooth battery pipewire arandr date time \
+ 	 memory apt pipewire battery date time \
  	-p time.format="%H:%M" date.format="%a, %d %b %Y" playerctl.hide=true \
  	-t cattpuccin-mocha
 
@@ -248,7 +249,7 @@ bindsym $met+space focus mode_toggle
 ####    windows & workspaces    ####
 ####################################
 # Set app to window with xprop 
-for_window [class="Vivaldi-stable"]     move to workspace $wsF
+# for_window [class="Vivaldi-stable"]     move to workspace $wsF
 for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]	move to workspace $wsG
@@ -294,7 +295,7 @@ bindsym $met+Ctrl+comma split v
 
 # V: open apps
 bindsym $met+Shift+a exec ghostty -e tmux attach -t general
-# bindsym $met+Shift+a exec kitty -1 tmux attach -t general
+		# bindsym $met+Shift+a exec kitty -1 tmux attach -t general
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 bindsym $met+Shift+f exec --no-startup-id vivaldi
@@ -304,14 +305,10 @@ bindsym $met+Shift+z exec --no-startup-id flameshot gui
 
 bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
 bindsym $met+Shift+e exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
-bindsym $met+Shift+t exec --no-startup-id nautilus
+bindsym $met+Shift+t exec --no-startup-id nautilus -w ~/Downloads/
 
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 bindsym $met+Shift+b exec --no-startup-id microsoft-edge
 
-bindsym $met+Shift+h exec kanata -c /home/j.castander/.config/kanata/kanata.kbd # no va
-
 bindsym $met+Shift+u exec bluetoothctl connect AC:BF:71:BC:80:CB
-
-# bindsym --release $meh+c exec --no-startup-id ~/.config/i3/scripts/saveTask.sh
 
