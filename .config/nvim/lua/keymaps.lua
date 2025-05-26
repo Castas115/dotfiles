@@ -18,10 +18,13 @@ keymap.set('n', '<C-j>', '<C-w>j', opts)
 keymap.set('n', '<C-k>', '<C-w>k', opts)
 keymap.set('n', '<C-l>', '<C-w>l', opts)
 
-vim.api.nvim_set_keymap('n', '<A-h>', ':vertical resize -2<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-j>', ':resize -2<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-k>', ':resize +2<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-l>', ':vertical resize +2<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-j>', '10jzz', opts)
+vim.api.nvim_set_keymap('n', '<A-k>', '10kzz', opts)
+
+vim.api.nvim_set_keymap('n', '<A-S-h>', ':vertical resize -2<CR>', opts)
+vim.api.nvim_set_keymap('n', '<A-S-j>', ':resize -2<CR>', opts)
+vim.api.nvim_set_keymap('n', '<A-S-k>', ':resize +2<CR>', opts)
+vim.api.nvim_set_keymap('n', '<A-S-l>', ':vertical resize +2<CR>', opts)
 
 keymap.set('n', 'tq', '<Esc>:bdelete<CR>')
 keymap.set('n', 'tk', '<Esc>:bnext<CR>')
@@ -45,7 +48,9 @@ keymap.set('n', '<leader><Del>', "<Esc>:execute 'silent !rm ' . expand('%') | bd
 keymap.set({ "n", "v" }, "<A-d>", [["_d]])
 keymap.set("n", "<A-x>", '"_x', opts)
 
-keymap.set({"n", "i"}, "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+vim.keymap.set("v", "<A-s>", [[y:<C-u>%s/<C-r>=escape(@", '/\')<CR>//gI<Left><Left><Left>]],
+    { desc = "Replace visually selected text globally" })
+keymap.set("n", "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace word cursor is on globally" })
 
 keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
