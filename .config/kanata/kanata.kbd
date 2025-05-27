@@ -41,6 +41,7 @@
   b (tap-hold $tt $ht b (multi lmet lalt))
   
   m (tap-hold $tt $ht m ralt)
+  n (tap-hold $tt $ht n (layer-while-held emojis))
 
   A-C (tap-hold $tt $ht ret (multi lmet lctl))
   A-S (tap-hold $tt $ht del (multi lmet lsft))
@@ -52,25 +53,13 @@
   laptop (layer-switch base_laptop)
   moon   (layer-switch base)
 
-  dr0 (dynamic-macro-record 0)
-  dp0 (dynamic-macro-play 0)
-  dr1 (dynamic-macro-record 1)
-  dp1 (dynamic-macro-play 1)
-  dr2 (dynamic-macro-record 2)
-  dp2 (dynamic-macro-play 2)
-  dr3 (dynamic-macro-record 3)
-  dp3 (dynamic-macro-play 3)
-  dr4 (dynamic-macro-record 4)
-  dp4 (dynamic-macro-play 4)
-  dr5 (dynamic-macro-record 5)
-  dp5 (dynamic-macro-play 5)
 )
 
 (deflayer base
   caps 1    2    3    4    5        6    7    8    9    0    -    =    @arrs
   esc  q    @w   @e   r    @t       y    u    i    @o   p    \   [    ret
   tab  @a   @s   @d   @f   @g       h    @j   @k   @l   @;    '   \    @laptop
-  lsft @z   @x   @c   @v   @b       n    @m    ,    .    /    rsft
+  lsft @z   @x   @c   @v   @b       @n   @m    ,    .    /    rsft
   @ctl @A-C @A-S            @spc_Meh          @arrs @ret_altgr
 )
 
@@ -110,6 +99,21 @@
   ins lrld
 )
 
+(defalias
+  dr0 (dynamic-macro-record 0)
+  dp0 (dynamic-macro-play 0)
+  dr1 (dynamic-macro-record 1)
+  dp1 (dynamic-macro-play 1)
+  dr2 (dynamic-macro-record 2)
+  dp2 (dynamic-macro-play 2)
+  dr3 (dynamic-macro-record 3)
+  dp3 (dynamic-macro-play 3)
+  dr4 (dynamic-macro-record 4)
+  dp4 (dynamic-macro-play 4)
+  dr5 (dynamic-macro-record 5)
+  dp5 (dynamic-macro-play 5)
+)
+
 (deflayer macros
   _    _    _    _    _    _      _    _    _    _    _    _    _    _
   _    @dr2 @dr3 @dp3 @dp2 XX     _    _    _    _    _    _    _    _
@@ -123,6 +127,61 @@
   esc   caps
   tab   esc
   ins   @moon
+)
+
+(defalias
+  😂 (unicode 😂)
+  😅 (unicode 😅)
+  😉 (unicode 😉)
+  😇 (unicode 😇)
+  😘 (unicode 😘)
+  😚 (unicode 😚)
+  🤔 (unicode 🤔)
+  😏 (unicode 😏)
+  😒 (unicode 😒)
+  😌 (unicode 😌)
+  😔 (unicode 😔)
+  😴 (unicode 😴)
+  🥵 (unicode 🥵)
+  🥳 (unicode 🥳)
+  😎 (unicode 😎)
+  😳 (unicode 😳)
+  🥺 (unicode 🥺)
+  🥹 (unicode 🥹)
+  😭 (unicode 😭)
+  😡 (unicode 😡)
+  😠 (unicode 😠)
+  🤬 (unicode 🤬)
+  😈 (unicode 😈)
+  👿 (unicode 👿)
+  💀 (unicode 💀)
+  💩 (unicode 💩)
+  🤡 (unicode 🤡)
+  👌 (unicode 👌)
+  🖕 (unicode 🖕)
+  👍 (unicode 👍)
+  👏 (unicode 👏)
+  💪 (unicode 💪)
+  👀 (unicode 👀)
+  🫦 (unicode 🫦)
+  ✨ (unicode ✨)
+  🔥 (unicode 🔥)
+  🍑 (unicode 🍑)
+  🍆 (unicode 🍆)
+  🤷 (unicode 🤷)
+  🤦 (unicode 🤦)
+
+;; 😀 😄 🙂 🙃 😊 🥰 🥲 🤪 🫢 🫣 🤫 🫡 🤐 🤨 😐 😑 😶 🙄 😬 😮‍💨 😪 🤤 🤮 🥴 😵 😵‍💫 
+;; 🤯 🤓 🧐 😕 😟 🙁 😯 😦 😧 😨 😰 😥 😢 😱 😣 😓 😩 🥱 😤 🙈 🙉 🙊 💞 💕 💦 🤌
+;; 🤏 🤞 🫰 🤟 🤘 🤙 ✊ 👊 🤛 🤜 🙌 🫶 🤝 🙏 💅 🙇 👮 👼 🏳️‍🌈 🧨 🎉 🎊
+)
+
+(deflayer emojis
+  _    _    _    _    _    @✨    @🍑  @🍆  _    _    _    _    _    _
+  @🖕  @👍  @👌  @💪  @😅  @😉    @👿  @😈  @😇  @🤷  @🤦  @👏  @🫦  _
+  @🥹  @👀  @😭  @😎  @😂  @😳    @😘  @😚  @🤔  @🔥  @💀  @🤡  @💩  _
+  @🥺  @😌  @😔  @😏  @😒  @🥵    XX   @😡  @😠  @🤬  @😴  @🥳
+  _    _    _			       _            _    _
 )
 
 (deflayer copy
