@@ -292,6 +292,7 @@ bindsym $met+Ctrl+x mode "resize"
 bindsym $met+Ctrl+v exec --no-startup-id autorandr -c
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
+bindsym $met+Ctrl+m exec --no-startup-id setxkbmap -layout us -variant altgr-intl
 
 # V: open apps
 bindsym $met+Shift+a exec ghostty -e tmux attach -t general
