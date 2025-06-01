@@ -68,7 +68,10 @@ return {
 					"searchcount",
 				},
 				lualine_x = {
-					{ "lsp_status" },
+					{
+						"lsp_status",
+						ignore_lsp = { "null-ls", "Augment Server" },
+					},
 					{
 						require("noice").api.status.command.get,
 						cond = require("noice").api.status.command.has,
