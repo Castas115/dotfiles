@@ -17,10 +17,37 @@ return {
 		},
 		bigfile = { enabled = true },
 		picker = { enabled = true },
+		indent = {
+			scope = { enabled = true },
+			animate = {
+				duration = {
+					step = 15, -- ms per step
+					total = 80, -- maximum duration
+				},
+			},
+		},
 	},
 	keys = {
-		{ "<leader>gl", function() Snacks.lazygit.log_file() end,	desc = "Lazygit Log (cwd)" },
-		{ "<leader>gg", function() Snacks.lazygit() end,			desc = "Lazygit" },
-		{ "<C-n>",      function() Snacks.explorer() end,			desc = "Explorer" },
-	}
+		{
+			"<leader>gl",
+			function()
+				Snacks.lazygit.log_file()
+			end,
+			desc = "Lazygit Log (cwd)",
+		},
+		{
+			"<leader>gg",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Lazygit",
+		},
+		{
+			"<C-n>",
+			function()
+				Snacks.explorer()
+			end,
+			desc = "Explorer",
+		},
+	},
 }
