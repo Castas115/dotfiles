@@ -53,7 +53,7 @@ return {
 				theme = custom_theme,
 				component_separators = "",
 				section_separators = "",
-				globalstatus = true,
+				-- globalstatus = true,
 			},
 			sections = {
 				lualine_a = { get_buffer_count },
