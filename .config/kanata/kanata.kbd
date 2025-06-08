@@ -12,8 +12,8 @@
 )
 
 (defvar
-  tt 170
-  ht 170
+  tt 160
+  ht 160
 )
 
 (defalias
