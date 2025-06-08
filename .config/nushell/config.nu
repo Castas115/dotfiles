@@ -778,6 +778,7 @@ alias b  = batcat
 alias t  = tmux
 alias ta = tmux attach
 alias xc = xclip -selection clipboard <
+alias fg = job unfreeze
 
 # Git
 alias gc	= git commit -m
