@@ -80,12 +80,13 @@ set $wsA "5:A"
 set $wsE "6:E"
 set $wsQ "7:Q"
 set $wsG "8:G"
+set $wsW "9:W"
 
-set $wsR "9:R"
-set $wsT "10:T"
-set $wsC "11:C"
-set $wsV "12:V"
-set $wsB "13:B"
+set $wsR "10:R"
+set $wsT "11:T"
+set $wsC "12:C"
+set $wsV "13:V"
+set $wsB "14:B"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -106,7 +107,7 @@ bar {
     strip_workspace_numbers yes
     status_command i3status
 
-	  font pango:Hack Nerd Font 8
+	  font pango:Terminess Nerd Font 9
  status_command bumblebee-status -m \
  	 memory apt pipewire battery date time \
  	-p time.format="%H:%M" date.format="%a, %d %b %Y" playerctl.hide=true \
@@ -205,6 +206,7 @@ bindsym $met+R workspace number $wsR
 bindsym $met+T workspace number $wsT
 bindsym $met+A workspace number $wsA
 bindsym $met+G workspace number $wsG
+bindsym $met+W workspace number $wsW
 bindsym $met+Z workspace number $wsZ
 bindsym $met+X workspace number $wsX
 bindsym $met+C workspace number $wsC
@@ -220,6 +222,7 @@ bindsym $met+$alt+R move container to workspace number $wsR
 bindsym $met+$alt+T move container to workspace number $wsT
 bindsym $met+$alt+A move container to workspace number $wsA
 bindsym $met+$alt+G move container to workspace number $wsG
+bindsym $met+$alt+W move container to workspace number $wsW
 bindsym $met+$alt+Z move container to workspace number $wsZ
 bindsym $met+$alt+X move container to workspace number $wsX
 bindsym $met+$alt+C move container to workspace number $wsC
@@ -252,17 +255,17 @@ bindsym $met+space focus mode_toggle
 # for_window [class="Vivaldi-stable"]     move to workspace $wsF
 for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
-for_window [title="^passwords.kdbx"]	move to workspace $wsG
+for_window [title="^passwords.kdbx"]	move to workspace $wsW
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
 for_window [class="floating"]			floating enable, move position center, resize set 1750 1000, border pixel 0
-for_window [class="g_workspace"]		move to workspace $wsG
+for_window [class="w_workspace"]		move to workspace $wsW
 
 ###########################
 ####      startup      ####
 ###########################
 
-exec --no-startup-id kitty -1 --class "g_workspace" fish -c "tmux & sleep 10 && tmux detach"
+exec --no-startup-id kitty -1 --class "w_workspace" fish -c "tmux & sleep 10 && tmux detach"
 exec --no-startup-id copyq
 exec --no-startup-id keepassxc
 exec --no-startup-id autorandr -c
