@@ -4,11 +4,14 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"leoluz/nvim-dap-go",
 		"nvim-neotest/nvim-nio",
+		"theHamsta/nvim-dap-virtual-text",
 	},
 	config = function()
 		local dap, dapui = require("dap"), require("dapui")
 
-		require("dapui").setup()
+		dapui.setup()
+
+		require("nvim-dap-virtual-text").setup()
 		require("dap-go").setup({
 			-- Add configuration for Go debugging
 			dap_configurations = {
