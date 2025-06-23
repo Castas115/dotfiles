@@ -10,7 +10,7 @@ return {
 
 			return {
 				{
-					"<leader>fd",
+					"H",
 					function()
 						builtin.buffers(themes.get_ivy({
 							sort_mru = true,
