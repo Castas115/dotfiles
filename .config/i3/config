@@ -90,14 +90,15 @@ set $wsB "14:B"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
+        bindsym q mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -147,6 +148,7 @@ workspace $wsA output $mon1
 workspace $wsE output $mon1
 workspace $wsQ output $mon1
 workspace $wsG output $mon1
+workspace $wsW output $mon1
 
 workspace $wsR output $mon2
 workspace $wsT output $mon2
@@ -247,7 +249,6 @@ bindsym $met+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $met+space focus mode_toggle
 
-
 ####################################
 ####    windows & workspaces    ####
 ####################################
@@ -256,20 +257,21 @@ bindsym $met+space focus mode_toggle
 for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]	move to workspace $wsW
+for_window [class="Docker Desktop"]		move to workspace $wsX
+for_window [class="w_workspace"]		move to workspace $wsW
 
 for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
 for_window [class="floating"]			floating enable, move position center, resize set 1750 1000, border pixel 0
-for_window [class="w_workspace"]		move to workspace $wsW
 
 ###########################
 ####      startup      ####
 ###########################
 
-exec --no-startup-id kitty -1 --class "w_workspace" fish -c "tmux & sleep 10 && tmux detach"
+exec --no-startup-id kitty -1 --class "w_workspace" fish -c "tmux attach & sleep 10 && tmux detach"
 exec --no-startup-id copyq
 exec --no-startup-id keepassxc
 exec --no-startup-id autorandr -c
-exec --no-startup-id nitrogen --restore
+# exec --no-startup-id nitrogen --restore
 exec --no-startup-id i3 reload
 
 ############################
@@ -313,5 +315,6 @@ bindsym $met+Shift+t exec --no-startup-id nautilus -w ~/Downloads/
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 bindsym $met+Shift+b exec --no-startup-id microsoft-edge
 
+bindsym $met+Shift+y exec systemctl --user start docker-desktop
 bindsym $met+Shift+u exec bluetoothctl connect AC:BF:71:BC:80:CB
 
