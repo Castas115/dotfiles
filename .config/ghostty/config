@@ -13,7 +13,7 @@ window-decoration = false
 macos-option-as-alt = true
 background-opacity = 0.85
 
-term = xterm-ghostty
+term = xterm-256color
 
 keybind=ctrl+shift+c=unbind
 keybind=ctrl+page_up=unbind
