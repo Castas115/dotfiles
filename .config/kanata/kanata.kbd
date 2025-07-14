@@ -112,12 +112,13 @@
   dp4 (dynamic-macro-play 4)
   dr5 (dynamic-macro-record 5)
   dp5 (dynamic-macro-play 5)
+  s1x (on-press-fakekey-delay  50)
 )
 
 (deflayer macros
   _    _    _    _    _    _      _    _    _    _    _    _    _    _
   _    @dr2 @dr3 @dp3 @dp2 XX     _    _    _    _    _    _    _    _
-  _    _    @dr1 @dp1 @dp0 @dr0   _    _    _    _    _    _    _    _
+  _    @s1x @dr1 @dp1 @dp0 @dr0   _    _    _    _    _    _    _    _
   _    _    @dr5 @dp5 @dp4 @dr4   _    _    _    _    _    _
   _    _    _                 _             _    _
 )
