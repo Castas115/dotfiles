@@ -231,8 +231,6 @@ bindsym $met+$alt+C move container to workspace number $wsC
 bindsym $met+$alt+V move container to workspace number $wsV
 bindsym $met+$alt+B move container to workspace number $wsB
 
-# funcionalidad alt+tab
-bindsym $met+Tab workspace back_and_forth
 
 # focus to specific output
 bindsym $met+2 focus output $monL 
@@ -248,12 +246,13 @@ bindsym $met+$alt+4 move workspace to output $mon2
 bindsym $met+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $met+space focus mode_toggle
+# funcionalidad alt+tab
+bindsym $met+Tab workspace back_and_forth
 
 ####################################
 ####    windows & workspaces    ####
 ####################################
-# Set app to window with xprop 
-# for_window [class="Vivaldi-stable"]     move to workspace $wsF
+# Set app to window with xprop
 for_window [class="Microsoft-edge"]     move to workspace $wsV
 for_window [class="Nautilus"]           move to workspace $wsT
 for_window [title="^passwords.kdbx"]	move to workspace $wsW
