@@ -36,37 +36,24 @@ return {
 
 		-- Key mappings
 		local on_attach = function(client, bufnr)
-			local opts = { buffer = bufnr, remap = false }
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			local set_keymap = function(mode, keymap, func, desc)
+				vim.keymap.set(mode, keymap, func, { buffer = bufnr, remap = false, desc = desc })
+			end
 
-			vim.keymap.set("n", "<leader>ld", function()
-				vim.lsp.buf.definition()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-			vim.keymap.set("n", "<leader>lr", function()
-				vim.lsp.buf.references()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-			vim.keymap.set("n", "<leader>la", function()
-				vim.lsp.buf.code_action()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-			vim.keymap.set("n", "<leader>ln", function()
-				vim.lsp.buf.rename()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-
-			vim.keymap.set("n", "L", function()
-				vim.diagnostic.setloclist()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
-			vim.keymap.set("n", "<leader>ls", function()
-				vim.lsp.buf.workspace_symbol()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Workspace Symbol" }))
-			vim.keymap.set("i", "<C-h>", function()
-				vim.lsp.buf.signature_help()
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Signature Help" }))
-			vim.keymap.set("n", "<leader>li", function()
+			set_keymap("n", "K", vim.lsp.buf.hover, "LSP Hover")
+			set_keymap("n", "<leader>ld", vim.lsp.buf.definition, "Definition")
+			set_keymap("n", "<leader>lr", vim.lsp.buf.references, "References")
+			set_keymap("n", "<leader>la", vim.lsp.buf.code_action, "Code Action")
+			set_keymap("n", "<leader>ln", vim.lsp.buf.rename, "Rename")
+			set_keymap("n", "L", vim.diagnostic.setloclist, "Show Diagnostics")
+			set_keymap("n", "<leader>ls", vim.lsp.buf.workspace_symbol, "Workspace Symbol")
+			set_keymap("i", "<C-h>", vim.lsp.buf.signature_help, "Signature Help")
+			set_keymap("n", "<leader>li", function ()
 				vim.lsp.buf.code_action({
 					apply = true,
 					context = { diagnostics = {}, only = { "source.organizeImports" } },
 				})
-			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Organize Imports" }))
+			end, "Organize Imports")
 		end
 
 		-- Manual server setup (bypass mason-lspconfig for now)
