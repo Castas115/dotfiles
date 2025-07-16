@@ -1,33 +1,45 @@
-local function diff_with_copy()
-	-- Get the current file path and extension
-	print("a")
-	local current_file = vim.fn.expand("%:p")
-	local file_name = vim.fn.expand("%:t:r") -- Get the base name without extension
-	local file_ext = vim.fn.expand("%:e") -- Get the file extension
 
-	if current_file == "" then
-		print("No file is currently open!")
-		return
-	end
+local M = {}
 
-	-- Create the new file name with .diff before the extension
-	local copy_file = vim.fn.fnamemodify(current_file, ":h") .. "/" .. file_name .. ".diff." .. file_ext
+local function all_registers()
+  return   end
 
-	-- Write the current buffer to the copy file
-	vim.cmd("write " .. copy_file)
+function M.create_or_edit(opts)
+  opts = {
+		"*","+",'"',"-","/","_","=","#","%",".",":",
+		"0","1","2","3","4","5","6","7","8","9",
+		"a","b","c","d","e","f","g","h","i","j","k","l","m",
+		"n","o","p","q","r","s","t","u","v","w","x","y","z",
+	}
 
-	-- Open a diff view comparing the original file and the copy
-	vim.cmd("tabnew") -- Open in a new tab
-	vim.cmd("execute 'terminal nvim -d " .. current_file .. " " .. copy_file .. "'")
+  vim.ui.select(all_registers(), {
+    prompt = "Select a register",
+    format_item = function(reg)
+      return reg .. "\t\t\t" .. vim.fn.getreg(reg, 1)
+    end,
+  }, function(reg)
+    if reg then
+      vim.ui.input({ prompt = "Edit register " .. reg, default = vim.fn.getreg(reg, 1) }, function(input)
+        if input then
+          vim.fn.setreg(reg, input)
+        end
+      end)
+    end
+  end)
 end
 
--- vim.keymap.set("n", "<leader>d", diff_with_copy, { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'go',
+  callback = function()
+    vim.keymap.set('n', '<leader>le', 'oif err != nil {<CR>return nil, err<CR>}<ESC>', { buffer = true, noremap = true, silent = true })
+  end
+})
 
 local function write_current_day()
 	local lines = {
 		"___",
 		os.date("# ***%Y-%m-%d %a**, %H:%M*"),
-		"",
 		"",
 		""
 	}
@@ -35,7 +47,12 @@ local function write_current_day()
 	vim.api.nvim_win_set_cursor(0, { 4, 0 })
 end
 
-vim.keymap.set("n", "td", write_current_day, { noremap = true, silent = true })
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'md',
+  callback = function()
+  end
+})
+		vim.keymap.set("n", "<leader>td", write_current_day, { noremap = true, silent = true })
 
 local function toggle_checkbox()
 

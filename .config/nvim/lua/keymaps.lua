@@ -18,8 +18,10 @@ keymap.set('n', '<C-j>', '<C-w>j', opts)
 keymap.set('n', '<C-k>', '<C-w>k', opts)
 keymap.set('n', '<C-l>', '<C-w>l', opts)
 
-vim.api.nvim_set_keymap('n', '<A-j>', '10jzz', opts)
-vim.api.nvim_set_keymap('n', '<A-k>', '10kzz', opts)
+keymap.set({ 'n', 'v', 'i', 'c' }, "<A-j>", "10jzz", { desc = "Scroll up 10 lines" })
+keymap.set({ 'n', 'v', 'i', 'c' }, "<A-k>", "10kzz", { desc = "Scroll down 10 lines" })
+keymap.set({ 'n', 'v', 'i', 'c' }, "<PageUp>", "<C-u>zz", { desc = "Scroll up half a page" })
+keymap.set({ 'n', 'v', 'i', 'c' }, "<PageDown>", "<C-d>zz", { desc = "Scroll down half a page" })
 
 vim.api.nvim_set_keymap('n', '<A-S-h>', ':vertical resize -2<CR>', opts)
 vim.api.nvim_set_keymap('n', '<A-S-j>', ':resize -2<CR>', opts)
@@ -30,10 +32,12 @@ keymap.set('n', 'tq', '<Esc>:bdelete<CR>')
 keymap.set('n', 'tk', '<Esc>:bnext<CR>')
 keymap.set('n', 'tj', '<Esc>:bprev<CR>')
 
-keymap.set('i', "jj", "<ESC>", { desc = "Exit insert mode with jj" })
+keymap.set('n', 'tn', '<Esc>:tabnew<CR>')
+keymap.set('n', 'tc', '<Esc>:tabclose<CR>')
+keymap.set('n', 'th', '<Esc>:tabprevious<CR>')
+keymap.set('n', 'tl', '<Esc>:tabnext<CR>')
 
-keymap.set({ 'n', 'v', 'i', 'c' }, "<PageUp>", "<C-u>zz", { desc = "Scroll up half a page" })
-keymap.set({ 'n', 'v', 'i', 'c' }, "<PageDown>", "<C-d>zz", { desc = "Scroll down half a page" })
+keymap.set('i', "jj", "<ESC>", { desc = "Exit insert mode with jj" })
 
 keymap.set("v", "<", "<gv", opts)
 keymap.set("v", ">", ">gv", opts)
@@ -54,6 +58,10 @@ keymap.set("n", "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
     { desc = "Replace word cursor is on globally" })
 
 keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
+
+keymap.set("n", "<A-r>", ":reg<CR>:put ", { silent = true, desc = "Writes registry" })
+keymap.set("i", "<A-r>", "<C-r><C-r>", { silent = true, desc = "Writes registry" })
+keymap.set("v", "<A-r>", "\"wy", { silent = true, desc = "Writes registry" })
 
 keymap.set("n", "<leader>.", "<C-w>v", { desc = "Split window vertically" })
 keymap.set("n", "<leader>,", "<C-w>s", { desc = "Split window horizontally" })
