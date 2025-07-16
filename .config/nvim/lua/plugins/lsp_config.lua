@@ -23,7 +23,7 @@ return {
 
 		-- Setup Mason first
 		require("mason").setup()
-		
+
 		-- Wait a bit and then setup mason-lspconfig
 		vim.defer_fn(function()
 			require("mason-lspconfig").setup({
@@ -38,10 +38,19 @@ return {
 		local on_attach = function(client, bufnr)
 			local opts = { buffer = bufnr, remap = false }
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, opts)
-			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, opts)
-			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-			vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, opts)
+
+			vim.keymap.set("n", "<leader>ld", function()
+				vim.lsp.buf.definition()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
+			vim.keymap.set("n", "<leader>lr", function()
+				vim.lsp.buf.references()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
+			vim.keymap.set("n", "<leader>la", function()
+				vim.lsp.buf.code_action()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
+			vim.keymap.set("n", "<leader>ln", function()
+				vim.lsp.buf.rename()
+			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Show Diagnostics" }))
 
 			vim.keymap.set("n", "L", function()
 				vim.diagnostic.setloclist()
@@ -53,7 +62,10 @@ return {
 				vim.lsp.buf.signature_help()
 			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Signature Help" }))
 			vim.keymap.set("n", "<leader>li", function()
-				vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" } }, apply = true })
+				vim.lsp.buf.code_action({
+					apply = true,
+					context = { diagnostics = {}, only = { "source.organizeImports" } },
+				})
 			end, vim.tbl_deep_extend("force", opts, { desc = "LSP Organize Imports" }))
 		end
 
@@ -76,7 +88,7 @@ return {
 		for server, config in pairs(servers) do
 			config.on_attach = on_attach
 			config.capabilities = capabilities
-			
+
 			-- Try to setup each server
 			local setup_ok, _ = pcall(lspconfig[server].setup, config)
 			if setup_ok then
