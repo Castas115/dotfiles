@@ -78,9 +78,7 @@ return {
 
 			-- Try to setup each server
 			local setup_ok, _ = pcall(lspconfig[server].setup, config)
-			if setup_ok then
-				vim.notify("Successfully setup " .. server, vim.log.levels.INFO)
-			else
+			if not setup_ok then
 				vim.notify("Failed to setup " .. server, vim.log.levels.WARN)
 			end
 		end
