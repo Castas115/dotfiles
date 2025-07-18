@@ -18,10 +18,10 @@ keymap.set('n', '<C-j>', '<C-w>j', opts)
 keymap.set('n', '<C-k>', '<C-w>k', opts)
 keymap.set('n', '<C-l>', '<C-w>l', opts)
 
-keymap.set({ 'n', 'v', 'i', 'c' }, "<A-j>", "10jzz", { desc = "Scroll up 10 lines" })
-keymap.set({ 'n', 'v', 'i', 'c' }, "<A-k>", "10kzz", { desc = "Scroll down 10 lines" })
-keymap.set({ 'n', 'v', 'i', 'c' }, "<PageUp>", "<C-u>zz", { desc = "Scroll up half a page" })
-keymap.set({ 'n', 'v', 'i', 'c' }, "<PageDown>", "<C-d>zz", { desc = "Scroll down half a page" })
+keymap.set({ 'n', 'v' }, "<A-j>", "10jzz", { desc = "Scroll up 10 lines" })
+keymap.set({ 'n', 'v' }, "<A-k>", "10kzz", { desc = "Scroll down 10 lines" })
+keymap.set({ 'n', 'v' }, "<PageUp>", "<C-u>zz", { desc = "Scroll up half a page" })
+keymap.set({ 'n', 'v' }, "<PageDown>", "<C-d>zz", { desc = "Scroll down half a page" })
 
 vim.api.nvim_set_keymap('n', '<A-S-h>', ':vertical resize -2<CR>', opts)
 vim.api.nvim_set_keymap('n', '<A-S-j>', ':resize -2<CR>', opts)
@@ -61,7 +61,12 @@ keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "ma
 
 keymap.set("n", "<A-r>", ":reg<CR>:put ", { silent = true, desc = "Writes registry" })
 keymap.set("i", "<A-r>", "<C-r><C-r>", { silent = true, desc = "Writes registry" })
-keymap.set("v", "<A-r>", "\"wy", { silent = true, desc = "Writes registry" })
+keymap.set('n', '<A-S-r>', function()
+	print("Enter target register (a-z):")
+	local char = vim.fn.nr2char(vim.fn.getchar())
+	vim.cmd('normal! "' .. char .. 'yy')
+	print("Yanked line to register @" .. char)
+end, { desc = "Yank current line into register [a-z]" })
 
 keymap.set("n", "<leader>.", "<C-w>v", { desc = "Split window vertically" })
 keymap.set("n", "<leader>,", "<C-w>s", { desc = "Split window horizontally" })

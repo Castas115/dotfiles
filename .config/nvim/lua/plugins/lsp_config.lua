@@ -47,7 +47,7 @@ return {
 			set_keymap("n", "<leader>ln", vim.lsp.buf.rename, "Rename")
 			set_keymap("n", "L", vim.diagnostic.setloclist, "Show Diagnostics")
 			set_keymap("n", "<leader>ls", vim.lsp.buf.workspace_symbol, "Workspace Symbol")
-			set_keymap("i", "<C-h>", vim.lsp.buf.signature_help, "Signature Help")
+			set_keymap("i", "<A-h>", vim.lsp.buf.signature_help, "Signature Help")
 			set_keymap("n", "<leader>li", function ()
 				vim.lsp.buf.code_action({
 					apply = true,
