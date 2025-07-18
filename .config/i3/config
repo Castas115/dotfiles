@@ -156,7 +156,6 @@ workspace $wsC output $mon2
 workspace $wsV output $mon2
 workspace $wsB output $mon2
 
-
 default_border pixel 1
 default_floating_border pixel 2
 
@@ -252,15 +251,15 @@ bindsym $met+Tab workspace back_and_forth
 ####################################
 ####    windows & workspaces    ####
 ####################################
-# Set app to window with xprop
-for_window [class="Microsoft-edge"]     move to workspace $wsV
-for_window [class="Nautilus"]           move to workspace $wsT
-for_window [title="^passwords.kdbx"]	move to workspace $wsW
-for_window [class="Docker Desktop"]		move to workspace $wsX
-for_window [class="w_workspace"]		move to workspace $wsW
+# xprop to see properties
+for_window [class="Microsoft-edge"]				move to workspace $wsV
+for_window [class="Nautilus" title="Downloads"]	move to workspace $wsT
+for_window [title="^passwords.kdbx"]			move to workspace $wsW
+for_window [class="Docker Desktop"]				move to workspace $wsX
+for_window [class="w_workspace"]				move to workspace $wsW
 
-for_window [instance="copyq"]			floating enable, resize set 600 500, border pixel 0
-for_window [class="floating"]			floating enable, move position center, resize set 1750 1000, border pixel 0
+for_window [instance="copyq"]	floating enable, resize set 600 500, border pixel 0
+for_window [class="floating"]	floating enable, move position center, resize set 1750 1000, border pixel 0
 
 ###########################
 ####      startup      ####
