@@ -302,17 +302,16 @@ bindsym $met+Shift+a exec --no-startup-id rofi -show drun -run-shell-command '{t
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec ghostty -e tmux attach
 bindsym $met+Shift+f exec --no-startup-id vivaldi
+bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 
-#		$met+Shift+x	CopyQ screenshot
 bindsym $met+Shift+z exec --no-startup-id flameshot gui
+#		$met+Shift+x	CopyQ screenshot
+bindsym $met+Shift+c exec bluetoothctl connect AC:BF:71:BC:80:CB
+bindsym $met+Shift+b exec --no-startup-id microsoft-edge
 
 bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
 bindsym $met+Shift+e exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
 bindsym $met+Shift+t exec --no-startup-id nautilus -w ~/Downloads/
 
-bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
-bindsym $met+Shift+b exec --no-startup-id microsoft-edge
-
 bindsym $met+Shift+y exec systemctl --user start docker-desktop
-bindsym $met+Shift+u exec bluetoothctl connect AC:BF:71:BC:80:CB
 
