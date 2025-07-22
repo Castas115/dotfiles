@@ -90,17 +90,17 @@ set $wsB "14:B"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-        bindsym q mode "default"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	bindsym h resize shrink width 5 px or 5 ppt
+	bindsym j resize grow height 5 px or 5 ppt
+	bindsym k resize shrink height 5 px or 5 ppt
+	bindsym l resize grow width 5 px or 5 ppt
+	bindsym Left resize shrink width 5 px or 5 ppt
+	bindsym Down resize grow height 5 px or 5 ppt
+	bindsym Up resize shrink height 5 px or 5 ppt
+	bindsym Right resize grow width 5 px or 5 ppt
+	bindsym q mode "default"
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bar {
@@ -108,24 +108,24 @@ bar {
     strip_workspace_numbers yes
     status_command i3status
 
-	  font pango:Terminess Nerd Font 9
- status_command bumblebee-status -m \
- 	 memory apt pipewire battery date time \
- 	-p time.format="%H:%M" date.format="%a, %d %b %Y" playerctl.hide=true \
+	font pango:Terminess Nerd Font 9
+	status_command bumblebee-status -m \
+ 	 memory apt pipewire  battery date time \
+ 	-p time.format="%H:%M" date.format="%a, %d %b %Y" \
  	-t cattpuccin-mocha
 
-  colors {
-    background         $base
-    statusline         $text
-    focused_statusline $text
-    focused_separator  $base
+	colors {
+		background         $base
+		statusline         $text
+		focused_statusline $text
+		focused_separator  $base
 
-    # target           border bg        text
-    focused_workspace  $base  $lavender $crust
-    active_workspace   $base  $surface2 $text
-    inactive_workspace $base  $base     $text
-    urgent_workspace   $base  $red      $crust
-  }
+		# target           border bg        text
+		focused_workspace  $base  $lavender $crust
+		active_workspace   $base  $surface2 $text
+		inactive_workspace $base  $base     $text
+		urgent_workspace   $base  $red      $crust
+	}
 }
 
 # for tíldes and ñ
@@ -296,6 +296,11 @@ bindsym $met+Ctrl+v exec --no-startup-id autorandr -c
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
 bindsym $met+Ctrl+m exec --no-startup-id setxkbmap -layout us -variant altgr-intl
+
+bindsym $met+Ctrl+u exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
+bindsym $met+Ctrl+i exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
+bindsym $met+Ctrl+o exec pactl set-sink-mute 0 toggle && $refresh_i3status
+bindsym $met+Ctrl+p exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # V: open apps
 bindsym $met+Shift+a exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
