@@ -91,22 +91,19 @@
   md (movemouse-accel-down  2 500 1 3)
   mu (movemouse-accel-up    2 500 1 3)
   mr (movemouse-accel-right 2 500 1 3)
+
+  wl (mwheel-left  1 5)
+  wd (mwheel-down  1 5)
+  wu (mwheel-up    1 5)
+  wr (mwheel-right 1 5)
 )
 
-(deflayermap mouse
-  g XX
-  d 🖰4
-  f 🖰5
-  e C-pgup
-  r C-pgdn
-  j @ml
-  k @md
-  l @mu
-  ; @mr
-  m 🖰1
-  , 🖰2
-  . 🖰3
-  ins lrld
+(deflayer mouse
+  _    _    _    _      _      _      _    _    _    _    _    _    _    _
+  _    _    _    C-pgup C-pgdn _      _    @wl  @wd  @wu  @wr  _    _    _
+  _    _    _    🖰4    🖰5    XX     _    @ml  @md  @mu  @mr  _    _    lrld
+  _    _    _    _      _      _      _    _    🖰1  🖰2  🖰3  _
+  _    _    _                  _             _    _
 )
 
 (defalias
