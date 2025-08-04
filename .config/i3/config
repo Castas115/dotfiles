@@ -159,7 +159,7 @@ workspace $wsB output $mon2
 default_border pixel 1
 default_floating_border pixel 2
 
-gaps inner 4
+gaps inner 0
 gaps outer 0
 
 #############################
@@ -242,7 +242,7 @@ bindsym $met+$alt+3 move workspace to output $mon1
 bindsym $met+$alt+4 move workspace to output $mon2
 
 # toggle tiling / floating
-bindsym $met+Shift+space floating toggle
+bindsym $met+ctrl+space floating toggle
 # change focus between tiling / floating windows
 bindsym $met+space focus mode_toggle
 # funcionalidad alt+tab
@@ -297,10 +297,10 @@ bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
 bindsym $met+Ctrl+m exec --no-startup-id setxkbmap -layout us -variant altgr-intl
 
-bindsym $met+Ctrl+u exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
-bindsym $met+Ctrl+i exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
-bindsym $met+Ctrl+o exec pactl set-sink-mute 0 toggle && $refresh_i3status
-bindsym $met+Ctrl+p exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym $met+Ctrl+u exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
+bindsym $met+Ctrl+i exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
+bindsym $met+Ctrl+o exec --no-startup-id pactl set-sink-mute 0 toggle && $refresh_i3status
+bindsym $met+Ctrl+p exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # V: open apps
 bindsym $met+Shift+a exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
