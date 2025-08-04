@@ -36,39 +36,40 @@ client.background        $base
 
 set $met Mod4
 set $alt Mod1
+set $exec exec --no-startup-id
 
 font pango: SauceCodePro Nerd Font 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex-autostart --autostart --environment i3
+$exec dex-autostart --autostart --environment i3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+$exec xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+$exec nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume $exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume $exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute $exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute $exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-exec --no-startup-id picom -b -c
-exec --no-startup-id python3 ~/.config/i3/scripts/autotiling-master/autotiling/main.py
+$exec picom -b -c
+$exec python3 ~/.config/i3/scripts/autotiling-master/autotiling/main.py
 
 # Use Mouse+$met to drag floating windows to their wanted position
 floating_modifier $met
 
-exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
-exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+$exec /usr/libexec/gnome-settings-daemon-localeexec
+$exec dconf write /org/gnome/settings-daemon/plugins/cursor/active false
 
 # Workspaces
 set $wsZ "1:Z"
@@ -173,10 +174,10 @@ bindsym $met+o gaps outer current plus 1
 bindsym $met+Shift+o gaps outer current minus 1
 
 # brightness
-bindsym $met+n exec --no-startup-id brightnessctl set 10%-
-bindsym $met+Shift+n exec --no-startup-id brightnessctl set 1%-
-bindsym $met+m exec --no-startup-id brightnessctl set +10%
-bindsym $met+Shift+m exec --no-startup-id brightnessctl set +1%
+bindsym $met+n $exec brightnessctl set 10%-
+bindsym $met+Shift+n $exec brightnessctl set 1%-
+bindsym $met+m $exec brightnessctl set +10%
+bindsym $met+Shift+m $exec brightnessctl set +1%
 
 # change focus
 bindsym $met+h focus left
@@ -265,12 +266,12 @@ for_window [class="floating"]	floating enable, move position center, resize set 
 ####      startup      ####
 ###########################
 
-exec --no-startup-id kitty -1 --class "w_workspace" fish -c "tmux attach & sleep 10 && tmux detach"
-exec --no-startup-id copyq
-exec --no-startup-id keepassxc
-exec --no-startup-id autorandr -c
-# exec --no-startup-id nitrogen --restore
-exec --no-startup-id i3 reload
+$exec kitty -1 --class "w_workspace" fish -c "tmux attach & sleep 10 && tmux detach"
+$exec copyq
+$exec keepassxc
+$exec autorandr -c
+# $exec nitrogen --restore
+$exec i3 reload
 
 ############################
 ####      shorcuts      ####
@@ -278,45 +279,45 @@ exec --no-startup-id i3 reload
 
 # C: i3 stuff
 bindsym $met+Ctrl+q kill
-bindsym $met+Ctrl+w exec --no-startup-id ~/.config/i3/scripts/autorandr-rofi.sh
+bindsym $met+Ctrl+w $exec ~/.config/i3/scripts/autorandr-rofi.sh
 bindsym $met+Ctrl+e reload
 bindsym $met+Ctrl+r restart
-bindsym $met+Ctrl+t exec --no-startup-id i3lock -c 232323
+bindsym $met+Ctrl+t $exec i3lock -c 232323
 bindsym $met+Ctrl+y exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $met+Ctrl+a layout tabbed
 bindsym $met+Ctrl+s layout stacking
 bindsym $met+Ctrl+d layout toggle split
 bindsym $met+Ctrl+f fullscreen toggle
-bindsym $met+Ctrl+g exec --no-startup-id sh ~/.config/i3/scripts/lock-script.sh
+bindsym $met+Ctrl+g $exec sh ~/.config/i3/scripts/lock-script.sh
 
 bindsym $met+Ctrl+z focus parent
 bindsym $met+Ctrl+x mode "resize"
-bindsym $met+Ctrl+v exec --no-startup-id autorandr -c
+bindsym $met+Ctrl+v $exec autorandr -c
 bindsym $met+Ctrl+period split h
 bindsym $met+Ctrl+comma split v
-bindsym $met+Ctrl+m exec --no-startup-id setxkbmap -layout us -variant altgr-intl
+bindsym $met+Ctrl+m $exec setxkbmap -layout us -variant altgr-intl
 
-bindsym $met+Ctrl+u exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
-bindsym $met+Ctrl+i exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
-bindsym $met+Ctrl+o exec --no-startup-id pactl set-sink-mute 0 toggle && $refresh_i3status
-bindsym $met+Ctrl+p exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym $met+Ctrl+u $exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
+bindsym $met+Ctrl+i $exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
+bindsym $met+Ctrl+o $exec pactl set-sink-mute 0 toggle && $refresh_i3status
+bindsym $met+Ctrl+p $exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # V: open apps
-bindsym $met+Shift+a exec --no-startup-id rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
+bindsym $met+Shift+a $exec rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
 #		$met+Shift+s	CopyQ
 bindsym $met+Shift+d exec ghostty -e tmux attach
-bindsym $met+Shift+f exec --no-startup-id vivaldi
+bindsym $met+Shift+f $exec vivaldi
 bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
 
-bindsym $met+Shift+z exec --no-startup-id flameshot gui
+bindsym $met+Shift+z $exec flameshot gui
 #		$met+Shift+x	CopyQ screenshot
 bindsym $met+Shift+c exec bluetoothctl connect AC:BF:71:BC:80:CB
-bindsym $met+Shift+b exec --no-startup-id microsoft-edge
+bindsym $met+Shift+b $exec microsoft-edge
 
-bindsym $met+Shift+q exec --no-startup-id export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
-bindsym $met+Shift+e exec --no-startup-id ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
-bindsym $met+Shift+t exec --no-startup-id nautilus -w ~/Downloads/
+bindsym $met+Shift+q $exec export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
+bindsym $met+Shift+e $exec ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
+bindsym $met+Shift+t $exec nautilus -w ~/Downloads/
 
 bindsym $met+Shift+y exec systemctl --user start docker-desktop
 
