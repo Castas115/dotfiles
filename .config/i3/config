@@ -1,44 +1,6 @@
-# catppuccin
-set $rosewater #f5e0dc
-set $flamingo #f2cdcd
-set $pink #f5c2e7
-set $mauve #cba6f7
-set $red #f38ba8
-set $maroon #eba0ac
-set $peach #fab387
-set $yellow #f9e2af
-set $green #a6e3a1
-set $teal #94e2d5
-set $sky #89dceb
-set $sapphire #74c7ec
-set $blue #89b4fa
-set $lavender #b4befe
-set $text #cdd6f4
-set $subtext1 #bac2de
-set $subtext0 #a6adc8
-set $overlay2 #9399b2
-set $overlay1 #7f849c
-set $overlay0 #6c7086
-set $surface2 #585b70
-set $surface1 #45475a
-set $surface0 #313244
-set $base #1e1e2e
-set $base #000000
-set $mantle #181825
-set $crust #11111b
-client.focused           $lavender $base $text  $rosewater $lavender
-client.focused_inactive  $overlay0 $base $text  $rosewater $overlay0
-client.unfocused         $overlay0 $base $text  $rosewater $overlay0
-client.urgent            $peach    $base $peach $overlay0  $peach
-client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
-client.background        $base
-
-
 set $met Mod4
 set $alt Mod1
 set $exec exec --no-startup-id
-
-font pango: SauceCodePro Nerd Font 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
@@ -55,7 +17,6 @@ $exec xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 $exec nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume $exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
 bindsym XF86AudioLowerVolume $exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
@@ -71,25 +32,6 @@ floating_modifier $met
 $exec /usr/libexec/gnome-settings-daemon-localeexec
 $exec dconf write /org/gnome/settings-daemon/plugins/cursor/active false
 
-# Workspaces
-set $wsZ "1:Z"
-set $wsX "2:X"
-
-set $wsF "3:F 󰈹"
-set $wsD "4:D "
-set $wsA "5:A"
-set $wsE "6:E"
-set $wsQ "7:Q"
-set $wsG "8:G"
-set $wsW "9:W"
-
-set $wsR "10:R"
-set $wsT "11:T"
-set $wsC "12:C"
-set $wsV "13:V"
-set $wsB "14:B"
-
-# resize window (you can also use the mouse for that)
 mode "resize" {
 	bindsym h resize shrink width 5 px or 5 ppt
 	bindsym j resize grow height 5 px or 5 ppt
@@ -100,224 +42,26 @@ mode "resize" {
 	bindsym Up resize shrink height 5 px or 5 ppt
 	bindsym Right resize grow width 5 px or 5 ppt
 	bindsym q mode "default"
-	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-bar {
-    tray_output primary
-    strip_workspace_numbers yes
-    status_command i3status
-
-	font pango:Terminess Nerd Font 9
-	status_command bumblebee-status -m \
- 	 memory apt pipewire  battery date time \
- 	-p time.format="%H:%M" date.format="%a, %d %b %Y" \
- 	-t cattpuccin-mocha
-
-	colors {
-		background         $base
-		statusline         $text
-		focused_statusline $text
-		focused_separator  $base
-
-		# target           border bg        text
-		focused_workspace  $base  $lavender $crust
-		active_workspace   $base  $surface2 $text
-		inactive_workspace $base  $base     $text
-		urgent_workspace   $base  $red      $crust
-	}
-}
-
-# for tíldes and ñ
 exec_always setxkbmap -layout us -variant altgr-intl
 
-##################
-###  Monitors  ###
-##################
-
-set $monL eDP-1
-set $mon1 DP-1-1
-set $mon2 DP-1-2
-
-workspace $wsZ output $monL
-workspace $wsX output $monL
-
-workspace $wsF output $mon1
-workspace $wsD output $mon1
-workspace $wsA output $mon1
-workspace $wsE output $mon1
-workspace $wsQ output $mon1
-workspace $wsG output $mon1
-workspace $wsW output $mon1
-
-workspace $wsR output $mon2
-workspace $wsT output $mon2
-workspace $wsC output $mon2
-workspace $wsV output $mon2
-workspace $wsB output $mon2
-
+####  gaps  ####
 default_border pixel 1
 default_floating_border pixel 2
-
 gaps inner 0
 gaps outer 0
 
-#############################
-####   window shorcuts   ####
-#############################
-
-# gaps
-bindsym $met+i gaps inner current plus 1
-bindsym $met+Shift+i gaps inner current minus 1
-bindsym $met+o gaps outer current plus 1
-bindsym $met+Shift+o gaps outer current minus 1
-
-# brightness
-bindsym $met+n $exec brightnessctl set 10%-
-bindsym $met+Shift+n $exec brightnessctl set 1%-
-bindsym $met+m $exec brightnessctl set +10%
-bindsym $met+Shift+m $exec brightnessctl set +1%
-
-# change focus
-bindsym $met+h focus left
-bindsym $met+Left focus left
-bindsym $met+j focus down
-bindsym $met+Down focus down
-bindsym $met+k focus up
-bindsym $met+Up focus up
-bindsym $met+l focus right
-bindsym $met+Right focus right
-
-# move focused window
-bindsym $met+$alt+h move left
-bindsym $met+$alt+Left move left
-bindsym $met+$alt+j move down
-bindsym $met+$alt+Down move down
-bindsym $met+$alt+k move up
-bindsym $met+$alt+Up move up
-bindsym $met+$alt+l move right
-bindsym $met+$alt+Right move right
-
-# switch to workspace
-bindsym $met+F workspace number $wsF
-bindsym $met+D workspace number $wsD
-bindsym $met+E workspace number $wsE
-bindsym $met+Q workspace number $wsQ
-bindsym $met+R workspace number $wsR
-bindsym $met+T workspace number $wsT
-bindsym $met+A workspace number $wsA
-bindsym $met+G workspace number $wsG
-bindsym $met+W workspace number $wsW
-bindsym $met+Z workspace number $wsZ
-bindsym $met+X workspace number $wsX
-bindsym $met+C workspace number $wsC
-bindsym $met+V workspace number $wsV
-bindsym $met+B workspace number $wsB
-
-# move focused container to workspace
-bindsym $met+$alt+F move container to workspace number $wsF
-bindsym $met+$alt+D move container to workspace number $wsD
-bindsym $met+$alt+E move container to workspace number $wsE
-bindsym $met+$alt+Q move container to workspace number $wsQ
-bindsym $met+$alt+R move container to workspace number $wsR
-bindsym $met+$alt+T move container to workspace number $wsT
-bindsym $met+$alt+A move container to workspace number $wsA
-bindsym $met+$alt+G move container to workspace number $wsG
-bindsym $met+$alt+W move container to workspace number $wsW
-bindsym $met+$alt+Z move container to workspace number $wsZ
-bindsym $met+$alt+X move container to workspace number $wsX
-bindsym $met+$alt+C move container to workspace number $wsC
-bindsym $met+$alt+V move container to workspace number $wsV
-bindsym $met+$alt+B move container to workspace number $wsB
-
-
-# focus to specific output
-bindsym $met+2 focus output $monL 
-bindsym $met+3 focus output $mon1
-bindsym $met+4 focus output $mon2 
-
-# move to specific output
-bindsym $met+$alt+2 move workspace to output $monL 
-bindsym $met+$alt+3 move workspace to output $mon1
-bindsym $met+$alt+4 move workspace to output $mon2
-
-# toggle tiling / floating
-bindsym $met+ctrl+space floating toggle
-# change focus between tiling / floating windows
-bindsym $met+space focus mode_toggle
-# funcionalidad alt+tab
-bindsym $met+Tab workspace back_and_forth
-
-####################################
-####    windows & workspaces    ####
-####################################
-# xprop to see properties
-for_window [class="Microsoft-edge"]				move to workspace $wsV
-for_window [class="Nautilus" title="Downloads"]	move to workspace $wsT
-for_window [title="^passwords.kdbx"]			move to workspace $wsW
-for_window [class="Docker Desktop"]				move to workspace $wsX
-for_window [class="w_workspace"]				move to workspace $wsW
-
-for_window [instance="copyq"]	floating enable, resize set 600 500, border pixel 0
-for_window [class="floating"]	floating enable, move position center, resize set 1750 1000, border pixel 0
-
-###########################
-####      startup      ####
-###########################
-
+####  startup  ####
 $exec kitty -1 --class "w_workspace" fish -c "tmux attach & sleep 10 && tmux detach"
 $exec copyq
 $exec keepassxc
 $exec autorandr -c
-# $exec nitrogen --restore
 $exec i3 reload
+# $exec nitrogen --restore
 
-############################
-####      shorcuts      ####
-############################
 
-# C: i3 stuff
-bindsym $met+Ctrl+q kill
-bindsym $met+Ctrl+w $exec ~/.config/i3/scripts/autorandr-rofi.sh
-bindsym $met+Ctrl+e reload
-bindsym $met+Ctrl+r restart
-bindsym $met+Ctrl+t $exec i3lock -c 232323
-bindsym $met+Ctrl+y exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-
-bindsym $met+Ctrl+a layout tabbed
-bindsym $met+Ctrl+s layout stacking
-bindsym $met+Ctrl+d layout toggle split
-bindsym $met+Ctrl+f fullscreen toggle
-bindsym $met+Ctrl+g $exec sh ~/.config/i3/scripts/lock-script.sh
-
-bindsym $met+Ctrl+z focus parent
-bindsym $met+Ctrl+x mode "resize"
-bindsym $met+Ctrl+v $exec autorandr -c
-bindsym $met+Ctrl+period split h
-bindsym $met+Ctrl+comma split v
-bindsym $met+Ctrl+m $exec setxkbmap -layout us -variant altgr-intl
-
-bindsym $met+Ctrl+u $exec pactl set-sink-volume @DEFAULT_SINK@ -4% && $refresh_i3status
-bindsym $met+Ctrl+i $exec pactl set-sink-volume @DEFAULT_SINK@ +4% && $refresh_i3status
-bindsym $met+Ctrl+o $exec pactl set-sink-mute 0 toggle && $refresh_i3status
-bindsym $met+Ctrl+p $exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# V: open apps
-bindsym $met+Shift+a $exec rofi -show drun -run-shell-command '{terminal} -e zsh -ic "{cmd} && read"'
-#		$met+Shift+s	CopyQ
-bindsym $met+Shift+d exec ghostty -e tmux attach
-bindsym $met+Shift+f $exec vivaldi
-bindsym $met+Shift+g exec bash ~/backedupFiles/scripts/gilifichador_v2.sh
-
-bindsym $met+Shift+z $exec flameshot gui
-#		$met+Shift+x	CopyQ screenshot
-bindsym $met+Shift+c exec bluetoothctl connect AC:BF:71:BC:80:CB
-bindsym $met+Shift+b $exec microsoft-edge
-
-bindsym $met+Shift+q $exec export XDG_CURRENT_DESKTOP=GNOME && gnome-control-center
-bindsym $met+Shift+e $exec ~/.config/i3/scripts/tmux_toggle_session.sh secondBrain $HOME/Documents/secondBrain/ true
-bindsym $met+Shift+t $exec nautilus -w ~/Downloads/
-
-bindsym $met+Shift+y exec systemctl --user start docker-desktop
-
+include ./shorcuts.conf
+include ./workspaces.conf
+include ./bar.conf
