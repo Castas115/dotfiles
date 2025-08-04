@@ -2,8 +2,8 @@ local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
 
-keymap.set({ "n", "x" }, ":", ";")
-keymap.set({ "n", "x" }, ";", ":")
+-- keymap.set({ "n", "x" }, ":", ";")
+-- keymap.set({ "n", "x" }, ";", ":")
 
 keymap.set("n", "<leader>q", ":q!<CR>", opts)
 keymap.set("n", "<M-q>", ":qa!<CR>", opts)
