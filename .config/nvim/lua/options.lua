@@ -1,6 +1,5 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.keymap.set('n', '<leader>x', ':echo "Hello"', { noremap = true, silent = true })
 
 vim.g.have_nerd_font = true
 
