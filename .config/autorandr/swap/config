@@ -23,14 +23,14 @@ x-prop-colorspace Default
 x-prop-max_bpc 12
 x-prop-non_desktop 0
 x-prop-scaling_mode Full aspect
-output DVI-I-1-1
-crtc 7
+output DVI-I-2-2
+crtc 6
 mode 1920x1080
 pos 1920x0
 rate 60.00
 x-prop-non_desktop 0
-output DVI-I-2-2
-crtc 6
+output DVI-I-1-1
+crtc 7
 mode 1920x1080
 pos 3840x0
 rate 60.00

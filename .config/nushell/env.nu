@@ -12,7 +12,8 @@ def create_right_prompt [] {
     ] | str join)
     } else { "" }
 
-    ([$last_exit_code, (char space), (git-prompt-string)] | str join)
+    ([$last_exit_code, (char space)] | str join)
+    # ([$last_exit_code, (char space), (git-prompt-string)] | str join)
 }
 
 # Use nushell functions to define your right and left prompt

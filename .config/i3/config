@@ -54,7 +54,7 @@ gaps inner 0
 gaps outer 0
 
 ####  startup  ####
-$exec kitty -1 --class "w_workspace" fish -c "tmux attach & sleep 10 && tmux detach"
+$exec kitty -1 --class "w_workspace" fish -c "tmux & sleep 10 && tmux detach"
 $exec copyq
 $exec keepassxc
 $exec autorandr -c

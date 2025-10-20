@@ -137,4 +137,10 @@ alias g='lazygit'
 # Created by `pipx` on 2024-11-18 08:10:21
 export PATH="$PATH:/home/j.castander/.local/bin"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Created by `pipx` on 2025-09-23 13:45:29
+export PATH="$PATH:/home/jon/.local/bin"
+export PATH=~/.npm-global/bin:$PATH
+
+complete -C /usr/bin/terraform terraform
