@@ -8,7 +8,7 @@
   esc  q    w    e    r    t     y    u    i    o    p    [    ]    ret
   tab  a    s    d    f    g     h    j    k    l    ;    '    \    ins
   lsft z    x    c    v    b     n    m    ,    .    /    rsft
-  lctl lmet lalt             spc           ralt f23
+  lctl lmet lalt             spc           ralt ContextMenu
 )
 
 (defvar
@@ -47,6 +47,7 @@
   A-S (tap-hold $tt $ht del (multi lmet lsft))
   spc_Meh (tap-hold $tt $ht spc (multi lalt lctl lsft))
   arrs (tap-hold $tt $ht bspc (layer-while-held arrows))
+  arrs2 (tap-hold $tt $ht bspc (layer-while-held arrows2))
 
   ret_altgr (tap-hold $tt $ht ret ralt)
 
@@ -68,6 +69,14 @@
   F7   F8   F9   F10  F11  F12    F1   F2   F3   F4   F5    F6   _    _
   _    @a   @s   @d   @f   @g     _    left down up   right _    _    _
   _    @z   @x   @c   @v   @b     _    home end  pgdn pgup  _
+  _    _    _                  _            XX   _
+)
+
+(deflayer arrows2
+  F1   F2   F3   F4   F5   F6     F7   F8   F9   F10  F11  F12  _    XX
+  F7   F8   F9   F10  F11  F12    F1   F2   F3   F4   F5   F6   _    _
+  _    @a   @s   @d   @f   @g     _    _    _    left down up   right _
+  _    @z   @x   @c   @v   @b     _    _    home end  pgdn pgup
   _    _    _                  _            XX   _
 )
 
@@ -135,6 +144,7 @@
   esc   caps
   tab   esc
   ins   @moon
+  ralt  @arrs2
 )
 
 (defalias

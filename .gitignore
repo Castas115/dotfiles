@@ -1,2 +1,4 @@
 *copyq_*
 *copyq.lock
+
+.config/tmux/plugins

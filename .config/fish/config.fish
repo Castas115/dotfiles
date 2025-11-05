@@ -36,15 +36,9 @@ abbr ta  'tmux attach'
 abbr tl  'tmux ls'
 
 
-function y
-	set tmp (mktemp -t "yazi-cwd.XXXXXX")
-	yazi $argv --cwd-file="$tmp"
-	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
-		builtin cd -- "$cwd"
-	end
-	rm -f -- "$tmp"
-end
-
-
 # salto things
 abbr po 'bash ~/programming/scripts/pricebook-options.sh'
+
+if not test -d ~/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+end
