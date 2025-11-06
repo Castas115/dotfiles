@@ -1,6 +1,7 @@
 output "LG Display 0x0555 0x000492A0"{
 	mode 2736x1824@59.95900
 	position 300,1440
+	scale 1.5
 	alias $SURFACE
 }
 
@@ -10,13 +11,21 @@ output "LG Electronics LG ULTRAGEAR 306NTDV47282" {
 	alias $HOME_2K
 }
 
+output "Philips Consumer Electronics Company PHL 243V7 UK02128017955" {
+	mode 1920x1080@60
+	position 2560,0
+	alias $HOME_PHILIPS
+}
+
 profile s_home {
 	output $SURFACE enable
 	output $HOME_2K enable
+	output $HOME_PHILIPS enable
 }
 
 profile s_laptop {
 	output $SURFACE enable
 	output $HOME_2K disable
+	output $HOME_PHILIPS disable
 }
 
