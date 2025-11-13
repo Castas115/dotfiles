@@ -1,0 +1,28 @@
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  sidePanelWidth: 0.15
+
+# Keybindings
+keybinding:
+  universal:
+    quit: <esc>
+
+os:
+  edit: 'nvim {{filename}}'
+  editAtLine: 'nvim -- {{filename}} --line={{line}}' #
+  editInTerminal: true
+
+  # # This is the snacks neovim plugin default option, if you want to use it,
+  # # comment all the options above
+  # # https://github.com/folke/snacks.nvim/blob/main/docs/lazygit.md
+  # editPreset: "nvim-remote"
+
+git:
+  paging:
+    colorArg: always
+    # For this to work, first install `brew install git-delta`
+    # https://github.com/dandavison/delta
+    # https://github.com/jesseduffield/lazygit/issues/155#issuecomment-2260986940
+    pager: delta --dark --paging=never --syntax-theme Coldark-Dark -s --wrap-max-lines=10
+    # pager: delta --dark --paging=never --syntax-theme base16-256 -s
