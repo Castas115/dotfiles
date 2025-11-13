@@ -29,8 +29,6 @@ abbr b  'batcat'
 abbr t  'tmux'
 abbr ta  'tmux attach'
 abbr tl  'tmux ls'
-
-
 abbr sd 'stow . -d ~/dotfiles'
 
 atuin init fish| source
