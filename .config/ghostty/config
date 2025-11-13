@@ -1,4 +1,4 @@
-command = /usr/bin/fish --login --interactive
+command = fish --login --interactive
 
 theme = custom-catppuccin-mocha
 font-size = 12
@@ -10,7 +10,7 @@ cursor-text = #1e1e2e
 mouse-hide-while-typing = true
 window-decoration = false
 macos-option-as-alt = true
-background-opacity = 0.85
+background-opacity = 0.95
 
 term = xterm-256color
 

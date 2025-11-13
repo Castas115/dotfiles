@@ -13,11 +13,6 @@ abbr la 'nu -c "ls -a"'
 abbr ll 'nu -c "ls -al"'
 abbr lt 'eza --tree --level=2 --long --icons --git'
 
-abbr sd= 'stow . -d ~/dotfiles'
-
-#  "$HOME/.atuin/bin/env"
-atuin init fish| source
-zoxide init fish --no-cmd| source
 
 alias s  'sudo'
 alias c  '__zoxide_z'
@@ -34,4 +29,11 @@ abbr b  'batcat'
 abbr t  'tmux'
 abbr ta  'tmux attach'
 abbr tl  'tmux ls'
+abbr sd 'stow . -d ~/dotfiles'
 
+atuin init fish| source
+zoxide init fish --no-cmd| source
+
+if not test -d ~/.tmux/plugins/tpm
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+end
