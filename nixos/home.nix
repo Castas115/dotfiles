@@ -37,7 +37,7 @@
 		};
 	};
 
-	home.file./
+	# home.file.".config/fish".source = ../.config/fish;
 
 	home.packages = with pkgs; [
 		neovim 
@@ -67,6 +67,8 @@
 		swaynotificationcenter
 		vlc
 		bibata-cursors
+		sqlite
+		eza
 	];
 
 }

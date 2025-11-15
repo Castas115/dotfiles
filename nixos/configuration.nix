@@ -84,7 +84,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # $ nix search wget
-  environment.systempackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     wget
     git
 	gh
