@@ -1,6 +1,6 @@
 output "LG Display 0x0555 0x000492A0"{
 	mode 2736x1824@59.95900
-	position 300,1440
+	position 350,1440
 	scale 1.5
 	alias $SURFACE
 }
@@ -17,22 +17,24 @@ output "Philips Consumer Electronics Company PHL 243V7 UK02128017955" {
 	alias $HOME_PHILIPS
 }
 
+###  WORK  ###
+
 output "AU Optronics 0x70B3 0x0000FFA1"{
 	mode 1920x1200@60
-	position 3840,0
+	position 0,0
 	scale 1.066667
 	alias $HP_WORK
 }
 
 output "HP Inc. HP P24h G5 3CM3471MJB"{
 	mode 1920x1080@60
-	position 0,0
+	position 1920,0
 	alias $WORK_L
 }
 
 output "HP Inc. HP P24h G5 3CM5090R7B"{
 	mode 1920x1080@60
-	position 1920,0
+	position 3840,0
 	alias $WORK_R
 }
 
