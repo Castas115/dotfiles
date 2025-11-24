@@ -8,10 +8,8 @@ fish_vi_key_bindings
 set -g fish_cursor_insert line
 set -g fish_cursor_default block
 
-abbr l 'nu -c ls'
-abbr la 'nu -c "ls -a"'
-abbr ll 'nu -c "ls -al"'
-abbr lt 'eza --tree --level=2 --long --icons --git'
+alias l 'eza --long --icons --git -a'
+abbr lt 'eza --long --icons --git -a --tree --level=2'
 
 
 alias s  'sudo'

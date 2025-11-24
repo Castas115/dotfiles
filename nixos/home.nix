@@ -69,6 +69,7 @@
 		bibata-cursors
 		sqlite
 		eza
+		claude
 	];
 
 }
