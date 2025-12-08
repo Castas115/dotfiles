@@ -11,10 +11,10 @@
     let
       system = "x86_64-linux";
     in {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.work = nixpkgs.lib.nixosSystem {
         inherit system;
 			modules = [
-				./configuration.nix
+				./hosts/work/configuration.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {

@@ -24,11 +24,9 @@
 	programs.bash = {
 		enable = true;
 		shellAliases = {
-			btw = "echo I use nixos, btw";
 			ll = "ls -alF";
 			la = "ls -A";
 			l  = "ls -CF";
-			ai = "sudo apt-get install -y ";
 			c  = "__zoxide_z";
 			cf = "__zoxide_zi";
 			v  = "nvim";
@@ -69,7 +67,20 @@
 		bibata-cursors
 		sqlite
 		eza
-		claude
+		unzip
+		dig
+		openvpn
+		openssl
+		dbeaver-bin
+		dive
+		docker
+		ripgrep
+		eza
+		mysql84
+		nodejs
+		mermaid-cli
+		azure-cli
+		btop
 	];
 
 }
