@@ -81,6 +81,7 @@
 		mermaid-cli
 		azure-cli
 		btop
+		libreoffice
 	];
 
 }
