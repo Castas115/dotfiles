@@ -15,8 +15,8 @@
       nixosConfigurations.work = nixpkgs.lib.nixosSystem {
         inherit system;
 			modules = [
-				./hosts/work/configuration.nix
-				./modules/general.nix
+				./hosts/work/hardware-configuration.nix
+				./configuration.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
@@ -32,8 +32,8 @@
       nixosConfigurations.surf = nixpkgs.lib.nixosSystem {
         inherit system;
 			modules = [
-				./hosts/surf/configuration.nix
-				./modules/general.nix
+				./hosts/surf/hardware-configuration.nix
+				./configuration.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
