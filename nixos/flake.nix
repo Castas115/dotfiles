@@ -11,10 +11,27 @@
     let
       system = "x86_64-linux";
     in {
+
       nixosConfigurations.work = nixpkgs.lib.nixosSystem {
         inherit system;
 			modules = [
 				./hosts/work/configuration.nix
+				home-manager.nixosModules.home-manager
+				{
+					home-manager = {
+						useGlobalPkgs = true;
+						useUserPackages = true;
+						users.jon = import ./home.nix;
+						backupFileExtension = "backup";
+					};
+				}
+			];
+		};
+
+      nixosConfigurations.surf = nixpkgs.lib.nixosSystem {
+        inherit system;
+			modules = [
+				./hosts/surf/configuration.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
