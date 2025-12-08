@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  networking = {
+    nameservers = [ "8.8.8.8" "8.8.4.4" ];
+    networkmanager.dns = "none";  # if you're using NetworkManager
+    # useDHCP = false;  # only if you want to disable DHCP
+    dhcpcd.extraConfig = "nohook resolv.conf";  # prevents DHCP from overwriting DNS
+  };
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -35,8 +42,8 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
-    variant = "altgr-intl";
+    layout = "us,es";
+    options = "caps:none,grp:caps_toggle";
   };
 
   services.printing.enable = true;
@@ -53,7 +60,7 @@
   users.users.jon = {
     isNormalUser = true;
     description = "jon";
-    extraGroups = [ "jon" "networkmanager" "wheel" ];
+    extraGroups = [ "jon" "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
     ];
   };
@@ -74,6 +81,22 @@
 		user.email = "joncastas@gmail.com";
 		init.defaultBranch = "main";
 	  };
+  };
+
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.evdi ];
+    initrd = {
+      # List of modules that are always loaded by the initrd.
+      kernelModules = [
+        "evdi"
+      ];
+    };
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -101,6 +124,8 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  
+  virtualisation.docker.enable = true;
 
   systemd.services.kanata = {
     description = "Kanata keyboard remapper";
