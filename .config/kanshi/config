@@ -21,7 +21,7 @@ output "Philips Consumer Electronics Company PHL 243V7 UK02128017955" {
 
 output "AU Optronics 0x70B3 0x0000FFA1"{
 	mode 1920x1200@60
-	position 0,0
+	position 350,1440
 	scale 1.066667
 	alias $HP_WORK
 }
@@ -54,4 +54,10 @@ profile w_dock {
 	output $HP_WORK enable
 	output $WORK_L enable
 	output $WORK_R enable
+}
+
+profile w_home {
+	output $HP_WORK enable
+	output $HOME_2K enable
+	output $HOME_PHILIPS enable
 }
