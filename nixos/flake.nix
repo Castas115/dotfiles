@@ -16,6 +16,7 @@
         inherit system;
 			modules = [
 				./hosts/work/configuration.nix
+				./modules/general.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
@@ -32,6 +33,7 @@
         inherit system;
 			modules = [
 				./hosts/surf/configuration.nix
+				./modules/general.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
