@@ -2,8 +2,8 @@ return {
 	"catppuccin/nvim",
 	name = "catppuccin",
 	priority = 1000,
-	config = function()
-		require("catppuccin").setup()
+	config = function(_,opts)
+		require("catppuccin").setup(opts)
 		vim.cmd.colorscheme("catppuccin")
 	end,
 	opts = {
