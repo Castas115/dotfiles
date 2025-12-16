@@ -5,6 +5,7 @@
   "spacing": 0,
   "height": 26,
   "modules-left": [
+    "window",
     "hyprland/workspaces"
   ],
   "modules-center": [
@@ -50,7 +51,7 @@
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
-    "interval": 3,
+    "interval": 5,
     "nospacing": 1,
     "on-click": "alacritty --class=Impala -e impala"
   },
