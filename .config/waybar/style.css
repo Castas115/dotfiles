@@ -9,7 +9,15 @@
   border-radius: 0;
   min-height: 0;
   font-family: CaskaydiaMono Nerd Font;
-  font-size: 12px;
+  font-size: 13px;
+}
+
+
+.dirty {
+  color: #f38ba8;
+}
+.changes {
+  color: #faf7d9;
 }
 
 .modules-left {
