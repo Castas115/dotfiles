@@ -49,7 +49,7 @@ return {
 		config = function()
 			require("gitsigns").setup()
 
-			vim.keymap.set("n", "<leader>gp", ":Gitsigns diffthis<CR>", { desc = "Git Diff"})
+			vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis<CR>", { desc = "Git Diff"})
 			vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "Git Blame"})
 		end,
 	},
