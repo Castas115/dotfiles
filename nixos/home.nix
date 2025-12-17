@@ -82,6 +82,7 @@
 		azure-cli
 		btop
 		libreoffice
+		bruno
 	];
 
 }
