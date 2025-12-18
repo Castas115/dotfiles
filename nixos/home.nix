@@ -83,6 +83,7 @@
 		btop
 		libreoffice
 		bruno
+		anki
 	];
 
 }
