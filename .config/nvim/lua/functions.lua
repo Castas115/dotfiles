@@ -196,7 +196,7 @@ vim.keymap.set("n", "<leader>tx", function()
       if line_text:match("^### ") then
         -- Extract header text and convert to tag format
         local header_text = line_text:gsub("^###%s*", ""):gsub("%s+", "_"):lower()
-        return "#" .. header_text
+        return "*" .. header_text .. "*"
       end
     end
     return nil  -- No header found
