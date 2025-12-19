@@ -1,3 +1,11 @@
+local M = {}
+M.checkbox_cycle = {
+	[" "] = "_",
+	["_"] = "/",
+	["/"] = " ",
+	["x"] = " ",
+}
+
 return {
 	{
 		"MeanderingProgrammer/markdown.nvim",
@@ -5,13 +13,19 @@ return {
 		opts = {
 			checkbox = {
 				custom = {
-													--      󰏧
-					stopped = { raw = '[/]', rendered = '', highlight = 'RenderMarkdownTodo', scope_highlight = nil },
+													-- 
+					stopped = { raw = '[/]', rendered = '', highlight = 'RenderMarkdownTodo'},
+					doing = { raw = '[_]', rendered = '', highlight = 'RenderMarkdownTodo'},
 				},
 			},
 		},
 		name = "render-markdown",                                                      -- Only needed if you have another plugin named markdown.nvim
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you use the mini.nvim suitable
+		config = function(_, opts)
+			require("render-markdown").setup(opts)
+			-- Make checkbox_cycle available globally
+			_G.checkbox_cycle = M.checkbox_cycle
+		end,
 	},
 	{
 		"SCJangra/table-nvim",
