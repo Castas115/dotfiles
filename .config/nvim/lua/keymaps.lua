@@ -70,3 +70,8 @@ end, { desc = "Yank current line into register [a-z]" })
 
 keymap.set("n", "<leader>.", "<C-w>v", { desc = "Split window vertically" })
 keymap.set("n", "<leader>,", "<C-w>s", { desc = "Split window horizontally" })
+
+-- URL handling: gf and gx
+local functions = require('functions')
+keymap.set("n", "gf", functions.goto_file, { desc = "Go to file or open URL" })
+keymap.set("n", "gx", functions.open_url, { desc = "Open URL in browser" })
