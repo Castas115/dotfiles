@@ -1,19 +1,15 @@
 output "LG Display 0x0555 0x000492A0"{
 	mode 2736x1824@59.95900
-	position 350,1440
-	scale 1.5
 	alias $SURFACE
 }
 
 output "LG Electronics LG ULTRAGEAR 306NTDV47282" {
 	mode 2560x1440@164.95799
-	position 0,0
 	alias $HOME_2K
 }
 
 output "Philips Consumer Electronics Company PHL 243V7 UK02128017955" {
 	mode 1920x1080@60
-	position 2560,0
 	alias $HOME_PHILIPS
 }
 
@@ -21,43 +17,41 @@ output "Philips Consumer Electronics Company PHL 243V7 UK02128017955" {
 
 output "AU Optronics 0x70B3 0x0000FFA1"{
 	mode 1920x1200@60
-	position 350,1440
-	scale 1.066667
 	alias $HP_WORK
 }
 
 output "HP Inc. HP P24h G5 3CM3471MJB"{
 	mode 1920x1080@60
-	position 1920,0
 	alias $WORK_L
 }
 
 output "HP Inc. HP P24h G5 3CM5090R7B"{
 	mode 1920x1080@60
-	position 3840,0
 	alias $WORK_R
 }
 
 profile s_home {
-	output $SURFACE enable
-	output $HOME_2K enable
-	output $HOME_PHILIPS enable
+	output $SURFACE enable position 350,1440 scale 1.5
+	output $HOME_2K enable position 0,0
+	output $HOME_PHILIPS enable position 2560,0
 }
 
 profile s_laptop {
-	output $SURFACE enable
-	output $HOME_2K disable
-	output $HOME_PHILIPS disable
+	output $SURFACE enable position 0,0 scale 1.5
+}
+
+profile w_laptop {
+	output $HP_WORK enable position 0,0 scale 1.066667
 }
 
 profile w_dock {
-	output $HP_WORK enable
-	output $WORK_L enable
-	output $WORK_R enable
+	output $HP_WORK enable position 350,1440 scale 1.066667
+	output $WORK_L enable position 0,0
+	output $WORK_R enable position 1920,0
 }
 
 profile w_home {
-	output $HP_WORK enable
-	output $HOME_2K enable
-	output $HOME_PHILIPS enable
+	output $HP_WORK enable position 350,1440 scale 1.066667
+	output $HOME_2K enable position 0,0
+	output $HOME_PHILIPS enable position 2560,0
 }
