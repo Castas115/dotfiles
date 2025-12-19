@@ -66,14 +66,12 @@ local function toggle_checkbox()
 	local cursor_pos = vim.api.nvim_win_get_cursor(0)
 	local current_line = vim.api.nvim_get_current_line()
 
-	-- If no checkbox exists, create one
 	if not current_line:match("^%s*%- %[") then
 		vim.cmd("normal!I - [ ] ")
 		vim.api.nvim_win_set_cursor(0, { cursor_pos[1], #current_line })
 		return
 	end
 
-	-- Find current checkbox state and replace with next state
 	for current, next_state in pairs(checkbox_cycle) do
 		local pattern = "%- %[" .. current:gsub("([%-%/])", "%%%1") .. "%]"
 		if current_line:match("^%s*" .. pattern) then
@@ -96,11 +94,65 @@ end
 
 vim.keymap.set({"n","v"}, "<A-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
 
+function M.get_url_under_cursor()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1
+
+  local url_pattern = "https?://[^%)%s]+"
+
+  local search_pos = 1
+  while true do
+    local url_start, url_end = line:find(url_pattern, search_pos)
+    if not url_start then break end
+
+    if col >= url_start and col <= url_end then
+      return line:sub(url_start, url_end)
+    end
+    search_pos = url_end + 1
+  end
+
+  local url = line:match("%((" .. url_pattern .. ")%)")
+  return url
+end
+
+function M.open_url()
+  local url = M.get_url_under_cursor()
+  if url then
+    local cmd = vim.fn.has("mac") == 1 and "open" or "xdg-open"
+    vim.fn.jobstart({cmd, url}, {detach = true})
+    vim.notify("Opening: " .. url)
+  else
+    vim.notify("No URL found", vim.log.levels.WARN)
+  end
+end
+
+function M.goto_file()
+  local url = M.get_url_under_cursor()
+  if url then
+    M.open_url()
+  else
+    -- First try to get content between () on the line
+    local line = vim.api.nvim_get_current_line()
+    local content = line:match('%((.-)%)')
+
+    if content and content ~= '' then
+      vim.cmd('edit ' .. vim.fn.fnameescape(content))
+    else
+      -- Fallback to file under cursor
+      local cfile = vim.fn.expand('<cfile>')
+      if cfile ~= '' then
+        vim.cmd('edit ' .. vim.fn.fnameescape(cfile))
+      else
+        vim.notify("No file or URL found", vim.log.levels.WARN)
+      end
+    end
+  end
+end
+
 vim.keymap.set("n", "<leader>tx", function()
-  -- Customizable variables
-  local label_done = "done:"  -- Label for completed tasks
-  local timestamp = os.date("%y%m%d-%H%M")  -- Timestamp format
-  local tasks_heading = "## Completed tasks"  -- Heading for completed tasks
+  local label_done = "done:"
+  local timestamp = os.date("%y%m%d-%H%M")
+  local tasks_heading = "## Completed tasks"
 
   -- Save the view to preserve folds
   vim.cmd("mkview")
@@ -303,3 +355,4 @@ vim.keymap.set("n", "<leader>tx", function()
   vim.cmd("loadview")
 end, { desc = "[P]Toggle task and move it to 'done'" })
 
+return M
