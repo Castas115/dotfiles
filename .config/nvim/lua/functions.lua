@@ -55,22 +55,32 @@ vim.api.nvim_create_autocmd('FileType', {
 		vim.keymap.set("n", "<leader>td", write_current_day, { noremap = true, silent = true })
 
 local function toggle_checkbox()
+	-- Get checkbox_cycle from global (configured in lua/plugins/markdown.lua)
+	local checkbox_cycle = _G.checkbox_cycle or {
+		[" "] = "_",  -- Fallback if markdown plugin not loaded yet
+		["_"] = "/",
+		["/"] = " ",
+		["x"] = " ",
+	}
 
 	local cursor_pos = vim.api.nvim_win_get_cursor(0)
 	local current_line = vim.api.nvim_get_current_line()
 
-	if not current_line:match("^%s* %- %[") then
+	-- If no checkbox exists, create one
+	if not current_line:match("^%s*%- %[") then
 		vim.cmd("normal!I - [ ] ")
-        vim.api.nvim_win_set_cursor(0, { cursor_pos[1], #current_line })
-	elseif current_line:match("^%s* %- %[ %]") then
-		local updated_line = current_line:gsub("%- %[ %]", "- [-]")
-		vim.api.nvim_set_current_line(updated_line)
-	elseif current_line:match("^%s* %- %[%x%]") then
-		local updated_line = current_line:gsub("%- %[%x%]", "- [ ]")
-		vim.api.nvim_set_current_line(updated_line)
-	elseif current_line:match("^%s* %- %[%-%]") then
-		local updated_line = current_line:gsub("%- %[%-%]", "- [ ]")
-		vim.api.nvim_set_current_line(updated_line)
+		vim.api.nvim_win_set_cursor(0, { cursor_pos[1], #current_line })
+		return
+	end
+
+	-- Find current checkbox state and replace with next state
+	for current, next_state in pairs(checkbox_cycle) do
+		local pattern = "%- %[" .. current:gsub("([%-%/])", "%%%1") .. "%]"
+		if current_line:match("^%s*" .. pattern) then
+			local updated_line = current_line:gsub(pattern, "- [" .. next_state .. "]")
+			vim.api.nvim_set_current_line(updated_line)
+			return
+		end
 	end
 
   -- -- Check if the line starts with a bullet or "- ", and remove it
@@ -84,7 +94,7 @@ local function toggle_checkbox()
 	-- vim.api.nvim_win_set_cursor(0, cursor_pos)
 end
 
-vim.keymap.set({"n","v"}, "<leader>tc", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
+vim.keymap.set({"n","v"}, "<A-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
 
 vim.keymap.set("n", "<leader>tx", function()
   -- Customizable variables
