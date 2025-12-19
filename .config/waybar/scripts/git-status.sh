@@ -4,7 +4,7 @@ cd "$HOME/dotfiles" || exit
 
 if git rev-parse --git-dir > /dev/null 2>&1; then
     # branch=$(git branch --show-current)
-	text=""
+	text=" "
     if [[ -n $(git status -s) ]]; then
         text+="*"
 		class="changes"
