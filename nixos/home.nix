@@ -84,6 +84,8 @@
 		libreoffice
 		bruno
 		anki
+		brightnessctl
+		playerctl
 	];
 
 }
