@@ -92,7 +92,7 @@ local function toggle_checkbox()
 	-- vim.api.nvim_win_set_cursor(0, cursor_pos)
 end
 
-vim.keymap.set({"n","v"}, "<A-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
+vim.keymap.set({"n","i","v"}, "<A-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
 
 function M.get_url_under_cursor()
   local line = vim.api.nvim_get_current_line()
