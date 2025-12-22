@@ -80,12 +80,12 @@ auto_git_push() {
     squash_hourly_commits "$path"
   done) &
 
-  inotifywait -q -m -r -e CLOSE_WRITE,DELETE,CREATE,MOVE --format="git -C '$path' add . && git -C '$path' commit -m 'autocommit on change' && git -C '$path' push" "$path" --exclude '(\.git/|#)' | sh &
+  inotifywait -q -m -r -e CLOSE_WRITE,DELETE,CREATE,MOVE --format="git -C '$path' add . && git -C '$path' commit -m 'autocommit on change' && git -C '$path' push" "$path" --exclude '(\.git/|#|.*~$)' | sh &
 }
 
 declare -a paths=(
   "$HOME/notes"
-  "$HOME/backedupFiles"
+  # "$HOME/backedupFiles"
 )
 
 echo "Press [Ctrl+C] to stop."
