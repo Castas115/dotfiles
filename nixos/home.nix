@@ -87,6 +87,7 @@
 		brightnessctl
 		playerctl
 		inotify-tools
+		claude-code
 	];
 
 }
