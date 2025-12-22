@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cd "$HOME/dotfiles" || exit
+git fetch
 
 if git rev-parse --git-dir > /dev/null 2>&1; then
     # branch=$(git branch --show-current)
