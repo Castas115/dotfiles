@@ -23,10 +23,10 @@ keymap.set({ 'n', 'v' }, "<A-k>", "10kzz", { desc = "Scroll down 10 lines" })
 keymap.set({ 'n', 'v' }, "<PageUp>", "<C-u>zz", { desc = "Scroll up half a page" })
 keymap.set({ 'n', 'v' }, "<PageDown>", "<C-d>zz", { desc = "Scroll down half a page" })
 
-vim.api.nvim_set_keymap('n', '<A-S-h>', ':vertical resize -2<CR>', opts)
+vim.api.nvim_set_keymap('n', '<A-S-h>', ':vertical resize -4<CR>', opts)
 vim.api.nvim_set_keymap('n', '<A-S-j>', ':resize -2<CR>', opts)
 vim.api.nvim_set_keymap('n', '<A-S-k>', ':resize +2<CR>', opts)
-vim.api.nvim_set_keymap('n', '<A-S-l>', ':vertical resize +2<CR>', opts)
+vim.api.nvim_set_keymap('n', '<A-S-l>', ':vertical resize +4<CR>', opts)
 
 keymap.set('n', 'tq', '<Esc>:bdelete<CR>')
 keymap.set('n', 'tk', '<Esc>:bnext<CR>')
