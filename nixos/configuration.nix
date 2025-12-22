@@ -138,6 +138,20 @@
     };
   };
 
+  systemd.services.gitsync = {
+    description = "Auto-sync git repositories on file changes";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
+    serviceConfig = {
+      Type = "simple";
+      User = "jon";
+      ExecStart = "${pkgs.bash}/bin/bash /home/jon/dotfiles/scripts/gitsync.sh";
+      Restart = "on-failure";
+      RestartSec = 10;
+    };
+    path = with pkgs; [ git inotify-tools bash ];
+  };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
 }

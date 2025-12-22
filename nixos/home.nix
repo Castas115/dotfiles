@@ -86,6 +86,7 @@
 		anki
 		brightnessctl
 		playerctl
+		inotify-tools
 	];
 
 }
