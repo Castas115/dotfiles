@@ -2,3 +2,4 @@
 .gitignore
 nonSymlinked
 nixos
+scripts
