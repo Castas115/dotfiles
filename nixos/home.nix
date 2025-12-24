@@ -76,7 +76,7 @@
 		docker
 		ripgrep
 		eza
-		mysql84
+		mariadb
 		nodejs
 		mermaid-cli
 		azure-cli
