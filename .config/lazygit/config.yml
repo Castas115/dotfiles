@@ -1,6 +1,6 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 gui:
-  sidePanelWidth: 0.1
+  sidePanelWidth: 0.2
 
 keybinding:
   universal:
