@@ -88,6 +88,7 @@
 		playerctl
 		inotify-tools
 		claude-code-nix.packages.${pkgs.system}.default
+		fastfetch
 	];
 
 }
