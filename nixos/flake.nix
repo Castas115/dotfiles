@@ -4,10 +4,11 @@
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
 		home-manager.url = "github:nix-community/home-manager/release-25.05";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
+		claude-code-nix.url = "github:sadjow/claude-code-nix";
 	};
 
 	
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, claude-code-nix, ... }:
     let
       system = "x86_64-linux";
     in {
@@ -24,6 +25,7 @@
 						useUserPackages = true;
 						users.jon = import ./home.nix;
 						backupFileExtension = "backup";
+						extraSpecialArgs = { inherit claude-code-nix; };
 					};
 				}
 			];
@@ -41,6 +43,7 @@
 						useUserPackages = true;
 						users.jon = import ./home.nix;
 						backupFileExtension = "backup";
+						extraSpecialArgs = { inherit claude-code-nix; };
 					};
 				}
 			];
