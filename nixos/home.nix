@@ -89,6 +89,9 @@
 		inotify-tools
 		claude-code-nix.packages.${pkgs.system}.default
 		fastfetch
+		python3
+		python3Packages.pip
+		python3Packages.scrapy
 	];
 
 }
