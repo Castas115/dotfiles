@@ -4,7 +4,7 @@ output "LG Display 0x0555 0x000492A0"{
 }
 
 output "LG Electronics LG ULTRAGEAR 306NTDV47282" {
-	mode 2560x1440@164.95799
+	mode 2560x1440@144
 	alias $HOME_2K
 }
 
