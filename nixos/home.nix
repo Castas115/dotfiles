@@ -92,6 +92,10 @@
 		python3
 		python3Packages.pip
 		python3Packages.scrapy
+		remmina
+		anydesk
+		rclone
+		teams-for-linux
 	];
 
 }
