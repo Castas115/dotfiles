@@ -156,4 +156,5 @@
   system.stateVersion = "25.05";
   
   services.flatpak.enable = true;
+  hardware.keyboard.zsa.enable = true;
 }
