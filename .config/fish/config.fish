@@ -29,6 +29,8 @@ abbr ta  'tmux attach'
 abbr tl  'tmux ls'
 abbr sd 'stow . -d ~/dotfiles'
 
+abbr vpn 'sudo openvpn --config ~/.ssh/vpn/jon.ovpn'
+
 atuin init fish| source
 zoxide init fish --no-cmd| source
 
