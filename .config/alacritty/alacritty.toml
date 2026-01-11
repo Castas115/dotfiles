@@ -1,0 +1,22 @@
+
+[terminal]
+shell = { program = "fish", args = ["--login", "--interactive"] }
+
+[window]
+opacity = 0.95
+padding.x = 1
+padding.y = 1
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font", style = "Italic" }
+size = 12.0
+
+[colors.primary]
+background = "#000000"
+foreground = "#cdd6f4"
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+
