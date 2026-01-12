@@ -1,4 +1,4 @@
-{ config, pkgs, claude-code-nix, ... }:
+{ config, pkgs, claude-code-nix, wiremix, ... }:
 
 {
 	home.username = "jon";
@@ -96,6 +96,11 @@
 		anydesk
 		rclone
 		teams-for-linux
+		alacritty
+		bluetui
+		impala
+		wiremix.packages.${pkgs.system}.default
+		lynx
 	];
 
 }

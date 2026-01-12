@@ -5,10 +5,11 @@
 		home-manager.url = "github:nix-community/home-manager/release-25.05";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
 		claude-code-nix.url = "github:sadjow/claude-code-nix";
+		wiremix.url = "github:tsowell/wiremix";
 	};
 
 	
-  outputs = { self, nixpkgs, home-manager, claude-code-nix, ... }:
+  outputs = { self, nixpkgs, home-manager, claude-code-nix, wiremix, ... }:
     let
       system = "x86_64-linux";
     in {
@@ -25,7 +26,7 @@
 						useUserPackages = true;
 						users.jon = import ./home.nix;
 						backupFileExtension = "backup";
-						extraSpecialArgs = { inherit claude-code-nix; };
+						extraSpecialArgs = { inherit claude-code-nix wiremix; };
 					};
 				}
 			];
@@ -43,7 +44,7 @@
 						useUserPackages = true;
 						users.jon = import ./home.nix;
 						backupFileExtension = "backup";
-						extraSpecialArgs = { inherit claude-code-nix; };
+						extraSpecialArgs = { inherit claude-code-nix wiremix; };
 					};
 				}
 			];
