@@ -74,6 +74,17 @@
 
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;  # Valve's gaming session compositor
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin  # Better Windows game compatibility
+    ];
+  };
+
+  hardware.steam-hardware.enable = true;  # udev rules for controllers
+
+  programs.gamemode.enable = true;  # Feral's performance optimizer
   programs.git = {
 	  enable = true;
 	  config = {
