@@ -101,6 +101,7 @@
 		impala
 		wiremix.packages.${pkgs.system}.default
 		lynx
+		vscode
 	];
 
 }
