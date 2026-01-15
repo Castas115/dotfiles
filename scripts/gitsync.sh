@@ -31,7 +31,7 @@ auto_git_push() {
   [[ -z "$path" || ! -d "$path" ]] && return 1
   git -C "$path" pull
   echo "Watching directory: $path"
-  inotifywait -q -m -r -e CLOSE_WRITE,DELETE,CREATE,MOVE --format="sleep 0.01 && git -C '$path' add . && git -C '$path' commit -m 'autocommit on change' && git -C '$path' push" "$path" --exclude '(\.git/|#|.*~$)' | sh &
+  inotifywait -q -m -r -e CLOSE_WRITE,DELETE,CREATE,MOVE --format="sleep 0.1 && git -C '$path' add . && git -C '$path' commit -m 'autocommit on change' && git -C '$path' push" "$path" --exclude '(\.git/|#|.*~$)' | sh &
 }
 
 # squash_hourly_commits "$HOME/notes"
