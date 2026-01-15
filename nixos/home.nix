@@ -102,6 +102,7 @@
 		wiremix.packages.${pkgs.system}.default
 		lynx
 		vscode
+		wl-clipboard
 	];
 
 }
