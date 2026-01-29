@@ -103,6 +103,7 @@
 		lynx
 		vscode
 		wl-clipboard
+		bc
 	];
 
 }
