@@ -20,3 +20,4 @@ keybind=ctrl+page_up=unbind
 keybind=ctrl+page_down=unbind
 keybind=ctrl+shift+page_up=unbind
 keybind=ctrl+shift+page_down=unbind
+keybind=ctrl+alt+shift+j=unbind
