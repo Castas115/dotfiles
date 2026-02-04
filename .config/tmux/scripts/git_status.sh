@@ -11,7 +11,8 @@ dark="#181825"
 black="#000000"
 light="#cdd6f4"
 
-accent="##FF8A65"
+accent="#FF8A65"
+
 
 
 if [[ -n $(git status -s 2>/dev/null) ]]; then
