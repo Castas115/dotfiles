@@ -104,6 +104,7 @@
 		vscode
 		wl-clipboard
 		bc
+		go
 	];
 
 }
