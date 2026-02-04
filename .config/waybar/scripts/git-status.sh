@@ -7,7 +7,8 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
     # branch=$(git branch --show-current)
 	text=" "
     if [[ -n $(git status -s) ]]; then
-        text+="*"
+        dirty=$(git status --porcelain | wc -l | tr -d ' ')
+        text+="*${dirty}"
 		class="changes"
     else
         class="clean"
