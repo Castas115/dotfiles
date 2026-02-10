@@ -45,9 +45,9 @@ profile w_laptop {
 }
 
 profile w_dock {
-	output $HP_WORK enable position 350,1440 scale 1.066667
-	output $WORK_L enable position 0,0
-	output $WORK_R enable position 1920,0
+	output $HP_WORK enable position 0,0 scale 1.066667
+	output $WORK_L enable position 1800,0
+	output $WORK_R enable position 3720,0
 }
 
 profile w_home {
