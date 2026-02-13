@@ -121,6 +121,7 @@
 	gcc
 	kanata
 	hyprland
+	appimage-run
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
