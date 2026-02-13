@@ -105,6 +105,10 @@
 		wl-clipboard
 		bc
 		go
+		kubectl
+		k9s
+		minikube
+		terraform
 	];
 
 }
