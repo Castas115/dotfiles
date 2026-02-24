@@ -38,8 +38,9 @@
 	# home.file.".config/fish".source = ../.config/fish;
 
 	home.packages = with pkgs; [
-		neovim 
 		vivaldi
+		chromium
+		neovim
 		tmux
 		fish
 		nushell
