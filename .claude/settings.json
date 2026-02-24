@@ -18,6 +18,13 @@
       "Bash(find *)",
       "Bash(mkdir *)",
       "Bash(cp *)",
+      "Bash(kubectl get *)",
+      "Bash(kubectl describe *)",
+      "Bash(kubectl logs *)",
+      "Bash(kubectl top *)",
+      "Bash(kubectl config *)",
+      "Bash(kubectx *)",
+      "Bash(kubens *)",
       "Task"
     ]
   },
