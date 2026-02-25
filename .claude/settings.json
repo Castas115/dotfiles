@@ -4,8 +4,6 @@
       "Read",
       "Glob",
       "Grep",
-      "Edit",
-      "Write",
       "Bash(npm *)",
       "Bash(npx *)",
       "Bash(ls *)",
