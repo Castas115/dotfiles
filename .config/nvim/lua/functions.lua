@@ -1,18 +1,15 @@
 
 local M = {}
 
-local function all_registers()
-  return   end
+local registers = {
+	"*","+",'"',"-","/","_","=","#","%",".",":",
+	"0","1","2","3","4","5","6","7","8","9",
+	"a","b","c","d","e","f","g","h","i","j","k","l","m",
+	"n","o","p","q","r","s","t","u","v","w","x","y","z",
+}
 
-function M.create_or_edit(opts)
-  opts = {
-		"*","+",'"',"-","/","_","=","#","%",".",":",
-		"0","1","2","3","4","5","6","7","8","9",
-		"a","b","c","d","e","f","g","h","i","j","k","l","m",
-		"n","o","p","q","r","s","t","u","v","w","x","y","z",
-	}
-
-  vim.ui.select(all_registers(), {
+function M.create_or_edit()
+  vim.ui.select(registers, {
     prompt = "Select a register",
     format_item = function(reg)
       return reg .. "\t\t\t" .. vim.fn.getreg(reg, 1)
