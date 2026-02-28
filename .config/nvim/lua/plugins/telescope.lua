@@ -96,29 +96,6 @@ return {
 			}
 		end,
 	},
-
-	-- Filename: ~/github/dotfiles-latest/neovim/neobean/lua/plugins/telescope-frecency.lua
-	-- ~/github/dotfiles-latest/neovim/neobean/lua/plugins/telescope-frecency.lua
-
-	--[=====[
-https://github.com/nvim-telescope/telescope-frecency.nvim
-
-This plugins keeps a score of my recently access files through telescope, and
-shows the ones I se the most at the top of the list
-
-It requires telescope, so don't uninstall telescope
-
-For questions read the docs
-https://github.com/nvim-telescope/telescope-frecency.nvim/blob/master/doc/telescope-frecency.txt
-
-You can delete entries from DB by this command. This command does not remove
-the file itself, only from DB.
-- delete the current opened file
-  - :FrecencyDelete
-- delete the supplied path
-  - :FrecencyDelete /full/path/to/the/file
---]=====]
-
 	{
 		"nvim-telescope/telescope-frecency.nvim",
 		config = function()

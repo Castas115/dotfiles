@@ -32,7 +32,6 @@ return {
 				set_keymap("i", "<A-h>", vim.lsp.buf.signature_help, "Signature Help")
 				set_keymap("n", "<leader>li", function()
 					vim.lsp.buf.code_action({
-						apply = true,
 						context = { diagnostics = {}, only = { "source.organizeImports" } },
 					})
 				end, "Organize Imports")
