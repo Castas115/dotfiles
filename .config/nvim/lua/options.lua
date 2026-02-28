@@ -59,6 +59,3 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.autoread = true
-
--- gets rid of line with white spaces
-vim.g.editorconfig = true

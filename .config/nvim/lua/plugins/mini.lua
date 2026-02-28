@@ -94,31 +94,4 @@ return {
 	{
 		"echasnovski/mini.notify",
 	},
-	-- {
-	-- 	"echasnovski/mini.indentscope",
-	-- 	version = false, -- wait till new 0.7.0 release to put it back on semver
-	-- 	opts = {
-	-- 		-- symbol = "▏",
-	-- 		symbol = "│",
-	-- 		options = { try_as_border = true },
-	-- 		draw = {
-	-- 			delay = 0,
-
-	-- 			-- Animation rule for scope's first drawing. A function which, given
-	-- 			-- next and total step numbers, returns wait time (in ms). See
-	-- 			-- |MiniIndentscope.gen_animation| for builtin options. To disable
-	-- 			-- animation, use `require('mini.indentscope').gen_animation.none()`.
-	-- 			-- animation = --<function: implements constant 20ms between steps>,
-
-	-- 			-- Whether to auto draw scope: return `true` to draw, `false` otherwise.
-	-- 			-- Default draws only fully computed scope (see `options.n_lines`).
-	-- 			predicate = function(scope)
-	-- 				return not scope.body.is_incomplete
-	-- 			end,
-
-	-- 			-- Symbol priority. Increase to display on top of more symbols.
-	-- 			priority = 2,
-	-- 		},
-	-- 	},
-	-- },
 }

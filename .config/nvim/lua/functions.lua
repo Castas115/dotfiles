@@ -44,12 +44,7 @@ local function write_current_day()
 	vim.api.nvim_win_set_cursor(0, { 4, 0 })
 end
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'md',
-  callback = function()
-  end
-})
-		vim.keymap.set("n", "<leader>td", write_current_day, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>td", write_current_day, { noremap = true, silent = true, desc = "Insert current day header" })
 
 local function toggle_checkbox()
 	-- Get checkbox_cycle from global (configured in lua/plugins/markdown.lua)
@@ -77,16 +72,6 @@ local function toggle_checkbox()
 			return
 		end
 	end
-
-  -- -- Check if the line starts with a bullet or "- ", and remove it
-  -- local updated_line = line:gsub("^%s*[-*]%s*", "", 1)
-  -- -- Update the line
-  -- vim.api.nvim_set_current_line(updated_line)
-  -- -- Move the cursor back to its original position
-  -- vim.api.nvim_win_set_cursor(0, { cursor[1], #updated_line })
-  -- -- Insert the checkbox
-  -- vim.api.nvim_put({ "- [ ] " }, "c", true, true)
-	-- vim.api.nvim_win_set_cursor(0, cursor_pos)
 end
 
 vim.keymap.set({"n","i","v"}, "<A-c>", toggle_checkbox, { noremap = true, silent = true, desc = "Toggle checkbox"})
@@ -185,7 +170,7 @@ vim.keymap.set("n", "<leader>tx", function()
   -- (B) Validate that it's a task bullet
   local bullet_line = lines[start_line + 1]
   if not bullet_line:match("^%s*%- %[[x ]%]") then
-    print("Not a task bullet: no action taken.")
+    vim.notify("Not a task bullet", vim.log.levels.WARN)
     vim.cmd("loadview")
     return
   end
