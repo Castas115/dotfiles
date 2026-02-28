@@ -6,11 +6,6 @@ return {
 		"echasnovski/mini.icons",
 	},
 	opts = {
-		-- lazygit = {
-		-- 	theme = {
-		-- 		selectedLineBgColor = { bg = "CursorLine" },
-		-- 	},
-		-- },
 		notifier = {
 			enabled = true,
 			top_down = false, -- place notifications from top to bottom
