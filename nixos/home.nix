@@ -1,6 +1,9 @@
 { config, pkgs, claude-code-nix, wiremix, ... }:
 
 {
+	imports = [
+		./modules/lsp.nix
+	];
 	home.username = "jon";
 	home.homeDirectory = "/home/jon";
 
