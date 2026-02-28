@@ -55,6 +55,7 @@ return {
 			"marksman",
 			"nil_ls",
 			"phpactor",
+			"tinymist",
 		}
 
 		-- Configure all servers with default capabilities
