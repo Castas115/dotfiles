@@ -31,6 +31,46 @@ abbr sd 'stow . -d ~/dotfiles'
 
 abbr vpn 'sudo openvpn --config ~/.ssh/vpn/jon.ovpn'
 
+alias cl    'claude -c'
+
+alias k    'kubectl'
+alias ka   'kubectl apply -f'
+alias kc   'kubectx'
+alias kns  'kubens'
+
+# get resources
+alias kg    'kubectl get'
+alias kga   'kubectl get all'
+alias kgpo  'kubectl get pods'
+alias kgpow 'kubectl get pods -o wide'
+alias kgd   'kubectl get deployments'
+alias kgs   'kubectl get services'
+alias kgn   'kubectl get nodes -o wide'
+alias kgns  'kubectl get namespaces'
+alias kgi   'kubectl get ingress'
+alias kgcm  'kubectl get configmaps'
+alias kgsec 'kubectl get secrets'
+alias kgpv  'kubectl get pv'
+alias kgpvc 'kubectl get pvc'
+alias kgev  'kubectl get events --sort-by=.lastTimestamp'
+alias kgrs  'kubectl get replicasets'
+alias kgss  'kubectl get statefulsets'
+alias kgds  'kubectl get daemonsets'
+alias kgj   'kubectl get jobs'
+alias kgcj  'kubectl get cronjobs'
+
+# describe/logs/exec
+alias kd   'kubectl describe'
+alias kdel 'kubectl delete'
+alias kl   'kubectl logs -f'
+alias ke   'kubectl exec -it'
+
+# context/info
+alias ktx  'kubectl config get-contexts'
+alias ktop 'kubectl top'
+alias ktopn 'kubectl top nodes'
+alias ktopp 'kubectl top pods'
+
 atuin init fish| source
 zoxide init fish --no-cmd| source
 
