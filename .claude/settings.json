@@ -36,7 +36,9 @@
       "Bash(az acr *)",
       "Bash(az webapp *)",
       "Bash(az functionapp *)",
-      "Task"
+      "Task",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__take_snapshot"
     ]
   },
   "hooks": {
