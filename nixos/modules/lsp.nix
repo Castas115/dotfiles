@@ -27,6 +27,9 @@
     yaml-language-server
     taplo # TOML
     marksman # Markdown
+    typst
+    tinymist # Typst LSP
+    websocat # for typst-preview
     actionlint  # GitHub Actions linter
     dockerfile-language-server-nodejs
     terraform-ls
