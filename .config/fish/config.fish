@@ -41,7 +41,7 @@ alias kns  'kubens'
 # get resources
 alias kg    'kubectl get'
 alias kga   'kubectl get all'
-alias kgpo  'kubectl get pods'
+abbr kgpo  'kubectl get pods'
 alias kgpow 'kubectl get pods -o wide'
 alias kgd   'kubectl get deployments'
 alias kgs   'kubectl get services'
@@ -73,6 +73,7 @@ alias ktopp 'kubectl top pods'
 
 atuin init fish| source
 zoxide init fish --no-cmd| source
+kubectl completion fish | source
 
 if not test -d ~/.tmux/plugins/tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
