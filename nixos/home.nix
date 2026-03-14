@@ -114,6 +114,8 @@
 		minikube
 		terraform
 		uv ## Atlassian MCP
+		pandoc 
+		texliveSmall
 	];
 
 }
