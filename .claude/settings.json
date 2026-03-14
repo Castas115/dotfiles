@@ -41,6 +41,10 @@
       "mcp__chrome-devtools__take_snapshot"
     ]
   },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "atlassian"
+  ],
   "hooks": {
     "PreToolUse": [
       {
@@ -86,6 +90,9 @@
     "type": "command",
     "command": "/home/jon/.spacecake/.app/hooks/statusline.sh"
   },
+  "enabledPlugins": {
+    "chrome-devtools-mcp@chrome-devtools-plugins": true
+  },
   "spinnerVerbs": {
     "mode": "replace",
     "verbs": [
@@ -97,7 +104,6 @@
       "Pionexing"
     ]
   },
-  "enabledPlugins": {
-    "chrome-devtools-mcp@chrome-devtools-plugins": true
-  }
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
 }

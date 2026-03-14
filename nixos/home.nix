@@ -113,6 +113,7 @@
 		k9s
 		minikube
 		terraform
+		uv ## Atlassian MCP
 	];
 
 }
