@@ -1,7 +1,71 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
+  # Boot
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.evdi ];
+    initrd.kernelModules = [ "evdi" ];
+  };
+
+  # Display
+  services.xserver.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  programs.dconf.enable = true;
+  services.displayManager.defaultSession = "hyprland";
+
+  services.xserver.xkb = {
+    layout = "us,es";
+    options = "caps:none,grp:caps_toggle";
+  };
+
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "jon";
+
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
+
+  # Audio
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  # Programs
+  programs.firefox.enable = true;
+  programs.hyprland.enable = true;
+  services.printing.enable = true;
+  services.flatpak.enable = true;
+  hardware.keyboard.zsa.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    kanata
+    hyprland
+    appimage-run
+  ];
+
+  systemd.services.kanata = {
+    description = "Kanata keyboard remapper";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.kanata}/bin/kanata --cfg /home/jon/.config/kanata/kanata.kbd";
+      Restart = "on-failure";
+      RestartSec = 3;
+    };
+  };
+
+  # Home-manager GUI packages
+  home-manager.users.jon.home.packages = with pkgs; [
     vivaldi
     chromium
     copyq

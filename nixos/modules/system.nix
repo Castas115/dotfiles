@@ -7,9 +7,6 @@
     dhcpcd.extraConfig = "nohook resolv.conf";
   };
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -28,29 +25,6 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  programs.dconf.enable = true;
-  services.displayManager.defaultSession = "hyprland";
-
-  services.xserver.xkb = {
-    layout = "us,es";
-    options = "caps:none,grp:caps_toggle";
-  };
-
-  services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
   users.users.jon = {
     isNormalUser = true;
     description = "jon";
@@ -58,28 +32,12 @@
     packages = with pkgs; [];
   };
 
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "jon";
-
-  systemd.services."getty@tty1".enable = false;
-  systemd.services."autovt@tty1".enable = false;
-
-  programs.firefox.enable = true;
-  programs.hyprland.enable = true;
-
   programs.git = {
     enable = true;
     config = {
       user.name = "Jon";
       user.email = "joncastas@gmail.com";
       init.defaultBranch = "main";
-    };
-  };
-
-  boot = {
-    extraModulePackages = [ config.boot.kernelPackages.evdi ];
-    initrd = {
-      kernelModules = [ "evdi" ];
     };
   };
 
@@ -95,25 +53,10 @@
     wget
     git
     gh
-    nerd-fonts.jetbrains-mono
     gcc
-    kanata
-    hyprland
-    appimage-run
   ];
 
   virtualisation.docker.enable = true;
-
-  systemd.services.kanata = {
-    description = "Kanata keyboard remapper";
-    wantedBy = [ "multi-user.target" ];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.kanata}/bin/kanata --cfg /home/jon/.config/kanata/kanata.kbd";
-      Restart = "on-failure";
-      RestartSec = 3;
-    };
-  };
 
   systemd.services.gitsync = {
     description = "Auto-sync git repositories on file changes";
@@ -131,7 +74,4 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
-
-  services.flatpak.enable = true;
-  hardware.keyboard.zsa.enable = true;
 }
