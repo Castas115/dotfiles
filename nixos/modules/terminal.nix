@@ -45,7 +45,6 @@
     ripgrep
     btop
     fastfetch
-    lynx
     bc
     sshfs
     dig
@@ -54,7 +53,6 @@
     sqlite
     inotify-tools
     bluetui
-    impala
     rclone
   ];
 }

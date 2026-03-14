@@ -22,8 +22,6 @@
     brightnessctl
     playerctl
     remmina
-    anydesk
-    teams-for-linux
     wl-clipboard
     dbeaver-bin
   ];

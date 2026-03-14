@@ -55,9 +55,6 @@
     # Tools
     claude-code-nix.packages.${pkgs.system}.default
     wiremix.packages.${pkgs.system}.default
-    bruno
-    vscode
-    mermaid-cli
     pandoc
     texliveSmall
   ];
