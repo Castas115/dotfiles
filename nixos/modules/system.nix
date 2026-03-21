@@ -54,6 +54,7 @@
     git
     gh
     gcc
+	zstd
   ];
 
   virtualisation.docker.enable = true;
