@@ -88,5 +88,6 @@
     remmina
     wl-clipboard
     dbeaver-bin
+    popsicle
   ];
 }
