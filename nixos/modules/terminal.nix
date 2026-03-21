@@ -54,5 +54,7 @@
     inotify-tools
     bluetui
     rclone
+	pandoc
+	glab
   ];
 }
