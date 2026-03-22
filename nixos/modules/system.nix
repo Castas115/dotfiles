@@ -38,6 +38,7 @@
       user.name = "Jon";
       user.email = "joncastas@gmail.com";
       init.defaultBranch = "main";
+      credential."https://github.com".helper = "!gh auth git-credential";
     };
   };
 
