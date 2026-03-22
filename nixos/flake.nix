@@ -8,9 +8,11 @@
     claude-code-nix.url = "github:sadjow/claude-code-nix";
     wiremix.url = "github:tsowell/wiremix";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, claude-code-nix, wiremix, nixos-hardware, ... }:
+  outputs = { self, nixpkgs, home-manager, claude-code-nix, wiremix, nixos-hardware, nixos-generators, ... }:
     let
       mkHost = { hostname, system, nixosModules ? [], homeModules ? [] }: nixpkgs.lib.nixosSystem {
         inherit system;
@@ -58,6 +60,35 @@
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
         homeModules = [ ./modules/terminal.nix ];
+      };
+
+      packages.aarch64-linux.sdcard = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        modules = [
+          ./hosts/raspi/configuration.nix
+          ./modules/system.nix
+          nixos-hardware.nixosModules.raspberry-pi-4
+          home-manager.nixosModules.home-manager
+          {
+            users.users.jon.initialPassword = "changeme";
+          }
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.jon = {
+                imports = [ ./modules/terminal.nix ];
+                home.username = "jon";
+                home.homeDirectory = "/home/jon";
+                programs.git.enable = true;
+                home.stateVersion = "25.05";
+              };
+              backupFileExtension = "backup";
+              extraSpecialArgs = { inherit claude-code-nix wiremix; };
+            };
+          }
+        ];
       };
     };
 }
