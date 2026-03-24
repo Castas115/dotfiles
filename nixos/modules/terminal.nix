@@ -56,5 +56,6 @@
     rclone
 	pandoc
 	glab
+	television
   ];
 }
