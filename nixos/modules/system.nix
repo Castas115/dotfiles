@@ -74,6 +74,14 @@
     path = with pkgs; [ git inotify-tools bash ];
   };
 
+  security.sudo.extraRules = [{
+    users = [ "jon" ];
+    commands = [{
+      command = "/etc/profiles/per-user/jon/bin/openvpn";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
 }
