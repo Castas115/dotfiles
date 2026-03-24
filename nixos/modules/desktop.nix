@@ -90,5 +90,6 @@
     wl-clipboard
     dbeaver-bin
     popsicle
+	libnotify
   ];
 }
