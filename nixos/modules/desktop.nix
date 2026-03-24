@@ -76,6 +76,7 @@
     waybar
     wofi
     keepassxc
+    libsecret
     blueberry
     kanshi
     swaynotificationcenter
