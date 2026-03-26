@@ -52,6 +52,7 @@
 
     # Databases
     mariadb
+    postgresql
 
     # Tools
     claude-code-nix.packages.${pkgs.system}.default
