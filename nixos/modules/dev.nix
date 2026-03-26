@@ -39,6 +39,7 @@
     uv
 
     # Cloud & infrastructure
+    awscli2
     azure-cli
     terraform
     kubectl
