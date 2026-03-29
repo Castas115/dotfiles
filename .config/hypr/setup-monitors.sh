@@ -14,7 +14,9 @@ fi
 
 if [ -n "$MON1" ]; then
 	hyprctl keyword workspace "2,name:F,monitor:$MON1,defaultName:F 󰈹"
+	hyprctl dispatch renameworkspace 2 "F 󰈹"
 	hyprctl keyword workspace "4,name:D,monitor:$MON1,defaultName:D "
+	hyprctl dispatch renameworkspace 4 "D "
 	hyprctl keyword workspace "name:A,monitor:$MON1"
 	hyprctl keyword workspace "name:Q,monitor:$MON1"
 	hyprctl keyword workspace "name:G,monitor:$MON1"
@@ -33,6 +35,7 @@ fi
 
 if [ -n "$MON2" ]; then
 	hyprctl keyword workspace "3,name:C,monitor:$MON2,defaultName:C 󰊻"
+	hyprctl dispatch renameworkspace 3 "C 󰊻"
 	hyprctl keyword workspace "name:V,monitor:$MON2"
 	hyprctl keyword workspace "name:E,monitor:$MON2"
 	hyprctl keyword workspace "name:R,monitor:$MON2"
