@@ -45,6 +45,7 @@
     kubectl
     k9s
     minikube
+	kcat
 
     # Containers
     docker
