@@ -7,6 +7,10 @@
     dhcpcd.extraConfig = "nohook resolv.conf";
   };
 
+  networking.extraHosts = ''
+    10.0.20.10 kafka-bhw2hurr.1938d7a4-bedd-4b8e-8fe3-a19171396b27.privatelink.spaincentral.azmk8s.io
+  '';
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -58,6 +62,7 @@
 	zstd
   ];
 
+  services.udisks2.enable = true;
   virtualisation.docker.enable = true;
 
   systemd.services.gitsync = {
