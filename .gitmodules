@@ -1,0 +1,3 @@
+[submodule "corne_keyboard"]
+	path = corne_keyboard
+	url = https://github.com/Castas115/corne_keyboard.git
