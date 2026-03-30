@@ -4,11 +4,14 @@
 )
 
 (defsrc
-  esc  1    2    3    4    5     6    7    8    9    0    -    =    bspc
-  tab q    w    e    r    t     y    u    i    o    p    [    ]    ret
-  caps a    s    d    f    g     h    j    k    l    ;    '    \
-  lsft z    x    c    v    b     n    m    ,    .    /    rsft		del
-  lctl lmet lalt             spc           ralt ContextMenu
+  esc lsft lctl lmet lalt ralt ContextMenu rsft
+  1 2 3 4 5 6 7 8 9 0 - =
+  [ ] ' \
+
+  q    w    e    r    t       y    u    i    o    p
+  a    s    d    f    g       h    j    k    l    ;
+  z    x    c    v    b       n    m    ,    .    /
+            tab  spc  caps    del  bspc ret
 )
 
 (defvar
@@ -20,9 +23,9 @@
   w (tap-hold $tt $ht w (layer-while-held nums_icons))
   o (tap-hold $tt $ht o (layer-while-held nums_icons))
   e (tap-hold $tt $ht e (layer-while-held num_brackets))
-  e2 (tap-hold $tt $ht e (layer-while-held num_brackets2))
   t (tap-hold $tt $ht t (layer-while-held macros))
   del (tap-hold $tt $ht del (layer-while-held fkeys))
+  tab (tap-hold $tt $ht tab (layer-while-held fkeys))
 
   a (tap-hold $tt $ht a lalt)
   s (tap-hold $tt $ht s lmet)
@@ -41,66 +44,74 @@
   c (tap-hold $tt $ht c (multi lmet lctrl))
   v (tap-hold $tt $ht v (multi lmet lsft))
   b (tap-hold $tt $ht b (multi lmet lalt))
-  
+
   m (tap-hold $tt $ht m ralt)
   n (tap-hold $tt $ht n (layer-while-held emojis))
 
   A-C (tap-hold $tt $ht ret (multi lmet lctl))
   A-S (tap-hold $tt $ht del (multi lmet lsft))
-  spc_Meh (tap-hold $tt $ht spc (multi lalt lctl lsft))
+  spc (tap-hold $tt $ht spc (multi lalt lctl lsft))
   arrs (tap-hold $tt $ht bspc (layer-while-held arrows))
-  arrs2 (tap-hold $tt $ht bspc (layer-while-held arrows2))
+  esc (tap-hold $tt $ht esc (multi lmet lsft))
 
   ret_altgr (tap-hold $tt $ht ret ralt)
 )
 
 (deflayer base
-  caps 1    2    3    4    5        6    7    8    9    0    -    =    @arrs
-  esc  q    @w   @e   r    @t       y    u    i    @o   p    \   [    ret
-  tab  @a   @s   @d   @f   @g       h    @j   @k   @l   @;    '   \
-  lsft @z   @x   @c   @v   @b       @n   @m    ,    .    /    rsft		@del
-  @ctl @A-C @A-S            @spc_Meh          @arrs @ret_altgr
+  tab  lsft @ctl @A-C @A-S @arrs @ret_altgr rsft
+  _ _ _ _ _ _ _ _ _ _ _ _
+  \ [ ' \
+  q    @w   @e   r    @t       y    u    i    @o   p
+  @a   @s   @d   @f   @g       h    @j   @k   @l   @;
+  @z   @x   @c   @v   @b       @n   @m   ,    .    /
+            @esc @spc @tab     @del @arrs ret
 )
 
 (deflayer arrows
-  F1   F2   F3   F4   F5   F6     F7   F8   F9   F10  F11   F12  _    XX
-  F7   F8   F9   F10  F11  F12    F1   F2   F3   F4   F5    F6   _    _
-  _    @a   @s   @d   @f   @g     _    left down up   right _    _
-  _    @z   @x   @c   @v   @b     _    home end  pgdn pgup  _         _
-  _    _    _                  _            XX   _
-)
+  _ _ _ _ _ XX _ _
+  _ _ _ _ _ _  _ _ _  _  _  _
+  _ _ _ _
 
-(deflayer arrows2
-  F1   F2   F3   F4   F5   F6     F7   F8   F9   F10  F11  F12  _    XX
-  F7   F8   F9   F10  F11  F12    F1   F2   F3   F4   F5   F6   _    _
-  _    @a   @s   @d   @f   @g     _    _    left down up   right _
-  _    @z   @x   @c   @v   @b     _    _    home end  pgdn pgup      _
-  _    _    _                  _            XX   _
+  _    _    _    _    _        _    _    _    _    _
+  @a   @s   @d   @f   @g       _    left down up   right
+  @z   @x   @c   @v   @b       _    home end  pgdn pgup
+            _    _    _        _    XX   _
 )
 
 (deflayer nums_icons
-  _    _    _    _    _    _     _    _    _    _    _    _    _    0
-  _    S-4  XX   S--  S-2  _     7    8    9    XX   =    _    _    _
-  _    S-5  _    S-9  S-0  _     4    5    6    -    +    _    _
-  _    _    _    S-3  S-8  _     1    2    3    .    /    _         _
-  _    _    _                 _            0    _
+  _ _ _ _ _ 0 _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _
+
+  S-4  XX   S--  S-2  _        7    8    9    XX   =
+  S-5  _    S-9  S-0  _        4    5    6    -    +
+  _    _    S-3  S-8  _        1    2    3    .    /
+            _    _    _        _    0    _
 )
 
 (deflayer num_brackets
-  _    _    _    _    _    _     _    _    _    _    _    _    _    0
-  _    `    S-{  XX   S-}  _     7    8    9    XX   =    _    _    _
-  _    S-6  [    _    ]    _     4    5    6    -    +    _    _
-  _    z    S-7  S-1  S-`  _     1    2    3    .    /    _         _
-  _    _    _                 _            0    _
+  _ _ _ _ _ 0 _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _
+
+  `    S-{  XX   S-}  _        7    8    9    XX   =
+  S-6  [    _    ]    _        4    5    6    -    +
+  z    S-7  S-1  S-`  _        1    2    3    .    /
+            _    _    _        _    0    _
 )
 
-(deflayer num_brackets2
-  _    _    _    _    _    _     _    _    _    _    _    _    _    0
-  _    `    S-{  XX   S-}  _     _    7    8    9    =    _    _    _
-  _    S-6  [    _    ]    _     _    4    5    6    -    +    _
-  _    z    S-7  S-1  S-`  _     _    1    2    3    .    /         _
-  _    _    _                 _            0    _
+(deflayer fkeys
+  _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _
+
+  F9   F10  F11  F12  _        _    _    _    _    _
+  F1   F2   F3   F4   _        _    _    _    _    _
+  F5   F6   F7   F8   _        _    _    _    _    _
+            _    _    _        _    _    _
 )
+
+
 
 (defalias
   ml (movemouse-accel-left  2 500 1 3)
@@ -115,11 +126,14 @@
 )
 
 (deflayer mouse
-  _    _    _    _      _      _      _    _    _    _    _    _    _    _
-  _    _    _    C-pgup C-pgdn _      _    @wl  @wd  @wu  @wr  _    _    _
-  _    _    _    🖰4    🖰5    XX     _    @ml  @md  @mu  @mr  _    _
-  _    _    _    _      _      _      _    _    🖰1  🖰2  🖰3  _         _
-  _    _    _                  _             _    _
+  _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _
+
+  _    _    C-pgup C-pgdn _      _    @wl  @wd  @wu  @wr
+  _    _    🖰4   🖰5   XX      _    @ml  @md  @mu  @mr
+  _    _    _     _     _       _    _    🖰1  🖰2  🖰3
+            _     _     _       _    _    _
 )
 
 (defalias
@@ -139,19 +153,14 @@
 )
 
 (deflayer macros
-  _    _    _    _    _    _      _    _    _    _    _    _    _    _
-  _    @dr2 @dr3 @dp3 @dp2 XX     _    _    _    _    _    _    _    _
-  _    @s1x @dr1 @dp1 @dp0 @dr0   _    _    _    _    _    _    _
-  _    _    @dr5 @dp5 @dp4 @dr4   _    _    _    _    _    _         _
-  _    _    _                 _             _    _
-)
+  _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _
 
-(deflayer fkeys
-  _    _    _    _    _    _      _    _    _    _    _    _    _    _
-  _    F9   F10  F11  F12  _      _    _    _    _    _    _    _    _
-  _    F1   F2   F3   F4   _      _    _    _    _    _    _    _
-  _    F5   F6   F7   F8   _      _    _    _    _    _    _         _
-  _    _    _                 _             _    _
+  @dr2 @dr3 @dp3 @dp2 XX       _    _    _    _    _
+  @s1x @dr1 @dp1 @dp0 @dr0     _    _    _    _    _
+  _    @dr5 @dp5 @dp4 @dr4     _    _    _    _    _
+            _    _    _        _    _    _
 )
 
 (defalias
@@ -196,23 +205,29 @@
   🤷 (unicode 🤷)
   🤦 (unicode 🤦)
 
-;; 😀 😄 🙂 🙃 😊 🥰 🥲 🤪 🫢 🫣 🤫 🫡 🤐 🤨 😐 😑 😶 🙄 😬 😮‍💨 😪 🤤 🤮 🥴 😵 😵‍💫 
+;; 😀 😄 🙂 🙃 😊 🥰 🥲 🤪 🫢 🫣 🤫 🫡 🤐 🤨 😐 😑 😶 🙄 😬 😮‍💨 😪 🤤 🤮 🥴 😵 😵‍💫
 ;; 🤯 🤓 🧐 😕 😟 🙁 😯 😦 😧 😨 😰 😥 😢 😱 😣 😓 😩 🥱 😤 🙈 🙉 🙊 💞 💕 💦 🤌
 ;; 🤏 🤞 🫰 🤟 🤘 🤙 ✊ 👊 🤛 🤜 🙌 🫶 🤝 🙏 💅 🙇 👮 👼 🏳️‍🌈 🧨 🎉 🎊
 )
 
 (deflayer emojis
-  _    _    _    _    _    @✨    @🍑  @🍆  _    _    _    _    _    _
-  @🖕  @👍  @👌  @💪  @😅  @😉    @👿  @😈  @😇  @🤷  @🤦  @👏  @🫦  _
-  @🥹  @👀  @😭  @😎  @😂  @😳    @😘  @😚  @🤔  @🔥  @💀  @🤡  @💩
-  @🥺  @😌  @😔  @😏  @😒  @🥵    XX   @😡  @😠  @🤬  @😴  @🥳       _
-  _    _    _			       _            _    _
+  @🥹  @🥺  _    _    _    _    _    @🥳
+  _    _    _    _    @✨  @🍑  @🍆  _    _    _    _    _
+  @👏  @🫦  @🤡  @💩
+
+  @👍  @👌  @💪  @😅  @😉       @👿  @😈  @😇  @🤷  @🤦
+  @👀  @😭  @😎  @😂  @😳       @😘  @😚  @🤔  @🔥  @💀
+  @😌  @😔  @😏  @😒  @🥵       XX   @😡  @😠  @🤬  @😴
+            @🖕  _    _         _    _    _
 )
 
 (deflayer copy
-  _    _    _    _    _    _      _    _    _    _    _    _    _    _
-  _    _    _    _    _    _      _    _    _    _    _    _    _    _
-  _    _    _    _    _    _      _    _    _    _    _    _    _
-  _    _    _    _    _    _      _    _    _    _    _    _         _
-  _    _    _                 _             _    _
+  _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _
+
+  _    _    _    _    _        _    _    _    _    _
+  _    _    _    _    _        _    _    _    _    _
+  _    _    _    _    _        _    _    _    _    _
+            _    _    _        _    _    _
 )
