@@ -104,5 +104,7 @@
     dbeaver-bin
     popsicle
 	libnotify
+    # warpd
+	wl-kbptr
   ];
 }

@@ -57,5 +57,6 @@
 	pandoc
 	glab
 	television
+	inetutils
   ];
 }
