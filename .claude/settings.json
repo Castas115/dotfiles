@@ -91,7 +91,8 @@
     "command": "/home/jon/.spacecake/.app/hooks/statusline.sh"
   },
   "enabledPlugins": {
-    "chrome-devtools-mcp@chrome-devtools-plugins": true
+    "chrome-devtools-mcp@chrome-devtools-plugins": true,
+    "lua-lsp@claude-plugins-official": true
   },
   "spinnerVerbs": {
     "mode": "replace",
@@ -104,6 +105,6 @@
       "Pionexing"
     ]
   },
-  "skipDangerousModePermissionPrompt": true,
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "skipDangerousModePermissionPrompt": true
 }
