@@ -42,6 +42,20 @@
   # Programs
   programs.firefox.enable = true;
   programs.hyprland.enable = true;
+
+  # XDG portal — explicitly route the Settings interface to gtk backend
+  # so Chromium/Electron apps can detect dark mode on Hyprland.
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      common.default = [ "gtk" ];
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+      };
+    };
+  };
   services.printing.enable = true;
   services.flatpak.enable = true;
   hardware.keyboard.zsa.enable = true;
