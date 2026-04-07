@@ -18,6 +18,7 @@ surface0 = "#313244"
 surface1 = "#45475a"
 surface2 = "#585b70"
 sapphire = "#74c7ec"
+git_color = "#FF8A65"
 
 # Status
 dirty = "#f38ba8"

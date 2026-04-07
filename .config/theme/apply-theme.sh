@@ -45,6 +45,8 @@ mkdir -p "$OUT"
 # Written directly to app config paths (gitignored) — enables live reload
 apply_template "$TEMPLATES/ghostty.conf.tpl"     "$HOME/.config/ghostty/config"
 apply_template "$TEMPLATES/waybar.css.tpl"       "$HOME/.config/waybar/style.css"
+apply_template "$TEMPLATES/git_status.sh.tpl"    "$HOME/.config/tmux/scripts/git_status.sh"
+chmod +x "$HOME/.config/tmux/scripts/git_status.sh"
 
 # Written to theme/generated/ — apps source/import from here
 apply_template "$TEMPLATES/tmux-theme.conf.tpl"  "$OUT/tmux.conf"
@@ -72,22 +74,26 @@ done
 hyprctl keyword misc:background_color "rgb(${C[background]#\#})" &>/dev/null || true
 
 # GTK apps (Vivaldi, GNOME apps, etc.)
+# Only set color-scheme — setting gtk-theme in the same call triggers an extra
+# portal signal that confuses Chromium's live dark-mode listener.
 gsettings set org.gnome.desktop.interface color-scheme "prefer-${C[mode]}" 2>/dev/null || true
-gsettings set org.gnome.desktop.interface gtk-theme "Adwaita$([ "${C[mode]}" = "dark" ] && echo "-dark" || echo "")" 2>/dev/null || true
 mkdir -p "$HOME/.config/gtk-3.0"
 cat > "$HOME/.config/gtk-3.0/settings.ini" <<GTKEOF
 [Settings]
 gtk-application-prefer-dark-theme=$([ "${C[mode]}" = "dark" ] && echo "1" || echo "0")
-gtk-theme-name=Adwaita$([ "${C[mode]}" = "dark" ] && echo "-dark" || echo "")
 GTKEOF
 
 # Waybar: SIGUSR2 reloads CSS
 pkill -SIGUSR2 waybar 2>/dev/null || true
 
-# Tmux: source new theme vars, then re-run catppuccin plugin to regenerate format strings
+# Tmux: source new theme vars, re-run catppuccin plugin to regenerate format
+# strings, then re-source the main tmux.conf so the status-right appends
+# (git_status, continuum, resurrect cleanup) are re-applied on top of
+# catppuccin's generated status line.
 if tmux list-sessions &>/dev/null 2>&1; then
     tmux source-file "$HOME/.config/theme/generated/tmux.conf" \; \
-         run-shell "$HOME/.config/tmux/plugins/catppuccin-tmux/catppuccin.tmux" &
+         run-shell "$HOME/.config/tmux/plugins/catppuccin-tmux/catppuccin.tmux" \; \
+         source-file "$HOME/.config/tmux/tmux.conf" &
 fi
 
 wait 2>/dev/null
