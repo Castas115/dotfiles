@@ -1,0 +1,51 @@
+# Catppuccin Latte — high contrast (pure white background)
+
+mode = "light"
+flavour = "latte"
+opacity = "1.0"
+
+# Core
+foreground = "#4c4f69"
+background = "#ffffff"
+cursor = "#dc8a78"
+cursor_text = "#ffffff"
+selection_fg = "#4c4f69"
+selection_bg = "#acb0be"
+
+# UI surfaces
+base = "#eff1f5"
+surface0 = "#ccd0da"
+surface1 = "#bcc0cc"
+surface2 = "#acb0be"
+sapphire = "#209fb5"
+
+# Status
+dirty = "#d20f39"
+changes = "#866500"
+
+# ANSI palette
+color0 = "#5c5f77"
+color1 = "#d20f39"
+color2 = "#40a02b"
+color3 = "#df8e1d"
+color4 = "#1e66f5"
+color5 = "#ea76cb"
+color6 = "#179299"
+color7 = "#acb0be"
+color8 = "#6c6f85"
+color9 = "#d20f39"
+color10 = "#40a02b"
+color11 = "#df8e1d"
+color12 = "#1e66f5"
+color13 = "#ea76cb"
+color14 = "#179299"
+color15 = "#bcc0cc"
+
+# Lualine
+lualine_normal = "#818596"
+lualine_insert = "#1e66f5"
+lualine_visual = "#40a02b"
+lualine_replace = "#df8e1d"
+lualine_inactive = "#9ca0b0"
+lualine_bg = "#e6e9ef"
+lualine_text = "#4c4f69"

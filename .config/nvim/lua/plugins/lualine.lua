@@ -2,47 +2,20 @@ local function get_buffer_count()
 	return #vim.fn.getbufinfo({ buflisted = 1 })
 end
 
-local colors = {
-	color9 = "#3e445e",
+local function load_theme()
+	local path = vim.fn.expand("~/.config/theme/generated/lualine.lua")
+	local f = loadfile(path)
+	if f then return f() end
+	return "auto"
+end
 
-	normal = "#818596",
-	insert = "#84a0c6",
-	visual = "#b4be82",
-	replace = "#e2a478",
-
-	background = "#16171f",
-	black = "#000000",
-	text = "#c6c8d1",
-}
-
-local custom_theme = {
-	normal = {
-		a = { fg = colors.black, bg = colors.normal, gui = "bold" },
-		b = { fg = colors.text, bg = colors.background },
-		c = { fg = colors.text, bg = colors.black },
-	},
-	insert = {
-		a = { fg = colors.black, bg = colors.insert, gui = "bold" },
-	},
-	visual = {
-		a = { fg = colors.black, bg = colors.visual, gui = "bold" },
-	},
-	replace = {
-		a = { fg = colors.black, bg = colors.replace, gui = "bold" },
-	},
-	inactive = {
-		a = { fg = colors.color9, bg = colors.black, gui = "bold" },
-		b = { fg = colors.color9, bg = colors.black },
-		c = { fg = colors.color9, bg = colors.black },
-	},
-}
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = custom_theme,
+				theme = load_theme(),
 				component_separators = "",
 				section_separators = "",
 				-- globalstatus = true,
