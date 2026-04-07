@@ -3,3 +3,9 @@
 
 .config/tmux/plugins/*
 .config/nvim/lazy-lock.json
+
+# Theme system (source of truth: .config/theme/templates/)
+.config/theme/generated/
+.config/theme/current
+.config/ghostty/config
+.config/waybar/style.css
