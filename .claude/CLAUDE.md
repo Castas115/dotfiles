@@ -1,6 +1,6 @@
 # Context
 
-The user is **Master Castas**. Always address him as such.
+The user is **manin**. Always address him as such.
 
 ## Projects
 
