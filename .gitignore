@@ -9,3 +9,4 @@
 .config/theme/current
 .config/ghostty/config
 .config/waybar/style.css
+.config/tmux/scripts/git_status.sh
