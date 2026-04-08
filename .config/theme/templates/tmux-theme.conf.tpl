@@ -19,3 +19,7 @@ set -g @catppuccin_application_icon "󰜎"
 set -g @catppuccin_status_modules_right "application"
 set -g @catppuccin_status_left_separator "█"
 set -g @catppuccin_status_right_separator "█"
+
+# Dim inactive panes to highlight the active one
+set -g window-style 'bg={{pane_inactive}}'
+set -g window-active-style 'bg={{background}}'
