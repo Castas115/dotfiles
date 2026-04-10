@@ -7,15 +7,15 @@ get_monitor_name() {
 if hyprctl monitors -j | jq -r '.[].description' | grep -q "LG Electronics LG ULTRAGEAR 306NTDV47282"; then
 	MON1=$(get_monitor_name "LG Electronics LG ULTRAGEAR 306NTDV47282")
 	MON2=$(get_monitor_name "Philips Consumer Electronics Company PHL 243V7 UK02128017955")
-elif hyprctl monitors -j | jq -r '.[].description' | grep -q "HP Inc. HP P24h G5 3CM3471MJB"; then
-	MON1=$(get_monitor_name "HP Inc. HP P24h G5 3CM3471MJB")
-	MON2=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R7B")
+elif hyprctl monitors -j | jq -r '.[].description' | grep -q "HP Inc. HP P24h G5 3CM5090R6G"; then
+	MON1=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R6G")
+	MON2=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R78")
 fi
 
 if [ -n "$MON1" ]; then
 	hyprctl keyword workspace "2,name:F,monitor:$MON1,defaultName:F 󰈹"
 	hyprctl dispatch renameworkspace 2 "F 󰈹"
-	hyprctl keyword workspace "4,name:D,monitor:$MON1,defaultName:D "
+	hyprctl keyword workspace "4,name:D,monitor:$MON1,defaultName:D "
 	hyprctl dispatch renameworkspace 4 "D "
 	hyprctl keyword workspace "name:A,monitor:$MON1"
 	hyprctl keyword workspace "name:Q,monitor:$MON1"

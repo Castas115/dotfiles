@@ -20,12 +20,12 @@ output "AU Optronics 0x70B3 0x0000FFA1"{
 	alias $HP_WORK
 }
 
-output "HP Inc. HP P24h G5 3CM3471MJB"{
+output "HP Inc. HP P24h G5 3CM5090R6G"{
 	mode 1920x1080@60
 	alias $WORK_L
 }
 
-output "HP Inc. HP P24h G5 3CM5090R7B"{
+output "HP Inc. HP P24h G5 3CM5090R78"{
 	mode 1920x1080@60
 	alias $WORK_R
 }
