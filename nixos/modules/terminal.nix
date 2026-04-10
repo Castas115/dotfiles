@@ -58,5 +58,6 @@
 	glab
 	television
 	inetutils
+	fzf
   ];
 }
