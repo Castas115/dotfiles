@@ -1,5 +1,4 @@
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
 
 keymap.set("n", "<leader>q", ":q!<CR>", { noremap = true, silent = true, desc = "Quit without saving" })
 keymap.set("n", "<M-q>", ":qa!<CR>", { noremap = true, silent = true, desc = "Quit all without saving" })
@@ -25,13 +24,6 @@ keymap.set('n', '<A-S-k>', ':resize +2<CR>', { noremap = true, silent = true, de
 keymap.set('n', '<A-S-l>', ':vertical resize +4<CR>', { noremap = true, silent = true, desc = "Increase width" })
 
 keymap.set('n', 'tq', '<Esc>:bdelete<CR>', { noremap = true, silent = true, desc = "Delete buffer" })
-keymap.set('n', 'tk', '<Esc>:bnext<CR>', { noremap = true, silent = true, desc = "Next buffer" })
-keymap.set('n', 'tj', '<Esc>:bprev<CR>', { noremap = true, silent = true, desc = "Previous buffer" })
-
-keymap.set('n', 'tn', '<Esc>:tabnew<CR>', { noremap = true, silent = true, desc = "New tab" })
-keymap.set('n', 'tc', '<Esc>:tabclose<CR>', { noremap = true, silent = true, desc = "Close tab" })
-keymap.set('n', 'th', '<Esc>:tabprevious<CR>', { noremap = true, silent = true, desc = "Previous tab" })
-keymap.set('n', 'tl', '<Esc>:tabnext<CR>', { noremap = true, silent = true, desc = "Next tab" })
 
 keymap.set('i', "jj", "<ESC>", { noremap = true, silent = true, desc = "Exit insert mode" })
 
@@ -59,17 +51,6 @@ keymap.set("n", "<A-s>", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ noremap = true, silent = true, desc = "Replace word under cursor" })
 
 keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
-
-keymap.set("n", "<A-r>", ":reg<CR>:put ", { silent = true, desc = "Show registers and put" })
-keymap.set("i", "<A-r>", "<C-r><C-r>", { silent = true, desc = "Insert from register" })
-keymap.set('n', '<A-S-r>', function()
-	vim.ui.input({ prompt = "Yank to register (a-z): " }, function(char)
-		if char and char:match("^[a-z]$") then
-			vim.cmd('normal! "' .. char .. 'yy')
-			vim.notify("Yanked line to @" .. char)
-		end
-	end)
-end, { noremap = true, silent = true, desc = "Yank line to register" })
 
 keymap.set("n", "<leader>.", "<C-w>v", { noremap = true, silent = true, desc = "Split vertically" })
 keymap.set("n", "<leader>,", "<C-w>s", { noremap = true, silent = true, desc = "Split horizontally" })

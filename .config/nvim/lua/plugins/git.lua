@@ -4,7 +4,6 @@ return {
 		version = "*",
 		config = function()
 			require("mini.diff").setup({
-				vim.keymap.set("n", "<leader>gD", ":lua MiniDiff.toggle_overlay()<CR>", { desc = "Git diff" }),
 				view = {
 					style = "sign", -- 'number' or 'sign',
 					signs = { add = "┃", change = "┃", delete = "▁" },
@@ -22,6 +21,7 @@ return {
 					goto_last = "]H",
 				},
 			})
+			vim.keymap.set("n", "<leader>gD", ":lua MiniDiff.toggle_overlay()<CR>", { desc = "Git diff" })
 		end,
 	},
 	{
@@ -50,9 +50,7 @@ return {
 			require("gitsigns").setup()
 
 			vim.keymap.set("n", "<leader>gd", ":Gitsigns diffthis<CR>", { desc = "Git Diff"})
-			-- vim.keymap.set("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "Git Blame line"})
 			vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Git Blame"})
-			
 		end,
 	},
 }
