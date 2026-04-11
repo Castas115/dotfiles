@@ -36,6 +36,7 @@
     python3
     python3Packages.pip
     python3Packages.scrapy
+    python3Packages.weasyprint
     uv
 
     # Cloud & infrastructure
