@@ -75,6 +75,10 @@ atuin init fish| source
 zoxide init fish --no-cmd| source
 kubectl completion fish | source
 
+function mkcd
+    mkdir -p $argv[1] && cd $argv[1]
+end
+
 if not test -d ~/.tmux/plugins/tpm
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 end
