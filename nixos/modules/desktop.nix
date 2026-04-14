@@ -115,6 +115,7 @@
     playerctl
     remmina
     wl-clipboard
+    tesseract
     dbeaver-bin
     popsicle
 	libnotify
