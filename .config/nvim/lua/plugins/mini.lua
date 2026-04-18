@@ -84,6 +84,13 @@ return {
 					go_out_plus = "H",
 				},
 			})
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "MiniFilesBufferCreate",
+				callback = function(args)
+					vim.keymap.set("n", "<C-s>", MiniFiles.synchronize, { buffer = args.data.buf_id, desc = "Save changes" })
+					vim.keymap.set("n", "<Esc>", MiniFiles.close, { buffer = args.data.buf_id, desc = "Close mini files" })
+				end,
+			})
 			vim.keymap.set("n", "<leader>E", "<cmd>lua MiniFiles.open()<CR>", { desc = "Toggle mini file explorer" }) -- toggle file explorer
 			vim.keymap.set("n", "<leader>e", function()
 				MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
