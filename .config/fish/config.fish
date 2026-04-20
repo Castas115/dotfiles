@@ -34,46 +34,46 @@ abbr vpn 'sudo openvpn --config ~/.ssh/vpn/jon.ovpn'
 alias cl    'claude -c'
 
 alias k    'kubectl'
-alias ka   'kubectl apply -f'
-alias kc   'kubectx'
-alias kns  'kubens'
+abbr ka   'k apply -f'
+abbr kc   'kubectx'
+abbr kns  'kubens'
 
 # get resources
-alias kg    'kubectl get'
-alias kga   'kubectl get all'
-abbr kgpo  'kubectl get pods'
-alias kgpow 'kubectl get pods -o wide'
-alias kgd   'kubectl get deployments'
-alias kgs   'kubectl get services'
-alias kgn   'kubectl get nodes -o wide'
-alias kgns  'kubectl get namespaces'
-alias kgi   'kubectl get ingress'
-alias kgcm  'kubectl get configmaps'
-alias kgsec 'kubectl get secrets'
-alias kgpv  'kubectl get pv'
-alias kgpvc 'kubectl get pvc'
-alias kgev  'kubectl get events --sort-by=.lastTimestamp'
-alias kgrs  'kubectl get replicasets'
-alias kgss  'kubectl get statefulsets'
-alias kgds  'kubectl get daemonsets'
-alias kgj   'kubectl get jobs'
-alias kgcj  'kubectl get cronjobs'
+abbr kg    'k get'
+abbr kga   'k get all'
+abbr kgpo  'k get pods'
+abbr kgpow 'k get pods -o wide'
+abbr kgd   'k get deployments'
+abbr kgs   'k get services'
+abbr kgn   'k get nodes -o wide'
+abbr kgns  'k get namespaces'
+abbr kgi   'k get ingress'
+abbr kgcm  'k get configmaps'
+abbr kgsec 'k get secrets'
+abbr kgev  'k get events --sort-by=.lastTimestamp'
+abbr kgrs  'k get replicasets'
+abbr kgss  'k get statefulsets'
+abbr kgds  'k get daemonsets'
+abbr kgj   'k get jobs'
+abbr kgcj  'k get cronjobs'
 
 # describe/logs/exec
-alias kd   'kubectl describe'
-alias kdel 'kubectl delete'
-alias kl   'kubectl logs -f'
-alias ke   'kubectl exec -it'
+abbr kd   'k describe'
+abbr kdel 'k delete'
+abbr kl   'k logs -f'
+abbr ke   'k exec -it'
 
 # context/info
-alias ktx  'kubectl config get-contexts'
-alias ktop 'kubectl top'
-alias ktopn 'kubectl top nodes'
-alias ktopp 'kubectl top pods'
+abbr ktx  'k config get-contexts'
+abbr ktop 'k top'
+abbr ktopn 'k top nodes'
+abbr ktopp 'k top pods'
+
+complete -c k -w kubectl
+kubectl completion fish | source
 
 atuin init fish| source
 zoxide init fish --no-cmd| source
-kubectl completion fish | source
 
 function mkcd
     mkdir -p $argv[1] && cd $argv[1]
