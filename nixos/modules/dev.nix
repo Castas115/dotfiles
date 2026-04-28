@@ -1,5 +1,8 @@
-{ pkgs, claude-code-nix, wiremix, ... }:
+{ pkgs, claude-code-nix, wiremix, nixpkgs-unstable, ... }:
 
+let
+  unstable = import nixpkgs-unstable { inherit (pkgs) system; config.allowUnfree = true; };
+in
 {
   home.packages = with pkgs; [
     # Language servers
@@ -41,7 +44,7 @@
 
     # Cloud & infrastructure
     awscli2
-    azure-cli
+    unstable.azure-cli
     terraform
     kubectl
     k9s

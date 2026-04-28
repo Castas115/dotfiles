@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     claude-code-nix.url = "github:sadjow/claude-code-nix";
@@ -12,7 +13,7 @@
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, claude-code-nix, wiremix, nixos-hardware, nixos-generators, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, claude-code-nix, wiremix, nixos-hardware, nixos-generators, ... }:
     let
       mkHost = { hostname, system, nixosModules ? [], homeModules ? [] }: nixpkgs.lib.nixosSystem {
         inherit system;
@@ -33,7 +34,7 @@
                 home.stateVersion = "25.05";
               };
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit claude-code-nix wiremix; };
+              extraSpecialArgs = { inherit claude-code-nix wiremix nixpkgs-unstable; };
             };
           }
         ] ++ nixosModules;
@@ -85,7 +86,7 @@
                 home.stateVersion = "25.05";
               };
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit claude-code-nix wiremix; };
+              extraSpecialArgs = { inherit claude-code-nix wiremix nixpkgs-unstable; };
             };
           }
         ];
