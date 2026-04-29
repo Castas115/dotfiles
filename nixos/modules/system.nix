@@ -43,8 +43,15 @@
       user.email = "joncastas@gmail.com";
       init.defaultBranch = "main";
       credential."https://github.com".helper = "!gh auth git-credential";
+      "includeIf.gitdir:~/projects/".path = "/etc/gitconfig-work";
+      "includeIf.gitdir:~/.ssh/".path = "/etc/gitconfig-work";
     };
   };
+
+  environment.etc."gitconfig-work".text = ''
+    [user]
+        email = jcastander@swapenergia.com
+  '';
 
   nix.gc = {
     automatic = true;
