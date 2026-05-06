@@ -46,6 +46,7 @@ in
     awscli2
     unstable.azure-cli
     terraform
+	vault
     kubectl
     k9s
     minikube
