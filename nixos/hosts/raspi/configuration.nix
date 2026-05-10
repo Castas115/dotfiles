@@ -16,4 +16,10 @@
     '';
   };
   users.users.jon.shell = pkgs.fish;
+
+  # ISP/router peers poorly with Cloudflare R2 (172.64.0.0/13) where Docker
+  # Hub stores blobs. Use Google's pull-through cache to bypass it.
+  virtualisation.docker.daemon.settings = {
+    registry-mirrors = [ "https://mirror.gcr.io" ];
+  };
 }
