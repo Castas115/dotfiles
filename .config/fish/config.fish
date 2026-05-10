@@ -72,8 +72,10 @@ abbr ktop 'k top'
 abbr ktopn 'k top nodes'
 abbr ktopp 'k top pods'
 
-complete -c k -w kubectl
-kubectl completion fish | source
+if command -q kubectl
+    complete -c k -w kubectl
+    kubectl completion fish | source
+end
 
 atuin init fish| source
 zoxide init fish --no-cmd| source
