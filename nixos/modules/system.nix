@@ -71,6 +71,7 @@
   ];
 
   services.udisks2.enable = true;
+  services.tailscale.enable = true;
   virtualisation.docker.enable = true;
 
   systemd.services.gitsync = {
