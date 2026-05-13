@@ -5,6 +5,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.loader.systemd-boot.extraEntries."ubuntu.conf" = ''
+    title   Ubuntu
+    efi     /EFI/ubuntu/shimx64.efi
+  '';
+
   boot = {
     extraModulePackages = [ config.boot.kernelPackages.evdi ];
     initrd.kernelModules = [ "evdi" ];
@@ -99,6 +104,7 @@
     hyprlock
     hypridle
     hyprshot
+    hyprsunset
     nwg-look
     waybar
     wofi
@@ -117,6 +123,7 @@
     wl-clipboard
     tesseract
     dbeaver-bin
+    lens
     popsicle
 	libnotify
     # warpd

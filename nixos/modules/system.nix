@@ -32,8 +32,32 @@
   users.users.jon = {
     isNormalUser = true;
     description = "jon";
-    extraGroups = [ "jon" "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "jon" "networkmanager" "wheel" "docker" "adbusers" "kvm" ];
     packages = with pkgs; [];
+  };
+
+  programs.adb.enable = true;
+
+  # Android SDK ships generic glibc binaries (aapt2, etc.) — nix-ld patches
+  # the dynamic linker at runtime so they can execute on NixOS.
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      glib
+      libGL
+      fontconfig
+      freetype
+      xorg.libX11
+      xorg.libXext
+      xorg.libXrender
+      xorg.libXtst
+      xorg.libXi
+      libxkbcommon
+      nss
+      nspr
+    ];
   };
 
   programs.git = {
