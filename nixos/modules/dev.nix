@@ -65,9 +65,5 @@ in
     wiremix.packages.${pkgs.system}.default
     pandoc
     texliveSmall
-
-    # Android dev (SDK + emulator managed inside Android Studio)
-    android-studio
-    jdk17
   ];
 }

@@ -43,14 +43,14 @@
       nixosConfigurations.work = mkHost {
         hostname = "work";
         system = "x86_64-linux";
-        nixosModules = [ ./modules/desktop.nix ./modules/gaming.nix ];
+        nixosModules = [ ./modules/desktop.nix ./modules/gaming.nix ./modules/android-dev.nix ];
         homeModules = [ ./modules/terminal.nix ./modules/dev.nix ];
       };
 
       nixosConfigurations.surf = mkHost {
         hostname = "surf";
         system = "x86_64-linux";
-        nixosModules = [ ./modules/desktop.nix ./modules/gaming.nix ];
+        nixosModules = [ ./modules/desktop.nix ./modules/gaming.nix ./modules/android-dev.nix ];
         homeModules = [ ./modules/terminal.nix ./modules/dev.nix ];
       };
 
