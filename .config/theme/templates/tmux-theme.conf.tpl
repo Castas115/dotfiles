@@ -7,8 +7,9 @@ set -g @catppuccin_window_left_separator " █"
 set -g @catppuccin_window_number_position "right"
 set -g @catppuccin_window_middle_separator " | "
 
-set -g @catppuccin_window_default_text "#{?window_zoomed_flag,#[fg={{sapphire}}] #[fg=default],}#{b:pane_current_path}"
-set -g @catppuccin_window_current_text "#[fg={{base}}]#{?window_zoomed_flag,#[fg=#1d4ed8] #[fg={{base}}],}#{b:pane_current_path}"
+#  
+set -g @catppuccin_window_default_text "#{?window_zoomed_flag,#[fg=#1e66f5#,bold] #[default],}#{b:pane_current_path}"
+set -g @catppuccin_window_current_text "#[fg={{base}}]#{?window_zoomed_flag,#[fg=#1e66f5#,bold] #[fg={{base}}#,nobold],}#{b:pane_current_path}"
 
 set -g @catppuccin_window_status_enable "no"
 set -g @catppuccin_window_default_fill "none"
