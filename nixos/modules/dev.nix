@@ -48,6 +48,7 @@ in
     terraform
 	vault
     kubectl
+	kubectx
     k9s
     minikube
 	kcat

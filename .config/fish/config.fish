@@ -38,8 +38,8 @@ alias cl    'claude -c'
 
 alias k    'kubectl'
 abbr ka   'k apply -f'
-abbr kc   'kubectx'
-abbr kns  'kubens'
+alias kx 'kubectx'
+alias kn 'kubens'
 
 # get resources
 abbr kg    'k get'
