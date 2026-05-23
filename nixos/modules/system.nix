@@ -9,6 +9,7 @@
 
   networking.extraHosts = ''
     10.0.20.10 kafka-bhw2hurr.1938d7a4-bedd-4b8e-8fe3-a19171396b27.privatelink.spaincentral.azmk8s.io
+    10.101.100.4 cluster-principal-dns-8s2a2bn9.777b4ca6-7541-4eb4-a27f-b19febe81649.privatelink.spaincentral.azmk8s.io
   '';
 
   networking.hostName = "nixos";
