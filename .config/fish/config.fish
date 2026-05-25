@@ -22,9 +22,11 @@ alias ai 'sudo apt-get install -y'
 alias au 'sudo apt update && sudo apt upgrade -y'
 alias ar 'sudo apt remove -y'
 
+abbr --position anywhere -- g '| grep'
+
 alias v  'nvim'
-abbr g  'lazygit'
-abbr gd 'lazygit -p ~/dotfiles'
+abbr lg  'lazygit'
+abbr lgd 'lazygit -p ~/dotfiles'
 abbr b  'batcat'
 
 abbr t  'tmux'
