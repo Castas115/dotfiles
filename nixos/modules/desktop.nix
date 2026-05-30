@@ -83,6 +83,7 @@
     kanata
     hyprland
     appimage-run
+    obs-studio
   ];
 
   systemd.services.kanata = {
@@ -105,6 +106,7 @@
     hypridle
     hyprshot
     hyprsunset
+    grim
     nwg-look
     waybar
     wofi

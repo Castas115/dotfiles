@@ -30,7 +30,13 @@
                 imports = homeModules;
                 home.username = "jon";
                 home.homeDirectory = "/home/jon";
-                programs.git.enable = true;
+                programs.git = {
+                  enable = true;
+                  includes = [
+                    { condition = "gitdir:~/projects/"; path = "/etc/gitconfig-work"; }
+                    { condition = "gitdir:~/.ssh/"; path = "/etc/gitconfig-work"; }
+                  ];
+                };
                 home.stateVersion = "25.05";
               };
               backupFileExtension = "backup";
