@@ -130,5 +130,6 @@
 	libnotify
     # warpd
 	wl-kbptr
+	anydesk
   ];
 }
