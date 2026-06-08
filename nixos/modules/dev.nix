@@ -50,6 +50,7 @@ in
     kubectl
 	kubectx
     k9s
+    kubernetes-helm
     minikube
 	kcat
 

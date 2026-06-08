@@ -84,7 +84,14 @@
     hyprland
     appimage-run
     obs-studio
+    vagrant
   ];
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+  };
+  users.users.jon.extraGroups = [ "vboxusers" ];
 
   systemd.services.kanata = {
     description = "Kanata keyboard remapper";
