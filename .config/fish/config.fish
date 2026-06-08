@@ -25,6 +25,7 @@ alias ar 'sudo apt remove -y'
 abbr --position anywhere -- g '| grep'
 
 alias v  'nvim'
+abbr vs  'vagrant ssh'
 abbr lg  'lazygit'
 abbr lgd 'lazygit -p ~/dotfiles'
 abbr b  'batcat'
