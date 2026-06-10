@@ -1,17 +1,15 @@
+local is_nixos = vim.uv.fs_stat("/etc/NIXOS") ~= nil
+
 return {
 	"neovim/nvim-lspconfig",
-	dependencies = {
-		{ "williamboman/mason.nvim" },  -- UI for LSP management
+	dependencies = vim.tbl_filter(function(d) return d ~= nil end, {
+		not is_nixos and { "williamboman/mason.nvim" } or nil,
+		not is_nixos and { "williamboman/mason-lspconfig.nvim" } or nil,
 		{ "saghen/blink.cmp" },
-	},
+	}),
 	config = function()
-		-- Setup Mason (for UI only, LSPs installed via Nix)
-		require("mason").setup()
-
-		-- Capabilities for autocompletion (blink.cmp)
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-		-- Key mappings on LSP attach
 		vim.api.nvim_create_autocmd("LspAttach", {
 			callback = function(args)
 				local bufnr = args.buf
@@ -35,7 +33,6 @@ return {
 			end,
 		})
 
-		-- Neovim 0.11+ uses vim.lsp.config
 		local servers = {
 			"gopls",
 			"rust_analyzer",
@@ -55,12 +52,10 @@ return {
 			"tinymist",
 		}
 
-		-- Configure all servers with default capabilities
 		for _, server in ipairs(servers) do
 			vim.lsp.config(server, { capabilities = capabilities })
 		end
 
-		-- Lua needs extra config
 		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
 			settings = {
@@ -72,8 +67,16 @@ return {
 			},
 		})
 
-		-- Enable all servers
 		table.insert(servers, "lua_ls")
+
+		if not is_nixos then
+			require("mason").setup()
+			require("mason-lspconfig").setup({
+				ensure_installed = servers,
+				automatic_installation = true,
+			})
+		end
+
 		vim.lsp.enable(servers)
 	end,
 }
