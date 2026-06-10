@@ -77,6 +77,15 @@ return {
 			})
 		end
 
-		vim.lsp.enable(servers)
+		local available = {}
+		for _, server in ipairs(servers) do
+			local cfg = vim.lsp.config[server]
+			local cmd = cfg and cfg.cmd
+			local bin = type(cmd) == "table" and cmd[1] or nil
+			if not bin or vim.fn.executable(bin) == 1 then
+				table.insert(available, server)
+			end
+		end
+		vim.lsp.enable(available)
 	end,
 }
