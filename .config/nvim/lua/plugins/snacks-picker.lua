@@ -52,10 +52,14 @@ return {
 		{
 			"<leader>fw",
 			function()
-				Snacks.picker.grep_word({ layout = "ivy" })
+				Snacks.picker.grep({
+					layout = "ivy",
+					live = true,
+					search = vim.fn.expand("<cword>"),
+				})
 			end,
 			mode = { "n", "v" },
-			desc = "Grep Word Under Cursor",
+			desc = "Grep Word (editable)",
 		},
 		{
 			"<leader>fr",
