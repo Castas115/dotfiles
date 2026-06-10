@@ -98,4 +98,24 @@ return {
 			end, { desc = "Toggle into currently opened file" })
 		end,
 	},
+	{
+		"echasnovski/mini.pairs",
+		event = "InsertEnter",
+		config = function()
+			require("mini.pairs").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.comment",
+		config = function()
+			require("mini.comment").setup({
+				mappings = {
+					comment = "<leader>c",
+					comment_line = "<leader>cc",
+					comment_visual = "<leader>c",
+					textobject = "<leader>c",
+				},
+			})
+		end,
+	},
 }
