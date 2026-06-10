@@ -134,5 +134,12 @@ return {
 			end,
 			desc = "Help Tags",
 		},
+		{
+			"<leader>n",
+			function()
+				Snacks.notifier.show_history()
+			end,
+			desc = "Notification Panel",
+		},
 	},
 }
