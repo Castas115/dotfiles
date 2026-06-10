@@ -59,3 +59,11 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.autoread = true
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldtext = ""
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
