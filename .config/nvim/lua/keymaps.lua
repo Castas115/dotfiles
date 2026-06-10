@@ -54,7 +54,16 @@ keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Ma
 keymap.set("n", "<leader>.", "<C-w>v", { noremap = true, silent = true, desc = "Split vertically" })
 keymap.set("n", "<leader>,", "<C-w>s", { noremap = true, silent = true, desc = "Split horizontally" })
 
--- URL handling
-local functions = require('functions')
-keymap.set("n", "gf", functions.goto_file, { desc = "Go to file or open URL" })
-keymap.set("n", "gx", functions.open_url, { desc = "Open URL in browser" })
+keymap.set("n", "gf", require("util.url").goto_file, { desc = "Go to file or open URL" })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	group = vim.api.nvim_create_augroup("markdown_keymaps", { clear = true }),
+	callback = function(args)
+		local md = require("util.markdown")
+		local buf = args.buf
+		vim.keymap.set("n", "<leader>td", md.write_current_day, { buffer = buf, desc = "Insert current day header" })
+		vim.keymap.set({ "n", "i" }, "<A-x>", md.toggle_checkbox, { buffer = buf, desc = "Toggle checkbox" })
+		vim.keymap.set({ "n", "i" }, "<A-S-x>", md.task_toggle_done, { buffer = buf, desc = "Toggle task and move to done" })
+	end,
+})
