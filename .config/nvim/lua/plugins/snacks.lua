@@ -11,7 +11,36 @@ return {
 			top_down = false, -- place notifications from top to bottom
 		},
 		bigfile = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			previewers = {
+				diff = {
+					builtin = false,
+					cmd = { "delta" },
+				},
+				file = {
+					max_size = 1024 * 1024,
+					max_line_length = 500,
+					ft = nil,
+				},
+			},
+			formatters = {
+				file = {
+					filename_first = true,
+					truncate = 80,
+				},
+			},
+			win = {
+				preview = {
+					wo = {
+						number = true,
+						relativenumber = false,
+						signcolumn = "no",
+						foldcolumn = "0",
+					},
+				},
+			},
+		},
 		indent = {
 			scope = { enabled = true },
 			animate = {

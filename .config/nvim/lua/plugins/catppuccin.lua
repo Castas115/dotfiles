@@ -46,9 +46,9 @@ return {
 			},
 		},
 		integrations = {
-			telescope = {
+			snacks = {
 				enabled = true,
-				style = "nvchad",
+				indent_scope_color = "lavender",
 			},
 			dropbar = {
 				enabled = true,
