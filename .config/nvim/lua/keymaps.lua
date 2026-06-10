@@ -5,8 +5,7 @@ keymap.set("n", "<M-q>", ":qa!<CR>", { noremap = true, silent = true, desc = "Qu
 keymap.set({ 'n', 'v' }, "<C-S-c>", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
 keymap.set({ 'n', 'v' }, "<C-c>", '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
 
-keymap.set({ 'n', 'v' }, '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true, desc = "Save file" })
-keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { noremap = true, silent = true, desc = "Save file" })
+keymap.set({ 'n', 'v', 'i' }, '<C-s>', '<cmd>w<CR>', { noremap = true, silent = true, desc = "Save file" })
 
 keymap.set('n', '<C-h>', '<C-w>h', { noremap = true, silent = true, desc = "Move to left window" })
 keymap.set('n', '<C-j>', '<C-w>j', { noremap = true, silent = true, desc = "Move to bottom window" })
