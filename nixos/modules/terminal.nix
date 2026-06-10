@@ -59,5 +59,6 @@
 	television
 	inetutils
 	fzf
+	imagemagick
   ];
 }
