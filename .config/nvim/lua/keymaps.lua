@@ -22,7 +22,7 @@ keymap.set('n', '<A-S-j>', ':resize -2<CR>', { noremap = true, silent = true, de
 keymap.set('n', '<A-S-k>', ':resize +2<CR>', { noremap = true, silent = true, desc = "Increase height" })
 keymap.set('n', '<A-S-l>', ':vertical resize +4<CR>', { noremap = true, silent = true, desc = "Increase width" })
 
-keymap.set('n', 'tq', '<Esc>:bdelete<CR>', { noremap = true, silent = true, desc = "Delete buffer" })
+keymap.set('n', '<leader>bd', '<cmd>bdelete<CR>', { noremap = true, silent = true, desc = "Delete buffer" })
 
 keymap.set('i', "jj", "<ESC>", { noremap = true, silent = true, desc = "Exit insert mode" })
 
