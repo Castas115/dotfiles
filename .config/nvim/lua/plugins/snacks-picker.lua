@@ -50,13 +50,6 @@ return {
 			desc = "Undo History",
 		},
 		{
-			"<leader>fs",
-			function()
-				Snacks.picker.grep({ layout = "ivy" })
-			end,
-			desc = "Grep in Root Dir",
-		},
-		{
 			"<leader>fw",
 			function()
 				Snacks.picker.grep_word({ layout = "ivy" })
@@ -86,13 +79,6 @@ return {
 			desc = "Git Commits",
 		},
 		{
-			"<leader>gb",
-			function()
-				Snacks.picker.git_branches({ layout = "ivy" })
-			end,
-			desc = "Git Branches",
-		},
-		{
 			"<leader>fk",
 			function()
 				Snacks.picker.keymaps({ layout = "ivy" })
@@ -112,13 +98,6 @@ return {
 				Snacks.picker.lsp_workspace_symbols({ layout = "ivy" })
 			end,
 			desc = "Find Symbols (workspace)",
-		},
-		{
-			"<leader>fo",
-			function()
-				Snacks.picker.recent({ layout = "ivy" })
-			end,
-			desc = "Old Files (global)",
 		},
 		{
 			"<leader>fd",
