@@ -98,7 +98,4 @@ return {
 			end, { desc = "Toggle into currently opened file" })
 		end,
 	},
-	{
-		"echasnovski/mini.notify",
-	},
 }
