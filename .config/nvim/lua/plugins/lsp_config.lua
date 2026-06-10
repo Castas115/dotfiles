@@ -2,17 +2,14 @@ return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
 		{ "williamboman/mason.nvim" },  -- UI for LSP management
-		{ "hrsh7th/nvim-cmp" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "L3MON4D3/LuaSnip" },
-		{ "saadparwaiz1/cmp_luasnip" },
+		{ "saghen/blink.cmp" },
 	},
 	config = function()
 		-- Setup Mason (for UI only, LSPs installed via Nix)
 		require("mason").setup()
 
-		-- Capabilities for autocompletion
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		-- Capabilities for autocompletion (blink.cmp)
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Key mappings on LSP attach
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -78,25 +75,5 @@ return {
 		-- Enable all servers
 		table.insert(servers, "lua_ls")
 		vim.lsp.enable(servers)
-
-		-- Completion setup
-		local cmp = require("cmp")
-		cmp.setup({
-			snippet = {
-				expand = function(args)
-					require("luasnip").lsp_expand(args.body)
-				end,
-			},
-			sources = {
-				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
-			},
-			mapping = cmp.mapping.preset.insert({
-				["<C-p>"] = cmp.mapping.select_prev_item(),
-				["<C-n>"] = cmp.mapping.select_next_item(),
-				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete(),
-			}),
-		})
 	end,
 }
