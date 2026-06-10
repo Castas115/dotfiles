@@ -26,6 +26,10 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.opt.showmode = false
 
+vim.opt.shortmess:append("WIc")
+
+vim.opt.cmdheight = 0
+
 vim.opt.breakindent = true
 
 -- Save undo history

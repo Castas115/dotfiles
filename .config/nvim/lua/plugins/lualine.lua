@@ -11,7 +11,7 @@ end
 
 return {
 	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons", "folke/noice.nvim" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("lualine").setup({
 			options = {
@@ -34,19 +34,8 @@ return {
 				},
 				lualine_x = {
 					"lsp_status",
-					{
-						require("noice").api.status.command.get,
-						cond = require("noice").api.status.command.has,
-						color = { fg = "#ff9e64" },
-					},
-					{
-						"progress",
-						color = { fg = "#ff9e64" },
-					},
-					{
-						"location",
-						color = { fg = "#ff9e64" },
-					},
+					{ "progress", color = { fg = "#ff9e64" } },
+					{ "location", color = { fg = "#ff9e64" } },
 				},
 				lualine_y = { "diagnostics", "diff", "branch" },
 				lualine_z = { "mode" },
