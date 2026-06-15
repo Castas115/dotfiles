@@ -85,6 +85,9 @@
     appimage-run
     obs-studio
     vagrant
+    ffmpeg          # camera capture + transcode for LAN streaming
+    v4l-utils       # v4l2-ctl: query webcam formats/resolutions
+    mediamtx        # RTSP/HLS/WebRTC server for LAN camera stream
   ];
 
   virtualisation.virtualbox.host = {
@@ -114,6 +117,7 @@
     hyprshot
     hyprsunset
     grim
+    wf-recorder
     nwg-look
     waybar
     wofi

@@ -60,5 +60,6 @@
 	inetutils
 	fzf
 	imagemagick
+	nmap
   ];
 }
