@@ -41,7 +41,6 @@
       "mcp__chrome-devtools__take_snapshot"
     ]
   },
-  "model": "claude-fable-5[1m]",
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "atlassian"
