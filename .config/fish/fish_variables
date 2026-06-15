@@ -1,8 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export EDITOR:nvim
-SETUVAR --export VAULT_ADDR:https\x3a//dev\x2evault\x2eswapenergia\x2ecom
-SETUVAR --export VAULT_TOKEN:hvs\x2eCAESIA4dnLp4wMo5DakdVlmKCuaMlm3rHcf7eDDZgp0z7MBfGh4KHGh2cy5FZExobDh6MUxtVXlXRHFTMzdSZGRkM3U
+SETUVAR --export VAULT_ADDR:https\x3a//vault\x2eswapenergia\x2ecom
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
