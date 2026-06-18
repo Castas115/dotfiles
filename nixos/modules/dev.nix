@@ -44,7 +44,7 @@ in
 
     # Cloud & infrastructure
     awscli2
-    unstable.azure-cli
+    azure-cli
     terraform
 	vault
     kubectl
@@ -53,6 +53,7 @@ in
     kubernetes-helm
     minikube
 	kcat
+    redpanda
 
     # Containers
     docker
