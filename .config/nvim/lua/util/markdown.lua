@@ -22,8 +22,12 @@ function M.toggle_checkbox()
 	local row = vim.api.nvim_win_get_cursor(0)[1]
 
 	if not current_line:match("^%s*%- %[") then
+		local is_empty = current_line:match("^%s*$") ~= nil
 		local lead_len = #(current_line:match("^(%s*)") or "")
 		vim.api.nvim_buf_set_text(0, row - 1, 0, row - 1, lead_len, { "- [ ] " })
+		if is_empty then
+			vim.cmd("startinsert!")
+		end
 		return
 	end
 
