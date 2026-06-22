@@ -49,6 +49,7 @@
     sshfs
     dig
     openvpn
+    openfortivpn
     openssl
     sqlite
     inotify-tools
