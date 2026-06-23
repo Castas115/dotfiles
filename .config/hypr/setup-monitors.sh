@@ -8,8 +8,8 @@ if hyprctl monitors -j | jq -r '.[].description' | grep -q "LG Electronics LG UL
 	MON1=$(get_monitor_name "LG Electronics LG ULTRAGEAR 306NTDV47282")
 	MON2=$(get_monitor_name "Philips Consumer Electronics Company PHL 243V7 UK02128017955")
 elif hyprctl monitors -j | jq -r '.[].description' | grep -q "HP Inc. HP P24h G5 3CM5090R6G"; then
-	MON1=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R6G")
-	MON2=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R78")
+	MON1=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R78")
+	MON2=$(get_monitor_name "HP Inc. HP P24h G5 3CM5090R6G")
 fi
 
 if [ -n "$MON1" ]; then
