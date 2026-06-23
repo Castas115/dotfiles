@@ -62,7 +62,7 @@ return {
 			desc = "Grep Word (editable)",
 		},
 		{
-			"<leader>fr",
+			"<leader>fR",
 			function()
 				Snacks.picker.resume()
 			end,

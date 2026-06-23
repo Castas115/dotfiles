@@ -56,6 +56,13 @@ set("n", "<leader>,", "<C-w>s", { noremap = true, silent = true, desc = "Split h
 
 set("n", "gf", require("util.url").goto_file, { desc = "Go to file or open URL" })
 
+set("n", "<leader>fv", function()
+	local word = vim.fn.expand("<cword>")
+	local cmd = ":vimgrep " .. word .. " **"
+	local left = vim.api.nvim_replace_termcodes("<Left>", true, false, true)
+	vim.api.nvim_feedkeys(cmd .. string.rep(left, 3), "n", false)
+end, { noremap = true, silent = false, desc = "vimgrep current word (editable)" })
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	group = vim.api.nvim_create_augroup("markdown_keymaps", { clear = true }),
