@@ -136,10 +136,11 @@
       "Secrepasou",
       "Me odiaba Endika",
       "It's showtime folks",
-      "Pionexing"
+      "Los números Leopoldo, ¿qué significan?"
     ]
   },
   "effortLevel": "high",
   "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "tui": "fullscreen"
 }
