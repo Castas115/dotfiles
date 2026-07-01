@@ -34,9 +34,10 @@ return {
 			group = group,
 			pattern = { "[vV\22]*:*" },
 			callback = function()
-				if vim.bo.filetype == "markdown" then
-					vim.cmd("edit")
-				end
+				if vim.bo.filetype ~= "markdown" then return end
+				vim.schedule(function()
+					pcall(vim.api.nvim_exec_autocmds, "BufWinEnter", { buffer = 0 })
+				end)
 			end,
 		})
 	end,
