@@ -113,10 +113,20 @@
 
   security.sudo.extraRules = [{
     users = [ "jon" ];
-    commands = [{
-      command = "/etc/profiles/per-user/jon/bin/openvpn";
-      options = [ "NOPASSWD" ];
-    }];
+    commands = [
+      {
+        command = "/etc/profiles/per-user/jon/bin/openvpn";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/etc/profiles/per-user/jon/bin/openfortivpn";
+        options = [ "NOPASSWD" ];
+      }
+      {
+        command = "/run/current-system/sw/bin/pkill -TERM -x openfortivpn";
+        options = [ "NOPASSWD" ];
+      }
+    ];
   }];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
