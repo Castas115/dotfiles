@@ -15,7 +15,9 @@ alias l 'eza --long --icons --git -a'
 abbr lt 'eza --long --icons --git -a --tree --level=2'
 
 
-alias s  'sudo'
+function s --wraps=ssh --description 'ssh + fish vi mode remoto'
+    ssh -t -o "RemoteCommand=command -v fish >/dev/null 2>&1 && exec fish -C 'set -eU fish_key_bindings; set -g fish_key_bindings fish_vi_key_bindings' || exec \$SHELL -l" $argv
+end
 alias c  '__zoxide_z'
 alias cf '__zoxide_zi'
 abbr '..'  'c ..'
