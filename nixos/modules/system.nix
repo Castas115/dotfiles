@@ -16,6 +16,8 @@
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 8889 ];
 
+  programs.ssh.startAgent = true;
+
   time.timeZone = "Europe/Madrid";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -91,6 +93,7 @@
 	zstd
     ssh-chat
     ansible
+    ncdu
   ];
 
   services.udisks2.enable = true;

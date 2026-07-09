@@ -62,5 +62,7 @@
 	fzf
 	imagemagick
 	nmap
+	usbutils
+	ncdu
   ];
 }
