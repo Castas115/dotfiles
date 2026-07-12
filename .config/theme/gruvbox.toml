@@ -1,0 +1,55 @@
+# Gruvbox dark (hard) — pure black background
+
+mode = "dark"
+flavour = "mocha"
+nvim_colorscheme = "gruvbox"
+opacity = "0.95"
+
+# Core
+foreground = "#ebdbb2"
+background = "#000000"
+cursor = "#ebdbb2"
+cursor_text = "#000000"
+selection_fg = "#ebdbb2"
+selection_bg = "#504945"
+
+# UI surfaces
+base = "#1d2021"
+pane_inactive = "#0d0e0e"
+copy_mode_bg = "#2a2420"
+surface0 = "#3c3836"
+surface1 = "#504945"
+surface2 = "#665c54"
+sapphire = "#83a598"
+git_color = "#FF8A65"
+
+# Status
+dirty = "#fb4934"
+changes = "#fabd2f"
+
+# ANSI palette
+color0 = "#282828"
+color1 = "#cc241d"
+color2 = "#98971a"
+color3 = "#d79921"
+color4 = "#458588"
+color5 = "#b16286"
+color6 = "#689d6a"
+color7 = "#a89984"
+color8 = "#928374"
+color9 = "#fb4934"
+color10 = "#b8bb26"
+color11 = "#fabd2f"
+color12 = "#83a598"
+color13 = "#d3869b"
+color14 = "#8ec07c"
+color15 = "#ebdbb2"
+
+# Lualine
+lualine_normal = "#a89984"
+lualine_insert = "#83a598"
+lualine_visual = "#b8bb26"
+lualine_replace = "#fe8019"
+lualine_inactive = "#3c3836"
+lualine_bg = "#1d2021"
+lualine_text = "#ebdbb2"

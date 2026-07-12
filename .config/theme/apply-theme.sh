@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Omarchy-style theme switcher
-# Usage: apply-theme.sh [dark|light|toggle]
+# Usage: apply-theme.sh [toggle|<name>]   e.g. dark, light, gruvbox, nord, dracula
 
 THEME_DIR="$HOME/.config/theme"
 STATE_FILE="$THEME_DIR/current"
@@ -10,12 +10,15 @@ OUT="$THEME_DIR/generated"
 # --- Determine target theme ---
 CURRENT=$(cat "$STATE_FILE" 2>/dev/null || echo "dark")
 case "${1:-toggle}" in
-    dark|light) TARGET="$1" ;;
-    toggle)     [ "$CURRENT" = "dark" ] && TARGET="light" || TARGET="dark" ;;
-    *)          echo "Usage: $0 [dark|light|toggle]"; exit 1 ;;
+    toggle) [ "$CURRENT" = "dark" ] && TARGET="light" || TARGET="dark" ;;
+    *)      TARGET="$1" ;;
 esac
 
-[ "$CURRENT" = "$TARGET" ] && exit 0
+if [ ! -f "$THEME_DIR/$TARGET.toml" ]; then
+    echo "Unknown theme: $TARGET"
+    echo "Available: $(cd "$THEME_DIR" && ls *.toml 2>/dev/null | sed 's/\.toml$//' | tr '\n' ' ')"
+    exit 1
+fi
 
 # --- Parse colors TOML into associative array ---
 declare -A C
@@ -42,12 +45,14 @@ apply_template() {
 # --- Generate configs in parallel ---
 mkdir -p "$OUT" "$HOME/.config/tmux/scripts" "$HOME/.config/gtk-3.0"
 
-apply_template "$TEMPLATES/ghostty.conf.tpl"      "$HOME/.config/ghostty/config" &
-apply_template "$TEMPLATES/waybar.css.tpl"        "$HOME/.config/waybar/style.css" &
+apply_template "$TEMPLATES/ghostty.conf.tpl"          "$HOME/.config/ghostty/config" &
+apply_template "$TEMPLATES/alacritty-colors.toml.tpl" "$OUT/alacritty-colors.toml" &
+apply_template "$TEMPLATES/waybar.css.tpl"            "$HOME/.config/waybar/style.css" &
 apply_template "$TEMPLATES/git_status.sh.tpl"     "$HOME/.config/tmux/scripts/git_status.sh" &
 apply_template "$TEMPLATES/tmux-theme.conf.tpl"   "$OUT/tmux.conf" &
 apply_template "$TEMPLATES/wofi-style.css.tpl"    "$OUT/wofi.css" &
 apply_template "$TEMPLATES/lualine-theme.lua.tpl" "$OUT/lualine.lua" &
+apply_template "$TEMPLATES/colorscheme.lua.tpl"   "$OUT/colorscheme.lua" &
 wait
 chmod +x "$HOME/.config/tmux/scripts/git_status.sh"
 
@@ -67,7 +72,7 @@ echo "$TARGET" > "$STATE_FILE"
 
 # Neovim — switch all running instances
 for sock in /run/user/$(id -u)/nvim.*.0; do
-    [ -S "$sock" ] && nvim --server "$sock" --remote-send "<Cmd>colorscheme catppuccin-${C[flavour]} | lua require('lualine').setup({options={theme=loadfile(vim.fn.expand('~/.config/theme/generated/lualine.lua'))()}})<CR>" 2>/dev/null &
+    [ -S "$sock" ] && nvim --server "$sock" --remote-send "<Cmd>colorscheme ${C[nvim_colorscheme]} | lua require('lualine').setup({options={theme=loadfile(vim.fn.expand('~/.config/theme/generated/lualine.lua'))()}})<CR>" 2>/dev/null &
 done
 
 # Hyprland background color
@@ -98,6 +103,6 @@ if tmux list-sessions &>/dev/null 2>&1; then
 fi
 
 # Fire-and-forget notification (don't block on it)
-notify-send -t 2000 "Theme" "Switched to ${TARGET} mode" &
+notify-send -t 2000 "Theme" "Switched to ${TARGET}" &
 
 wait 2>/dev/null

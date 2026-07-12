@@ -1,0 +1,55 @@
+# Nord — pure black background
+
+mode = "dark"
+flavour = "mocha"
+nvim_colorscheme = "nord"
+opacity = "0.95"
+
+# Core
+foreground = "#d8dee9"
+background = "#000000"
+cursor = "#d8dee9"
+cursor_text = "#000000"
+selection_fg = "#eceff4"
+selection_bg = "#434c5e"
+
+# UI surfaces
+base = "#2e3440"
+pane_inactive = "#0b0d10"
+copy_mode_bg = "#1c2530"
+surface0 = "#3b4252"
+surface1 = "#434c5e"
+surface2 = "#4c566a"
+sapphire = "#81a1c1"
+git_color = "#FF8A65"
+
+# Status
+dirty = "#bf616a"
+changes = "#ebcb8b"
+
+# ANSI palette
+color0 = "#3b4252"
+color1 = "#bf616a"
+color2 = "#a3be8c"
+color3 = "#ebcb8b"
+color4 = "#81a1c1"
+color5 = "#b48ead"
+color6 = "#88c0d0"
+color7 = "#e5e9f0"
+color8 = "#4c566a"
+color9 = "#bf616a"
+color10 = "#a3be8c"
+color11 = "#ebcb8b"
+color12 = "#81a1c1"
+color13 = "#b48ead"
+color14 = "#8fbcbb"
+color15 = "#eceff4"
+
+# Lualine
+lualine_normal = "#81a1c1"
+lualine_insert = "#a3be8c"
+lualine_visual = "#b48ead"
+lualine_replace = "#d08770"
+lualine_inactive = "#3b4252"
+lualine_bg = "#2e3440"
+lualine_text = "#d8dee9"

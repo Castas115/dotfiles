@@ -1,4 +1,4 @@
-@define-color foreground #cdd6f4;
+@define-color foreground #d8dee9;
 @define-color background #000000;
 
 * {
@@ -14,10 +14,10 @@
 
 
 .dirty {
-  color: #f38ba8;
+  color: #bf616a;
 }
 .changes {
-  color: #faf7d9;
+  color: #ebcb8b;
 }
 
 .modules-left {

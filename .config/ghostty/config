@@ -17,26 +17,26 @@ keybind=ctrl+shift+page_up=unbind
 keybind=ctrl+shift+page_down=unbind
 keybind=ctrl+alt+shift+j=unbind
 
-palette = 0=45475a
-palette = 1=f38ba8
-palette = 2=a6e3a1
-palette = 3=f9e2af
-palette = 4=89b4fa
-palette = 5=f5c2e7
-palette = 6=94e2d5
-palette = 7=bac2de
-palette = 8=585b70
-palette = 9=f38ba8
-palette = 10=a6e3a1
-palette = 11=f9e2af
-palette = 12=89b4fa
-palette = 13=f5c2e7
-palette = 14=94e2d5
-palette = 15=a6adc8
+palette = 0=3b4252
+palette = 1=bf616a
+palette = 2=a3be8c
+palette = 3=ebcb8b
+palette = 4=81a1c1
+palette = 5=b48ead
+palette = 6=88c0d0
+palette = 7=e5e9f0
+palette = 8=4c566a
+palette = 9=bf616a
+palette = 10=a3be8c
+palette = 11=ebcb8b
+palette = 12=81a1c1
+palette = 13=b48ead
+palette = 14=8fbcbb
+palette = 15=eceff4
 background = 000000
-foreground = cdd6f4
-cursor-color = f5e0dc
+foreground = d8dee9
+cursor-color = d8dee9
 cursor-text = 000000
-selection-background = 353749
-selection-foreground = cdd6f4
+selection-background = 434c5e
+selection-foreground = eceff4
 background-opacity = 0.95
