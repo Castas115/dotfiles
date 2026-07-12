@@ -24,3 +24,9 @@ set -g @catppuccin_status_right_separator "█"
 # Dim inactive panes to highlight the active one
 set -g window-style 'bg={{pane_inactive}}'
 set -g window-active-style 'bg={{background}}'
+
+# copy-mode → tinta bg SOLO del pane activo en modo (detectar copy-mode).
+# re-evaluar en cada cambio de modo Y de pane activo (window-active-style es
+# nivel-window); si el activo no esta en modo, cae al global de arriba.
+set-hook -g pane-mode-changed 'if-shell -F "#{pane_in_mode}" "set -w window-active-style bg={{copy_mode_bg}}" "set -uw window-active-style"'
+set-hook -g after-select-pane 'if-shell -F "#{pane_in_mode}" "set -w window-active-style bg={{copy_mode_bg}}" "set -uw window-active-style"'
