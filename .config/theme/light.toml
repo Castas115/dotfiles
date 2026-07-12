@@ -15,6 +15,7 @@ selection_bg = "#acb0be"
 # UI surfaces
 base = "#eff1f5"
 pane_inactive = "#eeeff3"
+copy_mode_bg = "#e8e0f2"
 surface0 = "#ccd0da"
 surface1 = "#bcc0cc"
 surface2 = "#acb0be"

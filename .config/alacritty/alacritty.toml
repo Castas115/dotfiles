@@ -20,3 +20,28 @@ foreground = "#cdd6f4"
 [cursor]
 style = { shape = "Block", blinking = "On" }
 
+# Alacritty solo habla Kitty keyboard protocol; tmux usa modifyOtherKeys/CSI-u.
+# Emitir a mano la secuencia CSI-u que tmux parsea (extended-keys-format csi-u).
+# \u001b = ESC. Modificador Ctrl+Shift+Alt = 8. Codepoint = letra minuscula base.
+[keyboard]
+bindings = [
+  { key = "A", mods = "Control|Shift|Alt", chars = "\u001b[97;8u" },
+  { key = "B", mods = "Control|Shift|Alt", chars = "\u001b[98;8u" },
+  { key = "C", mods = "Control|Shift|Alt", chars = "\u001b[99;8u" },
+  { key = "D", mods = "Control|Shift|Alt", chars = "\u001b[100;8u" },
+  { key = "E", mods = "Control|Shift|Alt", chars = "\u001b[101;8u" },
+  { key = "F", mods = "Control|Shift|Alt", chars = "\u001b[102;8u" },
+  { key = "G", mods = "Control|Shift|Alt", chars = "\u001b[103;8u" },
+  { key = "H", mods = "Control|Shift|Alt", chars = "\u001b[104;8u" },
+  { key = "J", mods = "Control|Shift|Alt", chars = "\u001b[106;8u" },
+  { key = "K", mods = "Control|Shift|Alt", chars = "\u001b[107;8u" },
+  { key = "L", mods = "Control|Shift|Alt", chars = "\u001b[108;8u" },
+  { key = "Q", mods = "Control|Shift|Alt", chars = "\u001b[113;8u" },
+  { key = "R", mods = "Control|Shift|Alt", chars = "\u001b[114;8u" },
+  { key = "S", mods = "Control|Shift|Alt", chars = "\u001b[115;8u" },
+  { key = "V", mods = "Control|Shift|Alt", chars = "\u001b[118;8u" },
+  { key = "W", mods = "Control|Shift|Alt", chars = "\u001b[119;8u" },
+  { key = "X", mods = "Control|Shift|Alt", chars = "\u001b[120;8u" },
+  { key = "Z", mods = "Control|Shift|Alt", chars = "\u001b[122;8u" },
+]
+
