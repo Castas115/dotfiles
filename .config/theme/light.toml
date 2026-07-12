@@ -2,6 +2,7 @@
 
 mode = "light"
 flavour = "latte"
+nvim_colorscheme = "catppuccin-latte"
 opacity = "1.0"
 
 # Core
