@@ -4,11 +4,13 @@
 
 notify() { notify-send -u critical -a "recover" "$1" "$2" 2>/dev/null; }
 
-# 1. Kill overlay/grab tools that can freeze the screen or steal input
-#    (screenshot --freeze, region pickers, launchers left half-open).
-pkill -x hyprshot
+# 1. Kill overlay/grab tools that can freeze the screen or steal input.
+#    hyprpicker holds the frozen frame, slurp draws the crosshair, hyprshot
+#    is the bash wrapper (-f: it runs as bash, so -x won't match).
+pkill -x hyprpicker
 pkill -x slurp
 pkill -x grim
+pkill -f hyprshot
 pkill -x wofi
 pkill -x rofi
 
