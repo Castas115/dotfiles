@@ -45,9 +45,7 @@ apply_template() {
 # --- Generate configs in parallel ---
 mkdir -p "$OUT" "$HOME/.config/tmux/scripts" "$HOME/.config/gtk-3.0"
 
-apply_template "$TEMPLATES/ghostty.conf.tpl"          "$HOME/.config/ghostty/config" &
 apply_template "$TEMPLATES/alacritty-colors.toml.tpl" "$OUT/alacritty-colors.toml" &
-apply_template "$TEMPLATES/waybar.css.tpl"            "$HOME/.config/waybar/style.css" &
 apply_template "$TEMPLATES/git_status.sh.tpl"     "$HOME/.config/tmux/scripts/git_status.sh" &
 apply_template "$TEMPLATES/tmux-theme.conf.tpl"   "$OUT/tmux.conf" &
 apply_template "$TEMPLATES/wofi-style.css.tpl"    "$OUT/wofi.css" &
@@ -60,15 +58,6 @@ chmod +x "$HOME/.config/tmux/scripts/git_status.sh"
 echo "$TARGET" > "$STATE_FILE"
 
 # --- Reload running applications in parallel ---
-
-# Ghostty: trigger reload via D-Bus GTK Action
-{
-    GHOSTTY_BUS=$(busctl --user list 2>/dev/null | grep -i ghostty | awk '{print $1}')
-    if [ -n "$GHOSTTY_BUS" ]; then
-        busctl --user call "$GHOSTTY_BUS" /com/mitchellh/ghostty org.gtk.Actions \
-            Activate "sava{sv}" "reload-config" 0 0 2>/dev/null || true
-    fi
-} &
 
 # Neovim — switch all running instances
 for sock in /run/user/$(id -u)/nvim.*.0; do
@@ -88,9 +77,6 @@ hyprctl keyword misc:background_color "rgb(${C[background]#\#})" &>/dev/null &
 gtk-application-prefer-dark-theme=$([ "${C[mode]}" = "dark" ] && echo "1" || echo "0")
 GTKEOF
 } &
-
-# Waybar: SIGUSR2 reloads CSS
-pkill -SIGUSR2 waybar 2>/dev/null &
 
 # Tmux: source new theme vars, re-run catppuccin plugin to regenerate format
 # strings, then re-source the main tmux.conf so the status-right appends
