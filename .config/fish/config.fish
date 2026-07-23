@@ -3,6 +3,7 @@ if status is-interactive
 end
 
 set fish_greeting ""
+set -gx EDITOR nvim
 
 fish_vi_key_bindings
 for mode in default insert visual
