@@ -10,3 +10,18 @@
 .config/ghostty/config
 .config/waybar/style.css
 .config/tmux/scripts/git_status.sh
+
+# Claude Code runtime state (sessions, cache, credentials, plugins)
+.claude/.caveman-active
+.claude/.credentials.json
+.claude/backups/
+.claude/cache/
+.claude/file-history/
+.claude/history.jsonl
+.claude/mcp-needs-auth-cache.json
+.claude/paste-cache/
+.claude/plugins/
+.claude/projects/
+.claude/session-env/
+.claude/sessions/
+.claude/shell-snapshots/
