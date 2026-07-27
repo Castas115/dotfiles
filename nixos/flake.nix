@@ -11,9 +11,11 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixgl.url = "github:nix-community/nixGL";
+    nixgl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, claude-code-nix, wiremix, nixos-hardware, nixos-generators, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, claude-code-nix, wiremix, nixos-hardware, nixos-generators, nixgl, ... }:
     let
       mkHost = { hostname, system, nixosModules ? [], homeModules ? [] }: nixpkgs.lib.nixosSystem {
         inherit system;
@@ -67,6 +69,35 @@
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
         homeModules = [ ./modules/terminal.nix ];
+      };
+
+      homeConfigurations.ubuntu = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = [ nixgl.overlay ];
+        };
+        extraSpecialArgs = { inherit claude-code-nix wiremix nixpkgs-unstable; };
+        modules = [
+          ./modules/terminal.nix
+          ./modules/dev.nix
+          ./modules/ubuntu-gui.nix
+          ({ pkgs, ... }: {
+            home.username = "jon";
+            home.homeDirectory = "/home/jon";
+            home.stateVersion = "25.05";
+            home.packages = [ pkgs.home-manager ];
+            programs.git = {
+              enable = true;
+              userName = "Jon";
+              userEmail = "joncastas@gmail.com";
+              extraConfig = {
+                init.defaultBranch = "main";
+                credential."https://github.com".helper = "!gh auth git-credential";
+              };
+            };
+          })
+        ];
       };
 
       packages.aarch64-linux.sdcard = nixos-generators.nixosGenerate {

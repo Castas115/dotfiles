@@ -56,7 +56,6 @@ in
     redpanda
 
     # Containers
-    docker
     dive
 
     # Databases

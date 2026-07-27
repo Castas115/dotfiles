@@ -1,0 +1,212 @@
+---
+# Ubuntu 26.04 + Nix + Hyprland workstation bootstrap.
+#
+# Strategy: minimum apt, maximum nix via home-manager flake. apt only for:
+#   - compositor + portals (need systemd-logind seat)
+#   - kanata (needs /dev/uinput + systemd service)
+#   - chromium-family browsers (SUID sandbox can't live in /nix/store)
+#   - Nix installer prerequisites
+#
+# All user-facing CLI + GUI (terminals, waybar, fonts, etc.) come from
+# home-manager flake at nixos/flake.nix#homeConfigurations.ubuntu.
+#
+# Usage:
+#   ansible-playbook -K -i localhost, -c local ubuntu-nix-setup.yml
+#
+# Re-runs are idempotent.
+
+- name: Ubuntu Hyprland + Nix workstation
+  hosts: localhost
+  become: true
+  vars:
+    target_user: jon
+    user_home: "/home/{{ target_user }}"
+    dotfiles_dir: "{{ user_home }}/dotfiles"
+    flake_attr: "ubuntu"
+    kanata_config: "{{ user_home }}/.config/kanata/kanata.kbd"
+
+    apt_packages:
+      - hyprland
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
+      - kanata
+      - curl
+      - ca-certificates
+      - xz-utils
+      - git
+
+  tasks:
+
+    # ---------- apt base ----------
+
+    - name: Install apt base packages
+      ansible.builtin.apt:
+        name: "{{ apt_packages }}"
+        state: present
+        update_cache: true
+
+    # ---------- Vivaldi (apt repo, NOT nix — needs SUID sandbox) ----------
+
+    - name: Vivaldi signing key
+      ansible.builtin.get_url:
+        url: https://repo.vivaldi.com/archive/linux_signing_key.pub
+        dest: /usr/share/keyrings/vivaldi.asc
+        mode: "0644"
+
+    - name: Vivaldi apt source
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/vivaldi.list
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          deb [signed-by=/usr/share/keyrings/vivaldi.asc] https://repo.vivaldi.com/archive/deb/ stable main
+
+    - name: Install Vivaldi
+      ansible.builtin.apt:
+        name: vivaldi-stable
+        state: present
+        update_cache: true
+
+    # ---------- Chromium (apt — SUID sandbox needed) ----------
+
+    - name: Install Chromium (snap-free via apt if available)
+      ansible.builtin.apt:
+        name: chromium-browser
+        state: present
+      failed_when: false
+
+    # ---------- Nix install (Determinate Systems) ----------
+
+    - name: Check if Nix already installed
+      ansible.builtin.stat:
+        path: /nix/var/nix/profiles/default/bin/nix
+      register: nix_bin_stat
+
+    - name: Install Nix
+      ansible.builtin.shell: |
+        curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix \
+          | sh -s -- install --no-confirm
+      args:
+        creates: /nix/var/nix/profiles/default/bin/nix
+      when: not nix_bin_stat.stat.exists
+
+    - name: Ensure /etc/nix exposes experimental features
+      ansible.builtin.lineinfile:
+        path: /etc/nix/nix.conf
+        line: "experimental-features = nix-command flakes"
+        create: true
+        mode: "0644"
+
+    - name: Restart nix-daemon
+      ansible.builtin.systemd:
+        name: nix-daemon
+        state: restarted
+      failed_when: false
+
+    # ---------- kanata ----------
+
+    - name: Ensure user in input group
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        groups: input
+        append: true
+
+    - name: uinput udev rule
+      ansible.builtin.copy:
+        dest: /etc/udev/rules.d/99-uinput.rules
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          KERNEL=="uinput", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+      notify: Reload udev
+
+    - name: kanata service drop-in directory
+      ansible.builtin.file:
+        path: /etc/systemd/system/kanata.service.d
+        state: directory
+        mode: "0755"
+
+    - name: kanata service override (run as user + read home config)
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/kanata.service.d/override.conf
+        owner: root
+        group: root
+        mode: "0644"
+        content: |
+          [Service]
+          User={{ target_user }}
+          Group=input
+          ProtectHome=false
+          PrivateUsers=false
+          ProtectSystem=false
+          ExecStart=
+          ExecStart=/usr/bin/kanata --cfg {{ kanata_config }}
+      notify:
+        - Reload systemd
+        - Restart kanata
+
+    - name: Enable + start kanata
+      ansible.builtin.systemd:
+        name: kanata
+        enabled: true
+        state: started
+
+    # ---------- dotfiles clone (if missing) ----------
+
+    - name: Clone dotfiles
+      become: true
+      become_user: "{{ target_user }}"
+      ansible.builtin.git:
+        repo: https://github.com/yourusername/dotfiles.git
+        dest: "{{ dotfiles_dir }}"
+        update: false
+      failed_when: false
+      tags: dotfiles
+
+    # ---------- home-manager activation (owns user CLI + GUI + fonts) ----------
+
+    - name: Run home-manager switch
+      become: true
+      become_user: "{{ target_user }}"
+      ansible.builtin.shell: |
+        set -e
+        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+        nix run home-manager/release-25.05 -- switch \
+          --flake {{ dotfiles_dir }}/nixos#{{ flake_attr }}
+      args:
+        executable: /bin/bash
+      register: hm_switch
+      changed_when: "'No change' not in hm_switch.stdout"
+
+    # ---------- post-checks (informational) ----------
+    #
+    # Hyprland 0.53+ config notes (apply by hand if porting from older):
+    #   - drop `gestures { }` block (removed)
+    #   - `windowrulev2 = RULE, sel` -> `windowrule = RULE sel`
+    #   - rule names snake_case: suppressevent->suppress_event,
+    #     nofocus->no_focus, noinitialfocus->no_initial_focus,
+    #     bordercolor->border_color, idleinhibit->idle_inhibit, noshadow->no_shadow
+    #   - regex selectors need anchor: `class:.*` -> `class:^(.*)$`
+    #
+    # Verify after first login:
+    #   hyprctl -j configerrors        # []
+    #   systemctl status kanata        # active
+    #   ghostty                        # opens (nixGL wrap via HM)
+    #   fc-list | grep -i nerd         # nerd fonts present
+
+  handlers:
+    - name: Reload udev
+      ansible.builtin.shell: |
+        udevadm control --reload-rules
+        udevadm trigger
+
+    - name: Reload systemd
+      ansible.builtin.systemd:
+        daemon_reload: true
+
+    - name: Restart kanata
+      ansible.builtin.systemd:
+        name: kanata
+        state: restarted
