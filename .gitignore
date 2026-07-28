@@ -1,6 +1,10 @@
 *copyq_*
 *copyq.lock
 
+# Config de Hyprland especifica de cada maquina (PATH, version de windowrules).
+# Plantilla versionada: .config/hypr/host.conf.example
+.config/hypr/host.conf
+
 .config/tmux/plugins/*
 .config/nvim/lazy-lock.json
 
