@@ -143,7 +143,7 @@
     ]
   },
   "effortLevel": "high",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
-  "editorMode": "vim",
-  "tui": "fullscreen"
+  "editorMode": "vim"
 }
