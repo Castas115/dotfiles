@@ -1,18 +1,15 @@
 # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
 gui:
   sidePanelWidth: 0.2
-
 keybinding:
   universal:
     quit: <esc>
-
 os:
   edit: 'nvim {{filename}}'
   editAtLine: 'nvim -- {{filename}} --line={{line}}' #
   editInTerminal: true
   editPreset: "nvim-remote"
-
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --syntax-theme Coldark-Dark -s --wrap-max-lines=10
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never --syntax-theme Coldark-Dark -s --wrap-max-lines=10
