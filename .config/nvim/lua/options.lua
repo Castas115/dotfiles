@@ -7,6 +7,8 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.have_nerd_font = true
 
+vim.opt.termguicolors = true
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
