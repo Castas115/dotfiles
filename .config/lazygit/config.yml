@@ -3,7 +3,7 @@ gui:
   sidePanelWidth: 0.2
 keybinding:
   universal:
-    quit: <esc>
+    quit: q
 os:
   edit: 'nvim {{filename}}'
   editAtLine: 'nvim -- {{filename}} --line={{line}}' #
