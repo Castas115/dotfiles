@@ -6,12 +6,13 @@
 # /etc/profiles/per-user/$USER/bin, asi que Hyprland arrancaba sin poder
 # ejecutar ni un exec-once: pantalla negra con solo el cursor.
 
-# --- Ubuntu 26.04 (Hyprland 0.53.3, nix en ~/.nix-profile) ---
+# Reglas de ventana (sintaxis commaless, Hyprland 0.53+/0.55).
+source = ~/.config/hypr/windows.conf
+
+# --- Ubuntu 26.04 (nix en ~/.nix-profile) ---
 # env = PATH,/home/jon/.nix-profile/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 # env = XDG_DATA_DIRS,/home/jon/.nix-profile/share:/usr/local/share:/usr/share:/var/lib/flatpak/exports/share:/home/jon/.local/share/flatpak/exports/share
-# source = ~/.config/hypr/windows-0.53.conf
 
-# --- NixOS 25.05 (Hyprland 0.49.0) ---
+# --- NixOS 25.05 ---
 # No tocar PATH ni XDG_DATA_DIRS: NixOS los construye bien en el arranque
 # de sesion, y sobreescribirlos rompe todo.
-# source = ~/.config/hypr/windows-0.49.conf
