@@ -1,101 +1,42 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
+	lazy = false,
 	build = ":TSUpdate",
 	config = function()
-		require("nvim-treesitter.configs").setup({
-			-- Add languages to be installed here that you want installed for treesitter
-			ensure_installed = {
-				"go",
-				"lua",
-				"python",
-				"rust",
-				"typescript",
-				"regex",
-				"php",
-				"bash",
-				"markdown",
-				"markdown_inline",
-				"kdl",
-				"sql",
-				"terraform",
-				"html",
-				"css",
-				"javascript",
-				"yaml",
-				"json",
-				"toml",
-				"nu",
-				"git_config",
-				"git_rebase",
-				"gitattributes",
-				"gitcommit",
-			},
+		local ts = require("nvim-treesitter")
+		ts.setup({ install_dir = vim.fn.stdpath("data") .. "/site" })
 
-			highlight = { enable = true },
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "<c-space>",
-					node_incremental = "<c-space>",
-					scope_incremental = "<c-s>",
-					node_decremental = "<c-backspace>",
-				},
-			},
-			textobjects = {
-				select = {
-					enable = true,
-					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["aa"] = "@parameter.outer",
-						["ia"] = "@parameter.inner",
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-						["ii"] = "@conditional.inner",
-						["ai"] = "@conditional.outer",
-						["il"] = "@loop.inner",
-						["al"] = "@loop.outer",
-						["at"] = "@comment.outer",
-					},
-				},
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]f"] = "@function.outer",
-						["]]"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]F"] = "@function.outer",
-						["]["] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[f"] = "@function.outer",
-						["[["] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[F"] = "@function.outer",
-						["[]"] = "@class.outer",
-					},
-				},
-				swap = {
-					enable = true,
-					swap_next = {
-						["<leader>a"] = "@parameter.inner",
-					},
-					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
-					},
-				},
-			},
+		local parsers = {
+			"go", "lua", "python", "rust", "typescript", "regex", "php", "bash",
+			"markdown", "markdown_inline", "kdl", "sql", "terraform",
+			"html", "css", "javascript", "yaml", "json", "toml", "nu",
+			"git_config", "git_rebase", "gitattributes", "gitcommit",
+		}
+
+		local installed = ts.get_installed and ts.get_installed() or {}
+		local set = {}
+		for _, p in ipairs(installed) do set[p] = true end
+		local missing = {}
+		for _, p in ipairs(parsers) do
+			if not set[p] then missing[#missing + 1] = p end
+		end
+		if #missing > 0 then ts.install(missing) end
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("ts_highlight_indent", { clear = true }),
+			callback = function(args)
+				local ft = vim.bo[args.buf].filetype
+				local lang = vim.treesitter.language.get_lang(ft)
+				if not lang then return end
+				local ok = pcall(vim.treesitter.start, args.buf, lang)
+				if ok then
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end
+			end,
 		})
 	end,
 	dependencies = {
-		-- Install official queries and filetype detection
-		-- alternatively, see section "Install official queries only"
 		{ "nushell/tree-sitter-nu" },
 	},
 }
