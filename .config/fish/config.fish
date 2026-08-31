@@ -46,6 +46,7 @@ alias cl    'claude -c'
 
 alias k    'kubectl'
 abbr ka   'k apply -f'
+abbr kk   'k apply -k ./'
 alias kx 'kubectx'
 alias kn 'kubens'
 
