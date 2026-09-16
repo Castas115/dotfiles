@@ -28,5 +28,3 @@ setsid -f waybar >/dev/null 2>&1
 pkill -x swaync
 sleep 0.2
 setsid -f swaync >/dev/null 2>&1
-
-notify "Recovered" "Reloaded config, restarted waybar + swaync"
