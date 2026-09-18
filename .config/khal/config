@@ -1,0 +1,13 @@
+[calendars]
+[[google]]
+path = ~/.local/share/calendars/google/*
+type = discover
+color = "#7aa2f7"
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d %H:%M
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+firstweekday = 0

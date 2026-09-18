@@ -8,6 +8,11 @@
 .config/tmux/plugins/*
 .config/nvim/lazy-lock.json
 
+# Google Calendar OAuth secrets/tokens - never commit, machine-local
+.config/vdirsyncer/google_client_id
+.config/vdirsyncer/google_client_secret
+.config/vdirsyncer/google_token.json
+
 # Theme system (source of truth: .config/theme/templates/)
 .config/theme/generated/
 .config/theme/current
